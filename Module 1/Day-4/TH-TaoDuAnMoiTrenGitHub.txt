@@ -1,0 +1,8 @@
+git init								:	khởi tạo Repository mới
+git remote add origin https://github.com/nttv/my-new-project.git	:	kết nối Local Repository tới Remote Repository
+git add README.md							:	đưa file README.md vào trong chỉ mục của Git
+git commit -m "Add README.md file"					:	lưu lại thay đổi và ghi một message đánh dấu cho thay đổi này
+git push origin master							:	đẩy thay đổi ở Local Repository lên trên Remote Repository
+git add test.txt							:	đưa file test.txt vào trong chỉ mục của Git
+git commit -m "Add test.txt file"					:	lưu lại thay đổi và ghi một message đánh dấu cho thay đổi này
+git push origin master							:	đẩy thay đổi ở Local Repository lên trên Remote Repository

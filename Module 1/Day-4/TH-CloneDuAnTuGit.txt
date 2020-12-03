@@ -1,0 +1,1 @@
+git clone Link-of-Repository	:	sao chép một Repository có sẵn từ GitHub về máy của mình

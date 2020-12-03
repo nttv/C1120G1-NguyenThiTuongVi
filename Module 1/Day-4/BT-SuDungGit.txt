@@ -1,0 +1,12 @@
+https://github.com/nttv/GitProject
+
+git clone https://github.com/nttv/GitProject.git
+cd GitProject/
+
+git add .
+git commit -m "Add README.md file"
+git push origin master
+
+git add .
+git commit -m "Add source folder"
+git push origin master

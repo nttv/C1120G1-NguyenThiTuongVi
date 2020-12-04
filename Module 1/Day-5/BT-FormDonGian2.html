@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form đăng ký học viên</title>
+</head>
+<body>
+    <form action="BT-FormDonGian2.html" method="get" style="background-color: #FFFDA9;font-family: Tahoma; padding: 3px">
+        <h2 style="background-color: #D4FDD6;color: blue;height: 30px;padding-top: 5px;padding-left: 3px;margin: 10px">ĐĂNG KÝ HỌC VIÊN</h2>
+        <table>
+            <tr style="height: 30px">
+                <td style="padding-left: 10px;color: blue; width: 150px">Họ và tên</td>
+                <td><input type="text" name="fullName" style="width: 250px"/></td>
+            </tr>
+            <tr style="height: 30px">
+                <td style="padding-left: 10px;color: blue">Ngày sinh</td>
+                <td><input type="date" name="dayOfBirth"/></td>
+            </tr>
+            <tr style="height: 30px">
+                <td style="padding-left: 10px;color: blue">Giới tính</td>
+                <td>
+                    <input type="radio" name="gender" value="male"/>Nam
+                    <input type="radio" name="gender" value="female"/>Nữ
+                </td>
+            </tr>
+            <tr style="height: 30px">
+                <td style="padding-left: 10px;color: blue;vertical-align: top">Địa chỉ</td>
+                <td><textarea name="address" rows="3" style="width: 200px"></textarea></td>
+            </tr>
+            <tr style="height: 30px">
+                <td style="padding-left: 10px;color: blue">Lớp</td>
+                <td><select>
+                    <option disabled selected hidden>--- Chọn lớp ---</option>
+                    <option name="class" value="C0920G1">C0920G1</option>
+                    <option name="class" value="C1020G1">C1020G1</option>
+                    <option name="class" value="C1120G1">C1120G1</option>
+                </select></td>
+            </tr>
+            <tr style="height: 30px">
+                <td style="padding-left: 10px;color: blue">Email</td>
+                <td><input type="email" name="email"/></td>
+            </tr>
+            <tr style="height: 30px">
+                <td style="padding-left: 10px;color: blue">Điện thoại</td>
+                <td><input type="tel" name="phone"/></td>
+            </tr>
+            <tr style="height: 30px">
+                <td></td>
+                <td>
+                    <input type="submit" value="Đăng ký">
+                    <input type="reset" value="Nhập lại">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

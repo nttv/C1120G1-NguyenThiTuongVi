@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nhúng JavaScript</title>
+</head>
+<body>
+<label>Viết mã Javascript ngay trong thẻ các thẻ html</label>
+<button type="button" onclick="alert('Xin chào!');">Click me!</button>
+<br/><br/>
+
+<label>Sử dụng thẻ script bên trong mã HTML</label>
+<button type="button" onclick="showMessage1();">Click me!</button>
+<br/><br/>
+<script>
+    function showMessage1() {
+        alert('Xin chào!');
+    }
+</script>
+
+<label>Sử dụng file Javascript riêng biệt</label>
+<button type="button" onclick="showMessage2();">Click me!</button>
+<script src="thuc-hanh.js"></script>
+</body>
+</html>

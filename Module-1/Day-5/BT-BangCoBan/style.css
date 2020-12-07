@@ -1,0 +1,41 @@
+h1 {
+    text-align: center;
+    color: blue;
+    font-family: Arial, sans-serif;
+}
+table {
+    width: 100%;
+}
+.info {
+    color: blue;
+    font-family: Arial, sans-serif;
+}
+.col1 {
+    text-align: left;
+}
+.col2 {
+    text-align: right;
+    vertical-align: top;
+}
+.schedule {
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: rgb(240, 240, 240);
+}
+.schedule th, .schedule td {
+    height: 30px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.blank {
+    background-color: white;
+}
+.yellow {
+    background-color: yellow;
+}
+.orange {
+    background-color: orange;
+}
+.week {
+    text-align: center;
+}

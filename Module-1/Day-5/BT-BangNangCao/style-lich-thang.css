@@ -1,0 +1,49 @@
+table {
+    width: 500px;
+    font-family: Arial;
+    border-collapse: collapse;
+}
+caption {
+    color: blue;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px;
+}
+th, td {
+    text-align: center;
+    font-weight: bold;
+}
+th {
+    background-color: goldenrod;
+    border: 2px solid white;
+    color: white;
+    height: 25px;
+}
+th.sunday {
+    background-color: red;
+}
+th.saturday {
+    background-color: blue;
+}
+.head td {
+    border: none;
+    font-weight: normal;
+    height:25px;
+    font-size: 16px;
+}
+td.sunday {
+    color: red;
+}
+td.saturday {
+    color: blue;
+}
+td {
+    height: 30px;
+    font-size: 20px;
+    border: 3px solid lightgray;
+}
+sub {
+    color: black;
+    font-size: 12px;
+}

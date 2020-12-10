@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu lệnh Switch Case</title>
+</head>
+<body>
+<input type="number" id="month">
+<input type="button" value="Tính số ngày" onclick="daysOfMonth()"><br/>
+<p id="result"></p>
+<script>
+    function daysOfMonth() {
+        let month = parseInt(document.getElementById("month").value);
+        let days;
+        switch (month) {
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                days = 30;
+                break;
+            case 2:
+                days = "28 hoặc 29";
+                break;
+            default:
+                days = 31;
+                break;
+        }
+        document.getElementById("result").innerText = "Tháng " + month + " có " + days + " ngày";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Máy tính</title>
+    <style>
+        table {
+            border: 3px solid black;
+        }
+        input {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+        }
+        #result {
+            height: 50px;
+            border: 1px solid gray;
+            text-align: right;
+            font-size: 20px;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<table cellspacing="20">
+    <tr>
+        <td colspan="4" id="result"></td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="1" onclick="calculator('1')">
+        </td>
+        <td>
+            <input type="button" value="2" onclick="calculator('2')">
+        </td>
+        <td>
+            <input type="button" value="3" onclick="calculator('3')">
+        </td>
+        <td>
+            <input type="button" value="+" onclick="calculator('+')">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="4" onclick="calculator('4')">
+        </td>
+        <td>
+            <input type="button" value="5" onclick="calculator('5')">
+        </td>
+        <td>
+            <input type="button" value="6" onclick="calculator('6')">
+        </td>
+        <td>
+            <input type="button" value="-" onclick="calculator('-')">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="7" onclick="calculator('7')">
+        </td>
+        <td>
+            <input type="button" value="8" onclick="calculator('8')">
+        </td>
+        <td>
+            <input type="button" value="9" onclick="calculator('9')">
+        </td>
+        <td>
+            <input type="button" value="*" onclick="calculator('*')">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="C" onclick="calculator('C')">
+        </td>
+        <td>
+            <input type="button" value="0" onclick="calculator('0')">
+        </td>
+        <td>
+            <input type="button" value="=" onclick="calculator('=')">
+        </td>
+        <td>
+            <input type="button" value="/" onclick="calculator('/')">
+        </td>
+    </tr>
+</table>
+
+<script>
+    function calculator(operator) {
+        let result = document.getElementById("result").innerText;
+        switch (operator) {
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                result = result + operator;
+                break;
+            case '=':
+                result = eval(result);
+                break;
+            case 'C':
+                result = '';
+                break;
+        }
+        document.getElementById("result").innerText = result;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xếp hạng học lực học sinh</title>
+</head>
+<body>
+<script>
+    let testScore = parseFloat(prompt("Nhập điểm bài kiểm tra"));
+    let midtermScore = parseFloat(prompt("Nhập điểm thi giữa kỳ"));
+    let finalScore = parseFloat(prompt("Nhập điểm thi cuối kỳ"));
+    let average = (testScore + midtermScore * 2 + finalScore * 3) / 6;
+    if (average < 5)
+        alert("Loại yếu");
+    else if (average < 6.5)
+        alert("Loại trung bình");
+    else if (average < 8)
+        alert("Loại khá");
+    else
+        alert("Loại giỏi");
+</script>
+</body>
+</html>

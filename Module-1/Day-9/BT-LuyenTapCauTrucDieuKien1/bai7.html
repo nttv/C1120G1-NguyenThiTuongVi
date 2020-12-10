@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính cước điện thoại</title>
+</head>
+<body>
+<script>
+    let minutes = parseFloat(prompt("Nhập số phút gọi"));
+    let charges;
+    if (minutes <= 3)
+        charges = minutes * 1000;
+    else if (minutes <= 10)
+        charges = 3000 + 1500 * (minutes - 3);
+    else
+        charges = 13500 + (minutes - 10) * 2000;
+    alert("Cước điện thoại là " + charges + " VND");
+</script>
+</body>
+</html>

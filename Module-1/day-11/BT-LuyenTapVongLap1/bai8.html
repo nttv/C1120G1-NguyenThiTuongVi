@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game đoán số</title>
+</head>
+<body>
+<button onclick="play()">Play</button>
+<script>
+    function play() {
+        let min = parseInt(prompt("Nhập giá trị dưới của miền giá trị"));
+        let max = parseInt(prompt("Nhập giá trị trên của miền giá trị"));
+        let chosenValue = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        for (i = 0; i < 3; i++) {
+            let guessValue = parseInt(prompt("Nhập giá trị mà bạn đoán"));
+            if (guessValue == chosenValue) {
+                alert("Chúc mừng bạn đoán đúng!");
+                break;
+            } else if (guessValue < chosenValue) {
+                alert("Số bạn đoán nhỏ hơn đáp án");
+            } else
+                alert("Số bạn đoán lớn hơn đáp án");
+        }
+    }
+</script>
+</body>
+</html>

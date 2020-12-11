@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính giai thừa của một số nguyên dương</title>
+</head>
+<body>
+<script>
+    let n = parseInt(prompt("Nhập vào một số nguyên dương n"));
+    let factorial = 1;
+    for (i = n; i > 0; i--) {
+        factorial *= i;
+    }
+    alert("Giai thừa của " + n + " = " + factorial);
+</script>
+</body>
+</html>

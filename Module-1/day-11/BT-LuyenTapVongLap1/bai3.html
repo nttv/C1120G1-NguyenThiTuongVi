@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>In 20 số đầu tiên trong dãy Fibonacci</title>
+</head>
+<body>
+<script>
+    let n = 20;
+    let count = 2;
+    let i = 0;
+    let i1 = 1;
+    let i2;
+    do {
+        if (count == 2) {
+            document.write(i + "<br/>");
+            document.write(i1 + "<br/>");
+        }
+        i2 = i + i1;
+        i = i1;
+        i1 = i2;
+        document.write(i2 + "<br/>");
+        count++;
+    } while (count < n);
+</script>
+</body>
+</html>

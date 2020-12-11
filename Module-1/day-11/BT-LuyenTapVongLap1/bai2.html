@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin nhiệt độ</title>
+</head>
+<body>
+<script>
+    let temperature;
+    do {
+        temperature = parseInt(prompt("Nhập vào thông tin nhiệt độ"));
+        if (temperature < 20) {
+            alert("Hãy tăng nhiệt độ");
+        } else if (temperature > 100) {
+            alert("Hãy giảm nhiệt độ");
+        } else
+            alert("Nhiệt độ OK.")
+    }
+    while (temperature < 20 || temperature > 100)
+</script>
+</body>
+</html>

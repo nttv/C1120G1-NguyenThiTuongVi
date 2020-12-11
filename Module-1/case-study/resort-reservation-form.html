@@ -35,7 +35,7 @@
                 <td><textarea name="address" id="inAddress" rows="3"></textarea></td>
                 <td>
                     <select name="city" id="inCity" onchange="calDiscount()">
-                        <option disabled selected hidden>Please Select</option>
+                        <option value="">Please Select</option>
                         <option value="Đà Nẵng">Đà Nẵng</option>
                         <option value="Huế">Huế</option>
                         <option value="Quảng Nam">Quảng Nam</option>
@@ -47,7 +47,7 @@
             <tr>
                 <td><label>Hạng thành viên</label></td>
                 <td colspan="2">
-                    <select name="customerType" id="inCustomerType" onchange="calDiscount()">
+                    <select name="customerType" id="inCustomerType" onchange="calDiscount()" required>
                         <option disabled selected hidden>Please Select</option>
                         <option value="Diamond">Diamond</option>
                         <option value="Platinum">Platinum</option>
@@ -71,7 +71,7 @@
             <tr>
                 <td><label>Loại dịch vụ</label></td>
                 <td colspan="2">
-                    <select name="service" id="inService">
+                    <select name="service" id="inService" required>
                         <option disabled selected hidden>Please Select</option>
                         <option value="Villa">Villa ($500/ngày)</option>
                         <option value="House">House ($300/ngày)</option>
@@ -111,7 +111,7 @@
                 <td id="birthday"></td>
             </tr>
             <tr>
-                <td><label >Email</label></td>
+                <td><label>Email</label></td>
                 <td id="email"></td>
             </tr>
             <tr>

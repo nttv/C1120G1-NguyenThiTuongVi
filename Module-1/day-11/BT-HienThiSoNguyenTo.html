@@ -6,10 +6,27 @@
 </head>
 <body>
 <script>
-    let numbers=parseInt(prompt("Nhập số lượng số nguyên tố cần in ra"));
-    let count =0;
-    for(let n =2;count<numbers;n++){
+    let numbers = parseInt(prompt("Nhập số lượng số nguyên tố cần in ra"));
+    let count = 0;
+    let prime = 2;
+    do {
+        if (checkPrime(prime)) {
+            document.write(prime + "<br/>");
+            count++
+        }
+        prime++;
+    } while (count < numbers)
 
+    function checkPrime(prime) {
+        let check = true;
+        if (prime)
+            for (let i = 2; i < prime; i++) {
+                if (prime % i == 0) {
+                    check = false;
+                    break;
+                }
+            }
+        return check;
     }
 </script>
 </body>

@@ -1,0 +1,68 @@
+body {
+    text-align: center;
+}
+div {
+    display: inline-block;
+    width: 650px;
+    border: 2px solid gray;
+    padding: 30px;
+}
+
+hr {
+    color: lightgray;
+}
+
+h2 {
+    text-align: left;
+    border-bottom: 3px solid lightgray;
+    line-height: 2px;
+    color: gray;
+    padding-top: 30px;
+}
+
+h2 span {
+    background-color: white;
+    padding-right: 10px;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 30px;
+    /*border: 1px solid black;*/
+}
+
+td {
+    height: 40px;
+    vertical-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    /*border: 1px solid black;*/
+}
+
+label {
+    font-weight: bold;
+    margin-right: 5px;
+    /*border: 1px solid black;*/
+}
+
+#customerName, #email {
+    width: 200px;
+}
+
+#address {
+    width: 300px;
+}
+
+#discount {
+    font-size: 16px;
+    font-weight: bold;
+    color: darkred;
+}
+
+button {
+    width: 120px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}

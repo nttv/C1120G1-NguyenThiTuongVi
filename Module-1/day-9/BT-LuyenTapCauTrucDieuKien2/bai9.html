@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra cạnh tam giác</title>
+</head>
+<body>
+<script>
+    let a = parseFloat(prompt("Nhập số a"));
+    let b = parseFloat(prompt("Nhập số b"));
+    let c = parseFloat(prompt("Nhập số c"));
+    let condition1 = (a > 0) && (b > 0) && (c > 0);
+    let condition2 = a + b > c;
+    let condition3 = b + c > a;
+    let condition4 = a + c > b;
+    if (condition1 && condition2 && condition3 && condition4) {
+        alert("a, b, c là ba cạnh của một tam giác");
+    } else {
+        alert("a, b, c không phải là ba cạnh của một tam giác");
+    }
+</script>
+</body>
+</html>

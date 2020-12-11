@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính giá điện</title>
+</head>
+<body>
+<script>
+    let electric = parseInt(prompt("Nhập tổng điện năng tiêu thụ (kWh)"));
+    let amount1 = 0, amount2 = 0, amount3 = 0, amount4 = 0, amount5 = 0, amount6 = 0, total = 0;
+    if (electric > 400) {
+        amount6 = 2927 * (electric - 400);
+        electric = 400;
+    }
+    if (electric > 300 && electric <= 400) {
+        amount5 = 2834 * (electric - 300);
+        electric = 300;
+    }
+    if (electric > 200 && electric <= 300) {
+        amount4 = 2536 * (electric - 200);
+        electric = 200;
+    }
+    if (electric > 100 && electric <= 200) {
+        amount3 = 2014 * (electric - 100);
+        electric = 100;
+    }
+    if (electric > 50 && electric <= 100) {
+        amount2 = 1734 * (electric - 50);
+        electric = 50;
+    }
+    amount1 = 1678 * electric;
+    total = (amount1 + amount2 + amount3 + amount4 + amount5 + amount6) * 110 / 100;   //thuế 10%
+    alert("Tổng tiền điện là " + Math.round(total) + " VND");
+</script>
+</body>
+</html>

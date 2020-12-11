@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính lãi ngân hàng</title>
+</head>
+<body>
+<script>
+    let deposit = parseFloat(prompt("Nhập số tiền gửi (triệu đồng)"));
+    let month = parseInt(prompt("Nhập số tháng gửi"));
+    let rate, interest, totalDeposit;
+    switch (month) {
+        case 3:
+            rate = 0.003;
+            break;
+        case 6:
+            rate = 0.005;
+            break;
+        case 12:
+            rate = 0.01;
+            break;
+        case 24:
+            rate = 0.012;
+            break;
+    }
+    totalDeposit = Number(deposit * (1 + rate) ** month).toFixed(2);
+    interest = Number(totalDeposit - deposit).toFixed(2);
+    alert("Tiền lãi nhận được là " + interest + " triệu đồng. Tổng tiền nhận được là " + totalDeposit);
+</script>
+</body>
+</html>

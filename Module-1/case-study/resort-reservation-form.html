@@ -7,8 +7,8 @@
 </head>
 <body>
 <div>
-    <form action="" method="post" id="reservation">
-        <h1>TRANG ĐẶT PHÒNG</h1>
+    <form action="" method="post" id="add-customer">
+        <h1>THÊM KHÁCH HÀNG</h1>
         <hr/>
         <table>
             <tr>
@@ -89,10 +89,10 @@
             </tr>
         </table>
     </form>
-    <button id="reserve" onclick="reserve()">Đặt phòng</button>
+    <button id="add" onclick="addCustomer()">Thêm</button>
 
-    <form action="" method="post" id="confirmation">
-        <h1>XÁC NHẬN</h1>
+    <form action="" method="post" id="customer-info">
+        <h1>THÔNG TIN KHÁCH HÀNG</h1>
         <hr/>
         <table>
             <tr>
@@ -151,8 +151,7 @@
             </tr>
         </table>
     </form>
-    <button id="back" onclick="edit()">Trở lại</button>
-    <button id="confirm">Xác nhận</button>
+    <button id="edit" onclick="editCustomer()">Chỉnh sửa</button>
 </div>
 <script src="script.js"></script>
 </body>

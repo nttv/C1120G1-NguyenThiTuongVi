@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>In hình trái tim</title>
+</head>
+<body>
+<script>
+    let size = 10;
+    let x, y;
+    for (x = (size / 2); x <= size; x += 2) {
+        for (y = 1; y < (size - x); y += 2) {
+            document.write("&nbsp&nbsp");
+        }
+        for (y = 1; y <= x; ++y) {
+            document.write("*");
+        }
+        for (y = 1; y <= (size - x); ++y) {
+            document.write("&nbsp&nbsp");
+        }
+        for (y = 1; y <= x; ++y) {
+            document.write("*");
+        }
+        document.write("<br/>");
+    }
+    for (x = size; x >= 1; --x) {
+        for (y = x; y < size; ++y) {
+            document.write("&nbsp&nbsp");
+        }
+        for (y = 1; y <= (x * 2) - 1; ++y) {
+            document.write("*");
+        }
+        document.write("<br/>");
+    }
+</script>
+</body>
+</html>

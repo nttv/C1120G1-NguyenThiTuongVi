@@ -1,39 +1,30 @@
-let inputCName //= document.getElementById("inCustomerName").value;
-let inputIdNumber //= document.getElementById("inIdNumber").value;
-let inputBirthday //= document.getElementById("inBirthday").value;
-let inputEmail //= document.getElementById("inEmail").value;
-let inputAddress //= document.getElementById("inAddress").value;
-let inputCity //= document.getElementById("inCity").innerText;
-let inputCType //= document.getElementById("inCustomerType").innerText;
-let inputNoOfPeople //= document.getElementById("inNoOfPeople").value;
-let inputRentDays //= document.getElementById("inRentDays").value;
-let inputService //= document.getElementById("inService").innerText;
+let inputCName;
+let inputIdNumber;
+let inputBirthday;
+let inputEmail;
+let inputAddress;
+let inputCity;
+let inputCType;
+let inputNoOfPeople;
+let inputRentDays;
+let inputService;
 let inputRoom;
 let price, discount, amount = 0;
-// if(document.getElementById("room1").checked){
-//     inputRoom = document.getElementById("room1").innerText;
-// }else if(document.getElementById("room2").checked){
-//     inputRoom = document.getElementById("room2").innerText;
-// }else
-//     inputRoom = document.getElementById("room3").innerText;
-
 
 window.onload = init();
 
 function init() {
-    //Only show initialization with Reservation form
-    document.getElementById("confirmation").style.display = "none";
-    document.getElementById("back").style.display = "none";
-    document.getElementById("confirm").style.display = "none";
+    //Only show initialization with Add Customer form
+    document.getElementById("customer-info").style.display = "none";
+    document.getElementById("edit").style.display = "none";
 }
 
-function reserve() {
-    //Revert from Reservation form to Confirmation form
-    document.getElementById("reservation").style.display = "none";
-    document.getElementById("reserve").style.display = "none";
-    document.getElementById("confirmation").style.display = "initial";
-    document.getElementById("back").style.display = "initial";
-    document.getElementById("confirm").style.display = "initial";
+function addCustomer() {
+    //Revert from Reservation form to Customer Info form
+    document.getElementById("add-customer").style.display = "none";
+    document.getElementById("add").style.display = "none";
+    document.getElementById("customer-info").style.display = "initial";
+    document.getElementById("edit").style.display = "initial";
 
     //Save entered values
     inputCName = document.getElementById("inCustomerName").value;
@@ -56,7 +47,7 @@ function reserve() {
     calDiscount();
     calAmount();
 
-    //Displays the saved values on Confirmation form
+    //Displays the saved values on Customer Info form
     document.getElementById("customerName").innerText = inputCName;
     document.getElementById("idNumber").innerText = inputIdNumber;
     document.getElementById("birthday").innerText = inputBirthday;
@@ -71,12 +62,11 @@ function reserve() {
     document.getElementById("amount").innerText = "$" + Math.round(amount);
 }
 
-function edit() {
-    document.getElementById("confirmation").style.display = "none";
-    document.getElementById("back").style.display = "none";
-    document.getElementById("confirm").style.display = "none";
-    document.getElementById("reservation").style.display = "initial";
-    document.getElementById("reserve").style.display = "initial";
+function editCustomer() {
+    document.getElementById("customer-info").style.display = "none";
+    document.getElementById("edit").style.display = "none";
+    document.getElementById("add-customer").style.display = "initial";
+    document.getElementById("add").style.display = "initial";
 }
 
 function calDiscount() {

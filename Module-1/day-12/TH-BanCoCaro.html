@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo bàn cờ caro</title>
+</head>
+<body>
+<h1>Caro Game Simple</h1>
+<p style="font-size: 30px" id="caroGame"></p><br/>
+<button onclick="changeValue()">Change Value</button>
+<script>
+    let row = 8;
+    let col = 8;
+    let caro = new Array();
+    let display = "";
+    for (let i = 0; i < row; i++) {
+        caro[i] = new Array();
+        for (let j = 0; j < col; j++) {
+            caro[i][j] = 0;
+            display += caro[i][j] + "&nbsp&nbsp&nbsp&nbsp";
+        }
+        display += "<br/>";
+    }
+    document.getElementById("caroGame").innerHTML = display;
+
+    function changeValue() {
+        let x = parseInt(prompt("X = "));
+        let y = parseInt(prompt("Y = "));
+        caro[x - 1][y - 1] = "x";
+        display = "";
+        for (let i = 0; i < row; i++) {
+            for (let j = 0; j < col; j++) {
+                display += caro[i][j] + "&nbsp&nbsp&nbsp&nbsp";
+            }
+            display += "<br/>";
+        }
+        document.getElementById("caroGame").innerHTML = display;
+    }
+</script>
+</body>
+</html>

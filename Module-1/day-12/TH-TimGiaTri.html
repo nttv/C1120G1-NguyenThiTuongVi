@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm giá trị trong mảng</title>
+</head>
+<body>
+<script>
+    let numbers = [-3, 5, 1, 3, 2, 10, 5];
+    let x = prompt("Nhập giá trị cần tìm");
+    let check = false;
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] == x) {
+            console.log(i);
+            check = true;
+        }
+    }
+    if (check == false)
+        alert("Giá trị ko nằm trong mảng");
+</script>
+</body>
+</html>

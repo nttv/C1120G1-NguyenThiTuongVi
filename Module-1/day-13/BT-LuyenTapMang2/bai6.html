@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm và thay thế</title>
+</head>
+<body>
+<script>
+    let a = [];
+    let n = parseInt(prompt("Nhập số phần tử của mảng"));
+    for (let i = 0; i < n; i++) {
+        a[i] = prompt("Nhập giá trị phần tử " + i);
+    }
+    alert(a.join(", "));
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] == "-") {
+            a[i] = "_";
+        }
+    }
+    alert("Chuỗi sau khi thay thế: " + a.join(", "));
+</script>
+</body>
+</html>

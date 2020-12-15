@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chèn dấu (-) giữa 2 số chẵn</title>
+</head>
+<body>
+<script>
+    let a = prompt("Nhập dãy số");
+    let result = [a[0]];
+    for (let i = 1; i < a.length; i++) {
+        if (a[i - 1] % 2 == 0 && a[i] % 2 == 0) {
+            result.push("-", a[i]);
+        } else {
+            result.push(a[i]);
+        }
+    }
+    document.write(result.join(""));
+</script>
+</body>
+</html>

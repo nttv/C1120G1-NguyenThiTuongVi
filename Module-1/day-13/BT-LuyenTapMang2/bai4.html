@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đếm số từ trong một chuỗi</title>
+</head>
+<body>
+<script>
+    let string = prompt("Nhập chuỗi");
+    let count;
+    if (string[0] != " ") {
+        count = 1;
+    } else
+        count = 0;
+    for (let i = 0; i < string.length - 1; i++) {
+        if (string[i] == " " && string[i + 1] != " ") {
+            count++;
+        }
+    }
+    alert("Chuỗi có " + count + " từ");
+</script>
+</body>
+</html>

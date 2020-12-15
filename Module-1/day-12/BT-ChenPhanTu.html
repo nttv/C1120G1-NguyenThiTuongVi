@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chèn phần tử vào vị trí bất kỳ trong mảng</title>
+</head>
+<body>
+<script>
+    let fruits = ["Banana", "Orange", "Apple", "Mango"];
+    let value = prompt("Nhập giá trị cần chèn");
+
+    let position;
+    do {
+        position = parseInt(prompt("Nhập vị trí muốn chèn (từ 0 đến " + fruits.length + ")"));
+    } while (position < 0 || position > fruits.length);
+
+    if (position < fruits.length) {
+        for (let i = fruits.length - 1; i >= position; i--) {
+            fruits[i + 1] = fruits[i];
+        }
+    }
+    fruits[position] = value;
+    alert(fruits.join(", "));
+</script>
+</body>
+</html>

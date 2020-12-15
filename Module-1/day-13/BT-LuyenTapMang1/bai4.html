@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nhập mảng số nguyên và đảo ngược phần tử</title>
+</head>
+<body>
+<script>
+    let numbers = [];
+    let length = parseInt(prompt("Nhập số phần tử của mảng"));
+    for (let i = 0; i < length; i++) {
+        numbers[i] = parseInt(prompt("Nhập giá trị để lưu vào mảng"));
+    }
+    alert("Mảng đảo ngược các phần tử thành: " + numbers.reverse().join(", "));
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm giá trị và vị trí của phần tử lớn nhất</title>
+</head>
+<body>
+<script>
+    let numbers = [78, 2, 5, 67, 12, 10, 34, 7, 22, 9];
+    let max = numbers[0];
+    let index = 0;
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            max = numbers[i];
+            index = i;
+        }
+    }
+    alert("Phần tử lớn nhất trong mảng là " + max + " ở vị trí " + index);
+</script>
+</body>
+</html>

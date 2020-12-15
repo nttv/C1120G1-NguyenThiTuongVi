@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính có bao nhiêu số nguyên lớn hơn 10</title>
+</head>
+<body>
+<script>
+    let numbers = [78, 2, 5, 67, 12, 10, 34, 7, 22, 9];
+    let count = 0;
+    for (let x of numbers) {
+        if (x >= 10) {
+            count++;
+        }
+    }
+    alert("Có " + count + "phần tử trong mảng lớn hơn hoặc bằng 10");
+</script>
+</body>
+</html>

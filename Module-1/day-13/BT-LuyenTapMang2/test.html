@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let number = [];
+    let V = parseInt(prompt("nhập số nguyên V"));
+    for (let i = 0; i < 10; i++) {
+        let r = parseInt(prompt("nhập phần tử của mảng"));
+        number.push(r);
+        if (V == number[i]) {
+            alert("V là một phần tử của mảng")
+        } else {
+            alert("V ko phải là otu của mảng");
+        }
+    }
+    console.log(number);​
+</script>
+</body>
+</html>

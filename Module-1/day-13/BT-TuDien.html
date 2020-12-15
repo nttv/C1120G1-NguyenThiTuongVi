@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Từ điển</title>
+</head>
+<body>
+<input type="text" id="word">
+<button onclick="search()">Search</button>
+<br/>
+<p id="result"></p>
+<script>
+    let en = ["hello", "morning", "afternoon", "goodbye", "dictionary"];
+    let vi = ["xin chào", "buổi sáng", "buổi chiều", "tạm biệt", "từ điển"];
+
+    function search() {
+        let word = document.getElementById("word").value;
+        let check = false;
+        let result;
+        for (let i = 0; i < en.length; i++) {
+            if (en[i] == word) {
+                result = word + ": " + vi[i];
+                check = true;
+                break;
+            }
+        }
+        if (check == false) {
+            result = 'No results found for "' + word + '"';
+        }
+        document.getElementById("result").innerText = result;
+    }
+</script>
+</body>
+</html>

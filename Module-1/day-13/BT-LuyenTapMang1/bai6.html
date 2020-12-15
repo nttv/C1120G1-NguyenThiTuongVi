@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra giá trị có thuộc mảng</title>
+</head>
+<body>
+<script>
+    let numbers = [78, 2, 5, 67, 12, 10, 34, 7, 22, 9];
+    let v = prompt("Nhập giá trị cần tìm");
+    let check = false;
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] == v) {
+            check = true;
+            break;
+        }
+    }
+    if (check == false)
+        alert("V is not in the array");
+    else
+        alert("V is in the array");
+</script>
+</body>
+</html>

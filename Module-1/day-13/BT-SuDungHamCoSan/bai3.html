@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chuyển các ký tự chữ thường thành chữ hoa</title>
+</head>
+<body>
+<script>
+    let string = "The Quick Brown Fox";
+    let stringUpper=string.toUpperCase();
+    let result = [];
+    for(let i = 0; i<string.length;i++){
+        if(string[i]==stringUpper[i]){
+            result.push(string[i].toLowerCase());
+        }else
+            result.push(string[i].toUpperCase());
+    }
+    document.write(result.join(""));
+</script>
+</body>
+</html>

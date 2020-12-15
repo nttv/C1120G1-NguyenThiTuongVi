@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đếm số nguyên âm trong một chuỗi</title>
+</head>
+<body>
+<script>
+    let string = prompt("Nhập vào chuỗi");
+    let str = string.toLowerCase();
+    let vowels = ['a', 'e', 'i', 'o', 'u'];
+    let count = 0;
+    for (let i of str) {
+        for (let j of vowels) {
+            if (i == j) {
+                count++;
+                break;
+            }
+        }
+    }
+    alert("Chuỗi có " + count + " nguyên âm.");
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm và xóa phần tử</title>
+</head>
+<body>
+<script>
+    let numbers = [78, 2, 5, 67, 12, 10, 34, 7, 22, 10];
+    let v = prompt("Nhập giá trị V");
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] == v) {
+            for(let j = i;j<numbers.length;j++){
+                numbers[j]=numbers[j+1];
+            }
+        }
+    }
+    alert(numbers);
+</script>
+</body>
+</html>

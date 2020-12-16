@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm giá trị nhỏ nhất của mảng</title>
+</head>
+<body>
+<script>
+    let arr1 = [3, 5, 1, 8, -3, 7, 8];
+    let arr2 = [7, 12, 6, 9, 20, 56, 89];
+    let arr3 = [];
+    let arr4 = [0, 0, 0, 0, 0, 0];
+    console.log(findMin(arr1));
+    console.log(findMin(arr2));
+    console.log(findMin(arr3));
+    console.log(findMin(arr4));
+
+    function findMin(array) {
+        let result;
+        if (array.length == 0) {
+            result = "Mảng rỗng";
+        } else {
+            let min = array[0];
+            for (let i = 1; i < array.length; i++) {
+                if (array[i] < min) {
+                    min = array[i];
+                }
+            }
+            result = min;
+        }
+        return result;
+    }
+</script>
+</body>
+</html>

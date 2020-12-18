@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hàm tính diện tích, chu vi hình tròn</title>
+</head>
+<body>
+<script>
+    let radius = parseFloat(prompt("Nhập bán kính hình tròn"));
+    alert("Diện tích hình tròn = " + findArea(radius));
+    alert("Chu vi hình tròn = " + findPerimeter(radius));
+
+    function findArea(r) {
+        return Math.PI * r * r;
+    }
+
+    function findPerimeter(r) {
+        return Math.PI * r * 2;
+    }
+</script>
+</body>
+</html>

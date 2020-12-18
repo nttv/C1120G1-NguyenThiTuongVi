@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính số lần ký tự xuất hiện trong mảng</title>
+</head>
+<body>
+<script>
+    let array = ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd'];
+    let character = prompt("Nhập vào một ký tự");
+    alert(findCharacter(array, character));
+
+    function findCharacter(arr, char) {
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] == char) {
+                count++;
+            }
+        }
+        if (count > 0)
+            return count;
+        else
+            return -1;
+    }
+</script>
+</body>
+</html>

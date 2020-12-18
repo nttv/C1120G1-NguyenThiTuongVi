@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hàm so sánh giá trị hai tham số</title>
+</head>
+<body>
+<script>
+    let firstParameter, secondParameter;
+    do {
+        firstParameter = parseFloat(prompt("Nhập vào số thứ nhất"));
+    } while (Number.isNaN(firstParameter));
+    do {
+        secondParameter = parseFloat(prompt("Nhập vào số thứ hai"));
+    } while (Number.isNaN(secondParameter));
+    compareParameters(firstParameter, secondParameter);
+
+    function compareParameters(a, b) {
+        if (a > b) {
+            alert("Số thứ nhất lớn hơn số thứ hai");
+        } else
+            alert(a + b);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hàm kiểm tra ký tự số</title>
+</head>
+<body>
+<script>
+    let input = parseInt(prompt("Nhập một ký tự"));
+    alert(checkDigit(input));
+
+    function checkDigit(value) {
+        if (value >= 0 && value <= 9 && Number.isInteger(value))
+            return true;
+        else
+            return false;
+    }
+</script>
+</body>
+</html>

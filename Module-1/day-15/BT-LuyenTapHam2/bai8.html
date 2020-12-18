@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đảo ngược mảng số nguyên</title>
+</head>
+<body>
+<script>
+    let arr = [];
+    let n = parseInt(prompt("Nhập chiều dài của mảng"));
+    for (let i = 0; i < n; i++) {
+        arr[i] = parseInt(prompt("Nhập giá trị số nguyên ở vị trí " + i));
+    }
+    alert(reverseArray(arr));
+
+    function reverseArray(array) {
+        array.reverse();
+        return array;
+    }
+</script>
+</body>
+</html>

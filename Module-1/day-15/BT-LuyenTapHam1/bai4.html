@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xem giá trị biến trước và sau gọi hàm</title>
+</head>
+<body>
+<script>
+    function addNumbers() {
+        firstNum = 4;
+        secondNum = 8;
+        result = firstNum + secondNum;
+        return result;
+    }
+
+    result = 0;
+    alert("Result trước khi gọi hàm = " + result);
+    result = addNumbers();
+    alert("Result sau khi gọi hàm = " + result);
+</script>
+</body>
+</html>

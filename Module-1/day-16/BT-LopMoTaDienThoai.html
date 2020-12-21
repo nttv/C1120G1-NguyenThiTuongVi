@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xây dựng lớp mô tả điện thoại</title>
+</head>
+<body>
+<script>
+    class Mobile {
+        constructor(status, battery, memoryForDraft, memoryForInbox, memoryForSent) {
+            this.status = status;
+            this.battery = battery;
+            this.memoryForDraft = memoryForDraft;
+            this.memoryForInbox = memoryForInbox;
+            this.memoryForSent = memoryForSent;
+            this.draft = [];
+            this.inbox = [];
+            this.sent = [];
+        }
+
+        checkOnStatus() {
+            if (this.battery == 0) {
+                alert("Goodbye!");
+                this.status = false;
+            }
+            console.log("status check: " + this.status);
+            return this.status;
+        }
+
+        turnOnOff() {
+            if (this.checkOnStatus()) {
+                alert("Goodbye!");
+                this.status = false;
+            } else if (this.battery == 0) {
+                alert("Low battery!");
+            } else {
+                alert("Hello!");
+                this.status = true;
+            }
+            console.log("status turn on/off: " + this.status);
+        }
+
+        charge(minutes) {
+            for (let i = 0; i < minutes; i++) {
+                if (this.battery < 100)
+                    this.battery++;
+                else {
+                    alert("100% charged")
+                    return;
+                }
+            }
+        }
+
+        text(message) {
+            if (this.checkOnStatus()) {
+                let memory = message.length;
+                if (memory > this.memoryForDraft)
+                    alert("Memory for draft is full!");
+                else {
+                    this.memoryForDraft -= memory;
+                    this.draft.push(message);
+                }
+                this.battery--;
+                console.log("battery: " + this.battery);
+                console.log("draft: " + this.memoryForDraft);
+                console.log("inbox: " + this.memoryForInbox);
+                console.log("sent: " + this.memoryForSent);
+            } else
+                return;
+        }
+
+        receiveMessage(message) {
+            if (this.checkOnStatus()) {
+                alert("New message!");
+                let memory = message.length;
+                if (memory > this.memoryForInbox)
+                    alert("Memory for inbox is full!");
+                else {
+                    this.memoryForInbox -= memory;
+                    this.inbox.push(message);
+                }
+                this.battery--;
+                console.log("battery: " + this.battery);
+                console.log("draft: " + this.memoryForDraft);
+                console.log("inbox: " + this.memoryForInbox);
+                console.log("sent: " + this.memoryForSent);
+            } else
+                return;
+        }
+
+        sendMessage(index) {
+            if (this.checkOnStatus()) {
+                let message = this.draft[index];
+                let memory = message.length;
+                if (memory > this.memoryForSent)
+                    alert("Memory for sent is full!");
+                else {
+                    this.sent.push(message);
+                    this.memoryForSent -= memory;
+                    for (let i = index; i < this.draft.length; i++) {
+                        this.draft[i] = this.draft[i + 1];
+                    }
+                    this.draft.pop();
+                    this.memoryForDraft += memory;
+                    alert("Message is sent!")
+                }
+                this.battery--;
+                console.log("battery: " + this.battery);
+                console.log("draft: " + this.memoryForDraft);
+                console.log("inbox: " + this.memoryForInbox);
+                console.log("sent: " + this.memoryForSent);
+            } else
+                return;
+        }
+
+        readInbox(index) {
+            if (this.checkOnStatus()) {
+                alert(this.inbox[index]);
+                this.battery--;
+            } else
+                return;
+        }
+
+        readSent(index) {
+            if (this.checkOnStatus()) {
+                alert(this.sent[index]);
+                this.battery--;
+            } else
+                return;
+        }
+    }
+
+    let nokia = new Mobile(false, 50, 100, 100, 100);
+    let iphone = new Mobile(true, 0, 100, 100, 100);
+    let message = "Hello C1120G1!";
+    nokia.turnOnOff();
+    nokia.text(message);
+    nokia.sendMessage(0);
+    iphone.receiveMessage();
+    iphone.turnOnOff();
+    iphone.charge(120);
+    iphone.turnOnOff();
+    iphone.receiveMessage(message);
+    iphone.readInbox(0);
+</script>
+</body>
+</html>

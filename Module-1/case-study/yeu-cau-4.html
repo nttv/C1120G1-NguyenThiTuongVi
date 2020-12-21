@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Furama Resort Management Application</title>
+</head>
+<body>
+<script>
+    let arrNameCustomers = new Array(0);
+    window.onload = showMenu();
+
+    function showMenu() {
+        let input;
+        do {
+            input = parseInt(prompt("Welcome to Customers Management Application\n" +
+                "Press 1: Add name customer\n" +
+                "Press 2: Delete customer\n" +
+                "Press 3: Exit\n" +
+                "Enter your choice:"));
+            switch (input) {
+                case 1:
+                    addNameCustomer();
+                    break;
+                case 2:
+                    deleteCustomer();
+                    break;
+                case 3:
+                    return;
+                default:
+                    alert("Please select an option from menu!");
+            }
+        } while (input != 1 && input != 2 && input != 3);
+    }
+
+    function addNameCustomer() {
+        let n = parseInt(prompt("Enter the number of customers you want to add:"));
+        for (let i = 0; i < n; i++) {
+            arrNameCustomers.push(prompt("Enter customer " + (i + 1) + "'s name:"));
+        }
+        showMenu();
+    }
+
+    function deleteCustomer() {
+        let list = "Customers' name list\n";
+        let name = prompt("Enter the customer's name you want to delete:");
+        let index = arrNameCustomers.indexOf(name);
+        for (let i = index; i < arrNameCustomers.length; i++) {
+            arrNameCustomers[i] = arrNameCustomers[i + 1];
+        }
+        arrNameCustomers.pop();
+        for (let i in arrNameCustomers) {
+            list += (i + 1) + ". " + arrNameCustomers[i] + "\n";
+        }
+        alert(list);
+    }
+</script>
+</body>
+</html>

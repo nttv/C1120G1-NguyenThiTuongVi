@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Furama Resort Management Application</title>
+</head>
+<body>
+<script>
+    let fullName = "Nguyen Van A";
+    let cmnd = "200201202";
+    let birthday = "01/01/1999";
+    let email = "anv@gmail.com";
+    let city = "Da Nang";
+    let address = "295 Nguyen Tat Thanh";
+    let customerType = "Platinum";
+    let quantityIncluded = 3;
+    let rentDays = 7;
+    let serviceType = "House";
+    let roomType = "Vip";
+    let discount;
+    let total;
+    window.onload = showMenu();
+
+    function showMenu() {
+        let input;
+        do {
+            input = prompt("Welcome to Furama Resort Management Application\n" +
+                "Press 1: Customers Management\n" +
+                "Press 2: Employees Management\n" +
+                "Press 3: Exit\n" +
+                "Enter your choice:");
+            if (input == 1) {
+                showCMMenu();
+            } else if (input == 2) {
+                showEMMenu();
+            } else if (input == 3) {
+                return;
+            } else
+                alert("Please select an option from menu!");
+        } while (input != 1 && input != 2 && input != 3);
+    }
+
+    function showCMMenu() {
+        let input;
+        do {
+            input = parseInt(prompt("Welcome to Customers Management Application\n" +
+                "Press 1: Add new customer\n" +
+                "Press 2: Display customer information\n" +
+                "Press 3: Display total pay of customer\n" +
+                "Press 4: Edit customer information\n" +
+                "Press 5: Delete customer\n" +
+                "Press 6: Return\n" +
+                "Press 7: Exit\n" +
+                "Enter your choice:"));
+            switch (input) {
+                case 1:
+                    addNewCustomer();
+                    break;
+                case 2:
+                    displayCustomer();
+                    break;
+                case 3:
+                    displayTotalPay();
+                    break;
+                case 4:
+                    editCustomer();
+                    break;
+                case 5:
+                    deleteCustomer();
+                    break;
+                case 6:
+                    showMenu();
+                    break;
+                case 7:
+                    return;
+                default:
+                    alert("Please select an option from menu!");
+            }
+        } while (!Number.isInteger(input) || input < 1 || input > 7);
+    }
+
+    function showEMMenu() {
+        let input;
+        do {
+            input = parseInt(prompt("Welcome to Employees Management Application\n" +
+                "Press 1: Add new employee\n" +
+                "Press 2: Display employee information\n" +
+                "Press 3: Display salary of employee\n" +
+                "Press 4: Return\n" +
+                "Press 5: Exit\n" +
+                "Enter your choice:"));
+            switch (input) {
+                case 1:
+                    addNewEmployee();
+                    break;
+                case 2:
+                    displayEmployee();
+                    break;
+                case 3:
+                    displaySalary();
+                    break;
+                case 4:
+                    showMenu();
+                    break;
+                case 5:
+                    return;
+                default:
+                    alert("Please select an option from menu!");
+            }
+        } while (!Number.isInteger(input) || input < 1 || input > 5);
+
+    }
+
+    function addNewCustomer() {
+        inputFullName();
+        inputCmnd();
+        inputBirthday();
+        inputEmail();
+        inputCity();
+        inputAddress();
+        inputCustomerType();
+        inputQuantityIncluded();
+        inputRentDays();
+        inputServiceType();
+        inputRoomType();
+        calculateDiscount();
+        showCMMenu();
+    }
+
+    function displayCustomer() {
+        alert("Full name: " + fullName +
+            "\nCMND: " + cmnd +
+            "\nDate of birth: " + birthday +
+            "\nEmail: " + email +
+            "\nAddress: " + address + ", " + city +
+            "\nCustomer type: " + customerType +
+            "\nNumber of people included: " + quantityIncluded +
+            "\nNumber of rent days: " + rentDays +
+            "\nService type: " + serviceType +
+            "\nRoom type: " + roomType +
+            "\nDiscount: " + discount + "%");
+        showCMMenu();
+    }
+
+    function displayTotalPay() {
+        calculateTotalPay();
+        alert("Total pay of " + fullName + ": " + total + "$");
+        showCMMenu();
+    }
+
+    function editCustomer() {
+        let input = parseInt(prompt("Select the property you want to edit from list below\n" +
+            "Press 1: Full name\n" +
+            "Press 2: CMND\n" +
+            "Press 3: Date of birth\n" +
+            "Press 4: Email\n" +
+            "Press 5: City address\n" +
+            "Press 6: Address\n" +
+            "Press 7: Customer type\n" +
+            "Press 8: Number of people included\n" +
+            "Press 9: Number of rent days\n" +
+            "Press 10: Service type\n" +
+            "Press 11: Room type\n" +
+            "Enter your choice:"));
+        if (!Number.isInteger(input) || input < 1 || input > 11) {
+            alert("Failed!");
+            showCMMenu();
+        }
+        switch (input) {
+            case 1:
+                inputFullName();
+                break;
+            case 2:
+                inputCmnd();
+                break;
+            case 3:
+                inputBirthday();
+                break;
+            case 4:
+                inputEmail();
+                break;
+            case 5:
+                inputCity();
+                break;
+            case 6:
+                inputAddress();
+                break;
+            case 7:
+                inputCustomerType();
+                break;
+            case 8:
+                inputQuantityIncluded();
+                break;
+            case 9:
+                inputRentDays();
+                break;
+            case 10:
+                inputServiceType();
+                break;
+            case 11:
+                inputRoomType();
+                break;
+        }
+        calculateDiscount();
+        showCMMenu();
+    }
+
+    function deleteCustomer() {
+
+    }
+
+    function addNewEmployee() {
+
+    }
+
+    function displayEmployee() {
+
+    }
+
+    function displaySalary() {
+
+    }
+
+    function inputFullName() {
+        let input;
+        do {
+            input = prompt("Enter customer's fullname:", "");
+            if (input == "") {
+                alert("Please enter customer's full name.");
+            }
+        } while (input == "");
+        fullName = normalize(input);
+    }
+
+    function inputCmnd() {
+        do {
+            cmnd = prompt("Enter customer's ID card number (CMND):");
+            if (!checkCmnd(cmnd)) {
+                alert("Please match the request format: XXXXXXXXX (X is a digit).");
+            }
+        } while (!checkCmnd(cmnd));
+    }
+
+    function inputBirthday() {
+        do {
+            birthday = prompt("Enter customer's date of birth:");
+            if (!checkBirthday(birthday)) {
+                alert("Please match the request format: DD/MM/YYYY");
+            }
+        } while (!checkBirthday(birthday));
+    }
+
+    function inputEmail() {
+        do {
+            email = prompt("Enter customer's email:");
+            if (!checkEmail(email)) {
+                alert("Please match the request format: abc@domain.com.");
+            }
+        } while (!checkEmail(email));
+    }
+
+    function inputCity() {
+        let cityId;
+        do {
+            cityId = parseInt(prompt("Select customer's city address from list below\n" +
+                "Press 1: Da Nang\n" +
+                "Press 2: Hue\n" +
+                "Press 3: Quang Nam\n" +
+                "Press 4: Other cities\n" +
+                "Enter your choice:"));
+            if (!Number.isInteger(cityId) || cityId < 1 || cityId > 4)
+                alert("Failed!");
+        } while (!Number.isInteger(cityId) || cityId < 1 || cityId > 4);
+        if (cityId == 1) {
+            city = "Da Nang";
+        } else if (cityId == 2) {
+            city = "Hue";
+        } else if (cityId == 3) {
+            city = "Quang Nam";
+        } else {
+            city = prompt("Enter customer's city address:");
+        }
+    }
+
+    function inputAddress() {
+        let input;
+        do {
+            input = prompt("Enter customer's address:", "");
+            if (input == "") {
+                alert("Please enter customer's address.");
+            }
+        } while (input == "");
+        address = normalize(input);
+    }
+
+    function inputCustomerType() {
+        let customerTypeId;
+        do {
+            customerTypeId = parseInt(prompt("Select customer type from list below\n" +
+                "Press 1: Diamond\n" +
+                "Press 2: Platinum\n" +
+                "Press 3: Gold\n" +
+                "Press 4: Silver\n" +
+                "Press 5: Member\n" +
+                "Enter your choice:"));
+            if (!Number.isInteger(customerTypeId) || customerTypeId < 1 || customerTypeId > 5)
+                alert("Failed!");
+        } while (!Number.isInteger(customerTypeId) || customerTypeId < 1 || customerTypeId > 5);
+        if (customerTypeId == 1) {
+            customerType = "Diamond";
+        } else if (customerTypeId == 2) {
+            customerType = "Platinum";
+        } else if (customerTypeId == 3) {
+            customerType = "Gold";
+        } else if (customerTypeId == 4) {
+            customerType = "Silver";
+        } else {
+            customerType = "Member";
+        }
+    }
+
+    function inputQuantityIncluded() {
+        do {
+            quantityIncluded = parseInt(prompt("Enter number of people included:"));
+            if (!Number.isInteger(quantityIncluded) || quantityIncluded < 0) {
+                alert("Number of people included must be an integer greater than or equal to 0.")
+            }
+        } while (!Number.isInteger(quantityIncluded) || quantityIncluded < 0);
+    }
+
+    function inputRentDays() {
+        do {
+            rentDays = parseInt(prompt("Enter number of rent days:"));
+            if (!Number.isInteger(rentDays) || rentDays < 1) {
+                alert("Rent days must be an integer greater than 0.")
+            }
+        } while (!Number.isInteger(rentDays) || rentDays < 1);
+    }
+
+    function inputServiceType() {
+        let serviceTypeId;
+        do {
+            serviceTypeId = parseInt(prompt("Select service type from list below\n" +
+                "Press 1: Villa\n" +
+                "Press 2: House\n" +
+                "Press 3: Room\n" +
+                "Enter your choice:"));
+            if (serviceTypeId != 1 && serviceTypeId != 2 && serviceTypeId != 3)
+                alert("Failed!");
+        } while (serviceTypeId != 1 && serviceTypeId != 2 && serviceTypeId != 3);
+        if (serviceTypeId == 1) {
+            serviceType = "Villa";
+        } else if (serviceTypeId == 2) {
+            serviceType = "House";
+        } else {
+            serviceType = "Room";
+        }
+    }
+
+    function inputRoomType() {
+        let roomTypeId;
+        do {
+            roomTypeId = parseInt(prompt("Select room type from list below\n" +
+                "Press 1: Vip\n" +
+                "Press 2: Business\n" +
+                "Press 3: Normal\n" +
+                "Enter your choice:"));
+            if (roomTypeId != 1 && roomTypeId != 2 && roomTypeId != 3)
+                alert("Failed!");
+        } while (roomTypeId != 1 && roomTypeId != 2 && roomTypeId != 3);
+        if (roomTypeId == 1) {
+            roomType = "Vip";
+        } else if (roomTypeId == 2) {
+            roomType = "Business";
+        } else {
+            roomType = "Normal";
+        }
+    }
+
+    function calculateDiscount() {
+        discount = 0;
+        if (city == "Da Nang") {
+            discount += 20;
+        } else if (city == "Hue") {
+            discount += 10;
+        } else if (city == "Quang Nam") {
+            discount += 5;
+        }
+        if (rentDays > 7) {
+            discount += 30;
+        } else if (rentDays >= 5 && rentDays <= 7) {
+            discount += 20;
+        } else if (rentDays >= 2 && rentDays <= 4) {
+            discount += 10;
+        }
+        switch (customerType) {
+            case "Diamond":
+                discount += 15;
+                break;
+            case "Platinum":
+                discount += 10;
+                break;
+            case "Gold":
+                discount += 5;
+                break;
+            case "Silver":
+                discount += 2;
+                break;
+        }
+    }
+
+    function calculateTotalPay() {
+        let servicePrice;
+        if (serviceType == "Villa") {
+            servicePrice = 500;
+        } else if (serviceType == "House") {
+            servicePrice = 300;
+        } else {
+            servicePrice = 100;
+        }
+        total = servicePrice * rentDays * (1 - discount / 100);
+    }
+
+    function checkEmail(email) {
+        let re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    function checkCmnd(cmnd) {
+        if (cmnd.length != 9) {
+            return false;
+        }
+        for (let i = 0; i < cmnd.length; i++) {
+            let x = parseFloat(cmnd[i]);
+            if (!Number.isInteger(x) || x < 0 || x > 9) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function checkBirthday(birthday) {
+        let day = parseInt(birthday.substr(0, 2));
+        let month = parseInt(birthday.substr(3, 2));
+        let year = parseInt(birthday.substr(6, 4));
+        if (!Number.isInteger(day) || !Number.isInteger(month) || !Number.isInteger(year) ||
+            birthday.charAt(2) != "/" || birthday.charAt(5) != "/") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function normalize(string) {
+        let newString = string.trim().toLowerCase();
+        for (let i = newString.length - 1; i > 0; i--) {
+            if (newString[i] == " " && newString[i - 1] == " ") {
+                newString.splice(i, 1);
+            }
+        }
+        newString[0].toUpperCase();
+        for (let i = 1; i < newString.length; i++) {
+            if (newString[i] == " ") {
+                newString[i + 1].toUpperCase();
+            }
+        }
+        return newString;
+    }
+</script>
+</body>
+</html>

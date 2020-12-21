@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xây dựng lớp mô tả Temperature</title>
+</head>
+<body>
+<script>
+    class Temperature {
+        constructor(cDegree) {
+            this.cDegree = cDegree;
+        }
+
+        convertToFDegree() {
+            return 9 / 5 * this.cDegree + 32;
+        }
+
+        convertToKDegree() {
+            return this.cDegree + 273.15;
+        }
+    }
+
+    let temperature = new Temperature(25);
+    let fDegree = temperature.convertToFDegree();
+    let kDegree = temperature.convertToKDegree();
+    alert("25 do C = " + fDegree + " do F");
+    alert("25 do C = " + kDegree + " do Kelvin");
+</script>
+</body>
+</html>

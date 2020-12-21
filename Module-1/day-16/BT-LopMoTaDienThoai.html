@@ -7,12 +7,9 @@
 <body>
 <script>
     class Mobile {
-        constructor(status, battery, memoryForDraft, memoryForInbox, memoryForSent) {
+        constructor(status, battery) {
             this.status = status;
             this.battery = battery;
-            this.memoryForDraft = memoryForDraft;
-            this.memoryForInbox = memoryForInbox;
-            this.memoryForSent = memoryForSent;
             this.draft = [];
             this.inbox = [];
             this.sent = [];
@@ -23,7 +20,7 @@
                 alert("Goodbye!");
                 this.status = false;
             }
-            console.log("status check: " + this.status);
+            //console.log("status check: " + this.status);
             return this.status;
         }
 
@@ -37,7 +34,7 @@
                 alert("Hello!");
                 this.status = true;
             }
-            console.log("status turn on/off: " + this.status);
+            //console.log("status turn on/off: " + this.status);
         }
 
         charge(minutes) {
@@ -53,18 +50,12 @@
 
         text(message) {
             if (this.checkOnStatus()) {
-                let memory = message.length;
-                if (memory > this.memoryForDraft)
-                    alert("Memory for draft is full!");
-                else {
-                    this.memoryForDraft -= memory;
-                    this.draft.push(message);
-                }
+                this.draft.push(message);
                 this.battery--;
-                console.log("battery: " + this.battery);
-                console.log("draft: " + this.memoryForDraft);
-                console.log("inbox: " + this.memoryForInbox);
-                console.log("sent: " + this.memoryForSent);
+                // console.log("battery: " + this.battery);
+                // console.log("draft: " + this.memoryForDraft);
+                // console.log("inbox: " + this.memoryForInbox);
+                // console.log("sent: " + this.memoryForSent);
             } else
                 return;
         }
@@ -72,18 +63,12 @@
         receiveMessage(message) {
             if (this.checkOnStatus()) {
                 alert("New message!");
-                let memory = message.length;
-                if (memory > this.memoryForInbox)
-                    alert("Memory for inbox is full!");
-                else {
-                    this.memoryForInbox -= memory;
-                    this.inbox.push(message);
-                }
+                this.inbox.push(message);
                 this.battery--;
-                console.log("battery: " + this.battery);
-                console.log("draft: " + this.memoryForDraft);
-                console.log("inbox: " + this.memoryForInbox);
-                console.log("sent: " + this.memoryForSent);
+                // console.log("battery: " + this.battery);
+                // console.log("draft: " + this.memoryForDraft);
+                // console.log("inbox: " + this.memoryForInbox);
+                // console.log("sent: " + this.memoryForSent);
             } else
                 return;
         }
@@ -91,24 +76,14 @@
         sendMessage(index) {
             if (this.checkOnStatus()) {
                 let message = this.draft[index];
-                let memory = message.length;
-                if (memory > this.memoryForSent)
-                    alert("Memory for sent is full!");
-                else {
-                    this.sent.push(message);
-                    this.memoryForSent -= memory;
-                    for (let i = index; i < this.draft.length; i++) {
-                        this.draft[i] = this.draft[i + 1];
-                    }
-                    this.draft.pop();
-                    this.memoryForDraft += memory;
-                    alert("Message is sent!")
-                }
+                this.sent.push(message);
+                this.draft.splice(index, 1);
+                alert("Message is sent!")
                 this.battery--;
-                console.log("battery: " + this.battery);
-                console.log("draft: " + this.memoryForDraft);
-                console.log("inbox: " + this.memoryForInbox);
-                console.log("sent: " + this.memoryForSent);
+                // console.log("battery: " + this.battery);
+                // console.log("draft: " + this.memoryForDraft);
+                // console.log("inbox: " + this.memoryForInbox);
+                // console.log("sent: " + this.memoryForSent);
             } else
                 return;
         }
@@ -130,8 +105,8 @@
         }
     }
 
-    let nokia = new Mobile(false, 50, 100, 100, 100);
-    let iphone = new Mobile(true, 0, 100, 100, 100);
+    let nokia = new Mobile(false, 50);
+    let iphone = new Mobile(true, 0);
     let message = "Hello C1120G1!";
     nokia.turnOnOff();
     nokia.text(message);

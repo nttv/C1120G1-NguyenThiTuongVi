@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mèo bắt chuột và ăn chuột</title>
+</head>
+<body>
+<script>
+    class Rat {
+        constructor(name, weight, speed, status) {
+            this.name = name;
+            this.weight = weight;
+            this.speed = speed;
+            this.status = status;
+        }
+
+        growl() {
+            console.log("Chit, chit...");
+        }
+    }
+
+    class Cat {
+        constructor(name, weight, speed) {
+            this.name = name;
+            this.weight = weight;
+            this.speed = speed;
+        }
+
+        growl() {
+            console.log("Meow, meow...");
+        }
+
+        catch(rat) {
+            if (this.speed > rat.speed) {
+                console.log("Caught you!");
+                this.eat(rat);
+            } else
+                console.log("Ahh! Lost it");
+        }
+
+        eat(rat) {
+            if (rat.status == "song") {
+                console.log("Mlem mlem");
+                this.weight += rat.weight;
+            } else
+                console.log("It's dead!");
+        }
+    }
+
+    let rat1 = new Rat("Jerry", 1, 20, "song");
+    let rat2 = new Rat("Villain", 2, 0, "chet");
+    let cat = new Cat("Tom", 5, 15);
+    cat.catch(rat1);
+    cat.catch(rat2);
+</script>
+</body>
+</html>

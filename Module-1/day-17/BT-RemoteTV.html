@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote điều khiển Tivi</title>
+</head>
+<body>
+<script>
+    class Remote {
+        constructor(tv) {
+            this.tv = tv;
+        }
+
+        turnOnOff() {
+            if (this.tv.status == "on") {
+                this.tv.status = "off";
+                console.log("TV is off");
+            } else {
+                this.tv.status = "on";
+                console.log("TV is on");
+            }
+        }
+
+        changeChannel(channel) {
+            this.tv.channel = channel;
+            console.log("Current channel is " + this.tv.channel);
+        }
+
+        changeVolume(event) {
+            if (event == "up") {
+                this.tv.volume++;
+                console.log("Volume is up. Current volume is " + this.tv.volume);
+            } else {
+                this.tv.volume--;
+                console.log("Volume is down. Current volume is " + this.tv.volume);
+            }
+        }
+    }
+
+    class Television {
+        constructor(channel, volume, status) {
+            this.channel = channel;
+            this.volume = volume;
+            this.status = status;
+        }
+
+        changeChannel(channel) {
+            this.channel = channel;
+            console.log("Current channel is " + this.channel);
+        }
+
+        changeVolume(event) {
+            if (event == "up") {
+                this.volume++;
+                console.log("Volume is up. Current volume is " + this.tv.volume);
+            } else {
+                this.volume--;
+                console.log("Volume is down. Current volume is " + this.tv.volume);
+            }
+        }
+    }
+
+    let tv = new Television(1, 20, "off");
+    let remote = new Remote(tv);
+    remote.turnOnOff();
+    remote.changeChannel(7);
+    remote.changeChannel(3);
+    remote.changeVolume("up");
+    remote.changeVolume("up");
+    remote.turnOnOff();
+</script>
+</body>
+</html>

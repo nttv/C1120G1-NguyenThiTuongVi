@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game đơn giản - di chuyển đối tượng</title>
+</head>
+<body>
+<div id="game"></div>
+<script>
+    class Character {
+        constructor(image, top, left, size) {
+            this.image = image;
+            this.top = top;
+            this.left = left;
+            this.size = size;
+        }
+
+        getCharacterElement() {
+            return '<img width="' + this.size + '"' +
+                ' height="' + this.size + '"' +
+                ' src="' + this.image + '"' +
+                ' style="top: ' + this.top + 'px; left:' + this.left + 'px;position:absolute;" />';
+        }
+
+        moveRight() {
+            this.left += 50;
+            console.log('ok - left: ' + this.left);
+        }
+
+        moveDown() {
+            this.top += 50;
+            console.log('ok - top: ' + this.top);
+        }
+
+        moveLeft() {
+            this.left -= 50;
+            console.log('ok - left: ' + this.left);
+        }
+
+        moveUp() {
+            this.top -= 50;
+            console.log('ok - top: ' + this.top);
+        }
+    }
+
+    let character = new Character('dove.png', 20, 30, 200);
+    let direction = "right";
+    start();
+
+    function start() {
+        if (character.left >= window.innerWidth - character.size && character.top < window.innerHeight - character.size)
+            direction = "down";
+        if (character.top >= window.innerHeight - character.size && character.left >= window.innerWidth - character.size)
+            direction = "left";
+        if (character.left <= 0 && character.top >= window.innerHeight - character.size)
+            direction = "up";
+        if (character.left <= 0 && character.top <= 0)
+            direction = "right";
+        if (direction == "right")
+            character.moveRight();
+        else if (direction == "down")
+            character.moveDown();
+        else if (direction == "left")
+            character.moveLeft();
+        else
+            character.moveUp();
+        document.getElementById('game').innerHTML = character.getCharacterElement();
+        setTimeout(start, 500);
+    }
+</script>
+</body>
+</html>

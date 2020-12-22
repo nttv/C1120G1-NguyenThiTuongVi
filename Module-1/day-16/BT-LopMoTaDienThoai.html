@@ -17,7 +17,7 @@
 
         checkOnStatus() {
             if (this.battery == 0) {
-                alert("Goodbye!");
+                console.log("Low battery! Goodbye!");
                 this.status = false;
             }
             //console.log("status check: " + this.status);
@@ -26,12 +26,12 @@
 
         turnOnOff() {
             if (this.checkOnStatus()) {
-                alert("Goodbye!");
+                console.log("Shutting down... Goodbye!");
                 this.status = false;
             } else if (this.battery == 0) {
-                alert("Low battery!");
+                console.log("Low battery!");
             } else {
-                alert("Hello!");
+                console.log("Launching... Hello!");
                 this.status = true;
             }
             //console.log("status turn on/off: " + this.status);
@@ -42,7 +42,7 @@
                 if (this.battery < 100)
                     this.battery++;
                 else {
-                    alert("100% charged")
+                    console.log("100% charged");
                     return;
                 }
             }
@@ -62,7 +62,7 @@
 
         receiveMessage(message) {
             if (this.checkOnStatus()) {
-                alert("New message!");
+                console.log("New message!");
                 this.inbox.push(message);
                 this.battery--;
                 // console.log("battery: " + this.battery);
@@ -78,7 +78,7 @@
                 let message = this.draft[index];
                 this.sent.push(message);
                 this.draft.splice(index, 1);
-                alert("Message is sent!")
+                console.log("Message is sent!")
                 this.battery--;
                 // console.log("battery: " + this.battery);
                 // console.log("draft: " + this.memoryForDraft);
@@ -90,7 +90,7 @@
 
         readInbox(index) {
             if (this.checkOnStatus()) {
-                alert(this.inbox[index]);
+                console.log("Message: " + this.inbox[index]);
                 this.battery--;
             } else
                 return;
@@ -98,7 +98,7 @@
 
         readSent(index) {
             if (this.checkOnStatus()) {
-                alert(this.sent[index]);
+                console.log("Message: " + this.sent[index]);
                 this.battery--;
             } else
                 return;

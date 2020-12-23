@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management</title>
+    <style>
+        form {
+            width: 350px;
+            padding: 20px;
+            background-color: #F5F5F5;
+        }
+        input {
+            height: 25px;
+        }
+        button {
+            color: white;
+            background-color: green;
+            border: none;
+            width: 70px;
+            height: 30px;
+        }
+        th {
+            text-align: left;
+        }
+        #id {
+            width: 40px;
+            text-align: center;
+        }
+        #productName {
+            width: 250px;
+        }
+        #totalProducts {
+            text-align: right;
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+<h3>Add New Product</h3>
+<form action="">
+    <input type="text" id="input">
+    <button type="button" onclick="addProduct()">Add</button>
+</form>
+
+<h3>Display All Product</h3>
+<form action="">
+    <table id="productsInfo"></table>
+</form>
+
+<script>
+    let products = [];
+    let tableHeader = "<tr><th id='id'></th><th id='productName'>Product Name</th><th colspan='2' id='totalProducts'></th></tr>";
+    let product;
+    window.onload = displayProduct();
+
+    function displayProduct() {
+        let tableContent = tableHeader;
+        for (let i = 0; i < products.length; i++) {
+            tableContent += "<tr><td>" + (i + 1) + "</td><td>" + products[i]
+                + "</td><td><button type='button' onclick='editProduct(" + i + ")'>Edit</button></td>"
+                + "<td><button type='button' onclick='deleteProduct(" + i + ")'>Delete</button></td></tr>";
+        }
+        document.getElementById("productsInfo").innerHTML = tableContent;
+        document.getElementById("totalProducts").innerText = products.length + " products";
+    }
+
+    function addProduct() {
+        product = document.getElementById("input").value;
+        if (product != "") {
+            products.push(product);
+            document.getElementById("input").value = "";
+        } else
+            alert("Bạn chưa nhập tên sản phẩm");
+        displayProduct();
+    }
+
+    function editProduct(index) {
+        let value = prompt("Nhập tên mới của sản phẩm");
+        products[index] = value;
+        displayProduct();
+    }
+
+    function deleteProduct(index) {
+        products.splice(index, 1);
+        displayProduct();
+    }
+</script>
+</body>
+</html>

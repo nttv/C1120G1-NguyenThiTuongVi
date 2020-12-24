@@ -7,12 +7,12 @@
 <body>
 <script>
     class Customer {
-        constructor(fullName, cmnd, birthday, email, city, address, customerType,
+        constructor(customerName, customerId, customerBirthday, customerEmail, city, address, customerType,
                     quantityIncluded, rentDays, serviceType, roomType) {
-            this.fullName = fullName;
-            this.cmnd = cmnd;
-            this.birthday = birthday;
-            this.email = email;
+            this.customerName = customerName;
+            this.customerId = customerId;
+            this.customerBirthday = customerBirthday;
+            this.customerEmail = customerEmail;
             this.city = city;
             this.address = address;
             this.customerType = customerType;
@@ -24,36 +24,36 @@
             this.setTotal();
         }
 
-        getFullName() {
-            return this.fullName;
+        getCustomerName() {
+            return this.customerName;
         }
 
-        setFullName(fullName) {
-            this.fullName = fullName;
+        setCustomerName(customerName) {
+            this.customerName = customerName;
         }
 
-        getCmnd() {
-            return this.cmnd;
+        getCustomerId() {
+            return this.customerId;
         }
 
-        setCmnd(cmnd) {
-            this.cmnd = cmnd;
+        setCustomerId(customerId) {
+            this.customerId = customerId;
         }
 
-        getBirthday() {
-            return this.birthday;
+        getCustomerBirthday() {
+            return this.customerBirthday;
         }
 
-        setBirthday(birthday) {
-            this.birthday = birthday;
+        setCustomerBirthday(customerBirthday) {
+            this.customerBirthday = customerBirthday;
         }
 
-        getEmail() {
-            return this.email;
+        getCustomerEmail() {
+            return this.customerEmail;
         }
 
-        setEmail(email) {
-            this.email = email;
+        setCustomerEmail(customerEmail) {
+            this.customerEmail = customerEmail;
         }
 
         getCity() {
@@ -179,12 +179,12 @@
     }
 
     class Employee {
-        constructor(fullName, birthday, cmnd, phone, email, level, position) {
-            this.fullName = fullName;
-            this.birthday = birthday;
-            this.cmnd = cmnd;
-            this.phone = phone;
-            this.email = email;
+        constructor(employeeName, employeeBirthday, employeeId, employeePhone, employeeEmail, level, position) {
+            this.customerName = customerName;
+            this.employeeBirthday = employeeBirthday;
+            this.employeeId = employeeId;
+            this.employeePhone = employeePhone;
+            this.employeeEmail = employeeEmail;
             this.level = level;
             this.position = position;
             this.setDepartment();
@@ -192,44 +192,44 @@
             this.setSalary();
         }
 
-        getFullName() {
-            return this.fullName;
+        getEmployeeName() {
+            return this.employeeName;
         }
 
-        setFullName(fullname) {
-            this.fullName = fullName;
+        setEmployeeName(employeeName) {
+            this.employeeName = employeeName;
         }
 
-        getBirthday() {
-            return this.birthday;
+        getEmployeeBirthday() {
+            return this.employeeBirthday;
         }
 
-        setBirthday(birthday) {
-            this.birthday = birthday;
+        setEmployeeBirthday(employeeBirthday) {
+            this.employeeBirthday = employeeBirthday;
         }
 
-        getCmnd() {
-            return this.cmnd;
+        getEmployeeId() {
+            return this.employeeId;
         }
 
-        setCmnd(cmnd) {
-            this.cmnd = cmnd;
+        setEmployeeId(employeeId) {
+            this.employeeId = employeeId;
         }
 
-        getPhone() {
-            return this.phone;
+        getEmployeePhone() {
+            return this.employeePhone;
         }
 
-        setPhone(phone) {
-            this.phone = phone;
+        setEmployeePhone(employeePhone) {
+            this.employeePhone = employeePhone;
         }
 
-        getEmail() {
-            return this.email;
+        getEmployeeEmail() {
+            return this.employeeEmail;
         }
 
-        setEmail(email) {
-            this.email = email;
+        setEmployeeEmail(employeeEmail) {
+            this.employeeEmail = employeeEmail;
         }
 
         getLevel() {
@@ -437,7 +437,7 @@
     }
 
     function addNewCustomer() {
-        let fullName, cmnd, birthday, email, city, address, customerType,
+        let fullName, id, birthday, email, city, address, customerType,
             quantityIncluded, rentDays, serviceType, roomType;
         do {
             fullName = normalize(prompt("Enter customer's fullname:", ""));
@@ -447,11 +447,11 @@
         } while (fullName == "");
 
         do {
-            cmnd = prompt("Enter customer's ID card number (CMND):", "");
-            if (!checkSerialNumber("cmnd", cmnd)) {
+            id = prompt("Enter customer's ID card number:", "");
+            if (!checkSerialNumber("id", id)) {
                 alert("Please match the request format: XXXXXXXXX (X is a digit).");
             }
-        } while (!checkSerialNumber("cmnd", cmnd));
+        } while (!checkSerialNumber("id", id));
 
         do {
             birthday = prompt("Enter customer's date of birth:", "");
@@ -596,7 +596,7 @@
             }
         } while (!flag);
 
-        let customer = new Customer(fullName, cmnd, birthday, email, city, address,
+        let customer = new Customer(fullName, id, birthday, email, city, address,
             customerType, quantityIncluded, rentDays, serviceType, roomType);
         listCustomers.push(customer);
         displayCMMenu();
@@ -606,7 +606,7 @@
         let index;
         let list = "Select a customer from list below to view his/her information\n";
         for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getFullName() + "\n";
+            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
         }
         do {
             flag = true;
@@ -623,10 +623,10 @@
         } while (!flag);
 
         alert((index + 1) + "." +
-            "\nFull name: " + listCustomers[index].getFullName() +
-            "\nCMND: " + listCustomers[index].getCmnd() +
-            "\nDate of birth: " + listCustomers[index].getBirthday() +
-            "\nEmail: " + listCustomers[index].getEmail() +
+            "\nFull name: " + listCustomers[index].getCustomerName() +
+            "\nId card number: " + listCustomers[index].getCustomerId() +
+            "\nDate of birth: " + listCustomers[index].getCustomerBirthday() +
+            "\nEmail: " + listCustomers[index].getCustomerEmail() +
             "\nAddress: " + listCustomers[index].getAddress() +
             "\nCity: " + listCustomers[index].getCity() +
             "\nCustomer type: " + listCustomers[index].getCustomerType() +
@@ -643,7 +643,7 @@
         let index;
         let list = "Select a customer from list below to view his/her total pay\n";
         for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getFullName() + "\n";
+            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
         }
         do {
             flag = true;
@@ -658,17 +658,17 @@
                 flag = false;
             }
         } while (!flag);
-        alert("Total pay of " + listCustomers[index].getFullName() + ": " + listCustomers[index].getTotal() + "$");
+        alert("Total pay of " + listCustomers[index].getCustomerName() + ": " + listCustomers[index].getTotal() + "$");
         displayCMMenu();
     }
 
     function editCustomer() {
-        let fullName, cmnd, birthday, email, city, address, customerType,
+        let fullName, id, birthday, email, city, address, customerType,
             quantityIncluded, rentDays, serviceType, roomType;
         let index;
         let list = "Select the customer you want to edit from list below\n";
         for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getFullName() + "\n";
+            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
         }
         do {
             flag = true;
@@ -687,7 +687,7 @@
             flag = true;
             let input = prompt("Select the property you want to edit from list below\n" +
                 "Press 1: Full name\n" +
-                "Press 2: CMND\n" +
+                "Press 2: Id card number\n" +
                 "Press 3: Date of birth\n" +
                 "Press 4: Email\n" +
                 "Press 5: City address\n" +
@@ -703,19 +703,19 @@
                 case '1':
                     fullName = normalize(prompt("Enter customer's fullname:", ""));
                     if (fullName != "")
-                        listCustomers[index].setFullName(fullName);
+                        listCustomers[index].setCustomerName(fullName);
                     break;
                 case '2':
                     do {
-                        cmnd = prompt("Enter customer's ID card number (CMND):", "");
-                        if (cmnd == "")
+                        id = prompt("Enter customer's ID card number:", "");
+                        if (id == "")
                             break;
-                        else if (!checkSerialNumber("cmnd", cmnd)) {
+                        else if (!checkSerialNumber("id", id)) {
                             alert("Please match the request format: XXXXXXXXX (X is a digit).");
                         }
-                    } while (!checkSerialNumber("cmnd", cmnd));
-                    if (cmnd != "")
-                        listCustomers[index].setCmnd(cmnd);
+                    } while (!checkSerialNumber("id", id));
+                    if (id != "")
+                        listCustomers[index].setCustomerId(id);
                     break;
                 case '3':
                     do {
@@ -727,7 +727,7 @@
                         }
                     } while (!checkBirthday(birthday));
                     if (birthday != "")
-                        listCustomers[index].setBirthday(birthday);
+                        listCustomers[index].setCustomerBirthday(birthday);
                     break;
                 case '4':
                     do {
@@ -739,7 +739,7 @@
                         }
                     } while (!checkEmail(email));
                     if (email != "")
-                        listCustomers[index].setEmail(email);
+                        listCustomers[index].setCustomerEmail(email);
                     break;
                 case '5':
                     do {
@@ -924,7 +924,7 @@
         let index;
         let list = "Select the customer you want to delete from list below\n";
         for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getFullName() + "\n";
+            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
         }
         do {
             flag = true;
@@ -944,7 +944,7 @@
     }
 
     function addNewEmployee() {
-        let fullName, birthday, cmnd, phone, email, level, position;
+        let fullName, birthday, id, phone, email, level, position;
         do {
             fullName = normalize(prompt("Enter employee's fullname:", ""));
             if (fullName == "") {
@@ -960,11 +960,11 @@
         } while (!checkBirthday(birthday));
 
         do {
-            cmnd = prompt("Enter employee's ID card number (CMND):", "");
-            if (!checkSerialNumber("cmnd", cmnd)) {
+            id = prompt("Enter employee's ID card number:", "");
+            if (!checkSerialNumber("id", id)) {
                 alert("Please match the request format: XXXXXXXXX (X is a digit).");
             }
-        } while (!checkSerialNumber("cmnd", cmnd));
+        } while (!checkSerialNumber("id", id));
 
         do {
             phone = prompt("Enter employee's phone number:", "");
@@ -1042,7 +1042,7 @@
             }
         } while (!flag);
 
-        let employee = new Employee(fullName, birthday, cmnd, phone, email, level, position);
+        let employee = new Employee(fullName, birthday, id, phone, email, level, position);
         listEmployees.push(employee);
         displayEMMenu();
     }
@@ -1051,7 +1051,7 @@
         let index;
         let list = "Select an employee from list below to view his/her information\n";
         for (let i = 0; i < listEmployees.length; i++) {
-            list += "Press " + (i + 1) + ": " + listEmployees[i].getFullName() + "\n";
+            list += "Press " + (i + 1) + ": " + listEmployees[i].getEmployeeName() + "\n";
         }
         do {
             flag = true;
@@ -1068,11 +1068,11 @@
         } while (!flag);
 
         alert((index + 1) + "." +
-            "\nFull name: " + listEmployees[index].getFullName() +
-            "\nDate of birth: " + listEmployees[index].getBirthday() +
-            "\nCMND: " + listEmployees[index].getCmnd() +
-            "\nPhone: " + listEmployees[index].getPhone() +
-            "\nEmail: " + listEmployees[index].getEmail() +
+            "\nFull name: " + listEmployees[index].getEmployeeName() +
+            "\nDate of birth: " + listEmployees[index].getEmployeeBirthday() +
+            "\nId card number: " + listEmployees[index].getEmployeeId() +
+            "\nPhone: " + listEmployees[index].getEmployeePhone() +
+            "\nEmail: " + listEmployees[index].getEmployeeEmail() +
             "\nLevel: " + listEmployees[index].getLevel() +
             "\nPosition: " + listEmployees[index].getPosition() +
             "\nDepartment: " + listEmployees[index].getDepartment() +
@@ -1085,7 +1085,7 @@
         let index;
         let list = "Select an employee from list below to view his/her salary\n";
         for (let i = 0; i < listEmployees.length; i++) {
-            list += "Press " + (i + 1) + ": " + listEmployees[i].getFullName() + "\n";
+            list += "Press " + (i + 1) + ": " + listEmployees[i].getEmployeeName() + "\n";
         }
         do {
             flag = true;
@@ -1100,7 +1100,7 @@
                 flag = false;
             }
         } while (!flag);
-        alert("Salary of " + listEmployees[index].getFullName() + ": " + listEmployees[index].getSalary() + "$");
+        alert("Salary of " + listEmployees[index].getEmployeeName() + ": " + listEmployees[index].getSalary() + "$");
         displayEMMenu();
     }
 
@@ -1125,7 +1125,7 @@
 
     function checkSerialNumber(property, value) {
         let length;
-        if (property == "cmnd") {
+        if (property == "id") {
             length = 9;
         } else if (property == "phone") {
             length = 10;

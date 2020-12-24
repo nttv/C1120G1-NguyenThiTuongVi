@@ -20,8 +20,8 @@
             this.rentDays = rentDays;
             this.serviceType = serviceType;
             this.roomType = roomType;
-            this.discount = this.calculateDiscount();
-            this.total = this.calculateTotalPay();
+            this.setDiscount();
+            this.setTotal();
         }
 
         getFullName() {
@@ -178,22 +178,193 @@
         }
     }
 
+    class Employee {
+        constructor(fullName, birthday, cmnd, phone, email, level, position) {
+            this.fullName = fullName;
+            this.birthday = birthday;
+            this.cmnd = cmnd;
+            this.phone = phone;
+            this.email = email;
+            this.level = level;
+            this.position = position;
+            this.setDepartment();
+            this.setBenefit();
+            this.setSalary();
+        }
+
+        getFullName() {
+            return this.fullName;
+        }
+
+        setFullName(fullname) {
+            this.fullName = fullName;
+        }
+
+        getBirthday() {
+            return this.birthday;
+        }
+
+        setBirthday(birthday) {
+            this.birthday = birthday;
+        }
+
+        getCmnd() {
+            return this.cmnd;
+        }
+
+        setCmnd(cmnd) {
+            this.cmnd = cmnd;
+        }
+
+        getPhone() {
+            return this.phone;
+        }
+
+        setPhone(phone) {
+            this.phone = phone;
+        }
+
+        getEmail() {
+            return this.email;
+        }
+
+        setEmail(email) {
+            this.email = email;
+        }
+
+        getLevel() {
+            return this.level;
+        }
+
+        setLevel(level) {
+            this.level = level;
+        }
+
+        getPosition() {
+            return this.position;
+        }
+
+        setPosition(position) {
+            this.position = position;
+        }
+
+        getDepartment() {
+            return this.department;
+        }
+
+        setDepartment() {
+            switch (this.position) {
+                case "Receptionist":
+                case "Service staff":
+                    this.department = "Service";
+                    break;
+                case "Specialist":
+                    this.department = "Sale-Marketing";
+                    break;
+                case "Supervisor":
+                    this.department = "Administration";
+                    break;
+                case "Manager":
+                case "Director":
+                    this.department = "Management";
+                    break;
+            }
+        }
+
+        getBenefit() {
+            return this.benefit;
+        }
+
+        setBenefit() {
+            switch (this.position) {
+                case "Receptionist":
+                case "Service staff":
+                    this.benefit = 100;
+                    break;
+                case "Specialist":
+                    this.benefit = 200;
+                    break;
+                case "Supervisor":
+                    this.benefit = 300;
+                    break;
+                case "Manager":
+                    this.benefit = 400;
+                    break;
+                case "Director":
+                    this.benefit = 500;
+                    break;
+            }
+        }
+
+        getSalary() {
+            return this.salary;
+        }
+
+        getBasicSalary() {
+            let basicSalary;
+            switch (this.position) {
+                case "Receptionist":
+                    basicSalary = 1000;
+                    break;
+                case "Service staff":
+                    basicSalary = 1200;
+                    break;
+                case "Specialist":
+                    basicSalary = 2200;
+                    break;
+                case "Supervisor":
+                    basicSalary = 2500;
+                    break;
+                case "Manager":
+                    basicSalary = 3000;
+                    break;
+                case "Director":
+                    basicSalary = 4000;
+                    break;
+            }
+            return basicSalary;
+        }
+
+        setSalary() {
+            this.setBenefit();
+            this.salary = this.benefit + this.getBasicSalary();
+        }
+    }
+
     let listCustomers = [];
-    let fullName;
-    let cmnd;
-    let birthday;
-    let email;
-    let city;
-    let address;
-    let customerType;
-    let quantityIncluded;
-    let rentDays;
-    let serviceType;
-    let roomType;
+    let listEmployees = [];
+    listCustomers[0] = new Customer("Nguyen Van A", "200201202", "01/01/1999", "anv@gmail.com",
+        "Da Nang", "295 Nguyen Tat Thanh", "Gold", 3, 7, "House", "Vip");
+    listEmployees[0] = new Employee("Tran Van B", "01/01/1995", "200200200", "0909000999",
+        "btv@gmail.com", "Postgraduate", "Director");
     let flag;
     window.onload = displayMainMenu();
 
     function displayMainMenu() {
+        do {
+            flag = true;
+            let input = prompt("Welcome to Furama Resort Management Application\n" +
+                "Press 1: Customers Management\n" +
+                "Press 2: Employees Management\n" +
+                "Press 3: Exit\n" +
+                "Enter your choice:", "");
+            switch (input) {
+                case '1':
+                    displayCMMenu();
+                    break;
+                case '2':
+                    displayEMMenu();
+                    break;
+                case '3':
+                    return;
+                default:
+                    alert("Please select an option from menu!");
+                    flag = false;
+            }
+        } while (!flag);
+    }
+
+    function displayCMMenu() {
         do {
             flag = true;
             let input = prompt("Welcome to Customers Management Application\n" +
@@ -202,7 +373,8 @@
                 "Press 3: Display total pay of customer\n" +
                 "Press 4: Edit customer information\n" +
                 "Press 5: Delete customer\n" +
-                "Press 6: Exit\n" +
+                "Press 6: Return\n" +
+                "Press 7: Exit\n" +
                 "Enter your choice:", "");
             switch (input) {
                 case '1':
@@ -221,6 +393,41 @@
                     deleteCustomer();
                     break;
                 case '6':
+                    displayMainMenu();
+                    break;
+                case '7':
+                    return;
+                default:
+                    alert("Please select an option from menu!");
+                    flag = false;
+            }
+        } while (!flag);
+    }
+
+    function displayEMMenu() {
+        do {
+            flag = true;
+            let input = prompt("Welcome to Employees Management Application\n" +
+                "Press 1: Add new employee\n" +
+                "Press 2: Display employee information\n" +
+                "Press 3: Display salary of employee\n" +
+                "Press 4: Return\n" +
+                "Press 5: Exit\n" +
+                "Enter your choice:", "");
+            switch (input) {
+                case '1':
+                    addNewEmployee();
+                    break;
+                case '2':
+                    displayEmployee();
+                    break;
+                case '3':
+                    displaySalary();
+                    break;
+                case '4':
+                    displayMainMenu();
+                    break;
+                case '5':
                     return;
                 default:
                     alert("Please select an option from menu!");
@@ -230,6 +437,8 @@
     }
 
     function addNewCustomer() {
+        let fullName, cmnd, birthday, email, city, address, customerType,
+            quantityIncluded, rentDays, serviceType, roomType;
         do {
             fullName = normalize(prompt("Enter customer's fullname:", ""));
             if (fullName == "") {
@@ -239,10 +448,10 @@
 
         do {
             cmnd = prompt("Enter customer's ID card number (CMND):", "");
-            if (!checkCmnd(cmnd)) {
+            if (!checkSerialNumber("cmnd", cmnd)) {
                 alert("Please match the request format: XXXXXXXXX (X is a digit).");
             }
-        } while (!checkCmnd(cmnd));
+        } while (!checkSerialNumber("cmnd", cmnd));
 
         do {
             birthday = prompt("Enter customer's date of birth:", "");
@@ -390,7 +599,7 @@
         let customer = new Customer(fullName, cmnd, birthday, email, city, address,
             customerType, quantityIncluded, rentDays, serviceType, roomType);
         listCustomers.push(customer);
-        displayMainMenu();
+        displayCMMenu();
     }
 
     function displayCustomer() {
@@ -427,7 +636,7 @@
             "\nRoom type: " + listCustomers[index].getRoomType() +
             "\nDiscount: " + listCustomers[index].getDiscount() + "$\n\n");
 
-        displayMainMenu();
+        displayCMMenu();
     }
 
     function displayTotalPay() {
@@ -450,10 +659,12 @@
             }
         } while (!flag);
         alert("Total pay of " + listCustomers[index].getFullName() + ": " + listCustomers[index].getTotal() + "$");
-        displayMainMenu();
+        displayCMMenu();
     }
 
     function editCustomer() {
+        let fullName, cmnd, birthday, email, city, address, customerType,
+            quantityIncluded, rentDays, serviceType, roomType;
         let index;
         let list = "Select the customer you want to edit from list below\n";
         for (let i = 0; i < listCustomers.length; i++) {
@@ -499,10 +710,10 @@
                         cmnd = prompt("Enter customer's ID card number (CMND):", "");
                         if (cmnd == "")
                             break;
-                        else if (!checkCmnd(cmnd)) {
+                        else if (!checkSerialNumber("cmnd", cmnd)) {
                             alert("Please match the request format: XXXXXXXXX (X is a digit).");
                         }
-                    } while (!checkCmnd(cmnd));
+                    } while (!checkSerialNumber("cmnd", cmnd));
                     if (cmnd != "")
                         listCustomers[index].setCmnd(cmnd);
                     break;
@@ -700,7 +911,7 @@
                         listCustomers[index].setRoomType(roomType);
                     break;
                 case '12':
-                    displayMainMenu();
+                    displayCMMenu();
                 default:
                     alert("Failed!");
                     flag = false;
@@ -732,6 +943,167 @@
         displayCustomer();
     }
 
+    function addNewEmployee() {
+        let fullName, birthday, cmnd, phone, email, level, position;
+        do {
+            fullName = normalize(prompt("Enter employee's fullname:", ""));
+            if (fullName == "") {
+                alert("Please enter employee's full name.");
+            }
+        } while (fullName == "");
+
+        do {
+            birthday = prompt("Enter employee's date of birth:", "");
+            if (!checkBirthday(birthday)) {
+                alert("Please match the request format: DD/MM/YYYY");
+            }
+        } while (!checkBirthday(birthday));
+
+        do {
+            cmnd = prompt("Enter employee's ID card number (CMND):", "");
+            if (!checkSerialNumber("cmnd", cmnd)) {
+                alert("Please match the request format: XXXXXXXXX (X is a digit).");
+            }
+        } while (!checkSerialNumber("cmnd", cmnd));
+
+        do {
+            phone = prompt("Enter employee's phone number:", "");
+            if (!checkSerialNumber("phone", phone)) {
+                alert("Please match the request format: XXXXXXXXXX (X is a digit).");
+            }
+        } while (!checkSerialNumber("phone", phone));
+
+        do {
+            email = prompt("Enter employee's email:", "");
+            if (!checkEmail(email)) {
+                alert("Please match the request format: abc@domain.com.");
+            }
+        } while (!checkEmail(email));
+
+        do {
+            flag = true;
+            let input = prompt("Select employee's academic level from list below\n" +
+                "Press 1: Intermediate\n" +
+                "Press 2: College\n" +
+                "Press 3: University\n" +
+                "Press 4: Postgraduate\n" +
+                "Enter your choice:", "");
+            switch (input) {
+                case '1':
+                    level = "Intermediate";
+                    break;
+                case '2':
+                    level = "College";
+                    break;
+                case '3':
+                    level = "University";
+                    break;
+                case '4':
+                    level = "Postgraduate";
+                    break;
+                default:
+                    alert("Failed!");
+                    flag = false;
+            }
+        } while (!flag);
+
+        do {
+            flag = true;
+            let input = prompt("Select employee's position from list below\n" +
+                "Press 1: Receptionist\n" +
+                "Press 2: Service staff\n" +
+                "Press 3: Specialist\n" +
+                "Press 4: Supervisor\n" +
+                "Press 5: Manager\n" +
+                "Press 6: Director\n" +
+                "Enter your choice:", "");
+            switch (input) {
+                case '1':
+                    position = "Receptionist";
+                    break;
+                case '2':
+                    position = "Service staff";
+                    break;
+                case '3':
+                    position = "Specialist";
+                    break;
+                case '4':
+                    position = "Supervisor";
+                    break;
+                case '5':
+                    position = "Manager";
+                    break;
+                case '6':
+                    position = "Director";
+                    break;
+                default:
+                    alert("Failed!");
+                    flag = false;
+            }
+        } while (!flag);
+
+        let employee = new Employee(fullName, birthday, cmnd, phone, email, level, position);
+        listEmployees.push(employee);
+        displayEMMenu();
+    }
+
+    function displayEmployee() {
+        let index;
+        let list = "Select an employee from list below to view his/her information\n";
+        for (let i = 0; i < listEmployees.length; i++) {
+            list += "Press " + (i + 1) + ": " + listEmployees[i].getFullName() + "\n";
+        }
+        do {
+            flag = true;
+            let input = prompt(list, "");
+            if (!isNaN(input)) {
+                input = parseFloat(input);
+                if (Number.isInteger(input) && input >= 1 && input <= listEmployees.length) {
+                    index = input - 1;
+                }
+            } else {
+                alert("Failed!");
+                flag = false;
+            }
+        } while (!flag);
+
+        alert((index + 1) + "." +
+            "\nFull name: " + listEmployees[index].getFullName() +
+            "\nDate of birth: " + listEmployees[index].getBirthday() +
+            "\nCMND: " + listEmployees[index].getCmnd() +
+            "\nPhone: " + listEmployees[index].getPhone() +
+            "\nEmail: " + listEmployees[index].getEmail() +
+            "\nLevel: " + listEmployees[index].getLevel() +
+            "\nPosition: " + listEmployees[index].getPosition() +
+            "\nDepartment: " + listEmployees[index].getDepartment() +
+            "\nSalary benefit: " + listEmployees[index].getBenefit() + "$\n\n");
+
+        displayEMMenu();
+    }
+
+    function displaySalary() {
+        let index;
+        let list = "Select an employee from list below to view his/her salary\n";
+        for (let i = 0; i < listEmployees.length; i++) {
+            list += "Press " + (i + 1) + ": " + listEmployees[i].getFullName() + "\n";
+        }
+        do {
+            flag = true;
+            let input = prompt(list, "");
+            if (!isNaN(input)) {
+                input = parseFloat(input);
+                if (Number.isInteger(input) && input >= 1 && input <= listEmployees.length) {
+                    index = input - 1;
+                }
+            } else {
+                alert("Failed!");
+                flag = false;
+            }
+        } while (!flag);
+        alert("Salary of " + listEmployees[index].getFullName() + ": " + listEmployees[index].getSalary() + "$");
+        displayEMMenu();
+    }
+
     function checkEmail(email) {
         let countAt = 0;
         let countDoc = 0;
@@ -751,12 +1123,18 @@
         return true;
     }
 
-    function checkCmnd(cmnd) {
-        if (cmnd.length != 9) {
+    function checkSerialNumber(property, value) {
+        let length;
+        if (property == "cmnd") {
+            length = 9;
+        } else if (property == "phone") {
+            length = 10;
+        }
+        if (value.length != length) {
             return false;
         }
-        for (let i = 0; i < cmnd.length; i++) {
-            if (isNaN(cmnd[i])) {
+        for (let i = 0; i < value.length; i++) {
+            if (isNaN(value[i])) {
                 return false;
             }
         }

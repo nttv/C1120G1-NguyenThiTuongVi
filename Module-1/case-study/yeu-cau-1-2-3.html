@@ -17,8 +17,8 @@
     let rentDays = 7;
     let serviceType = "House";
     let roomType = "Vip";
-    let discount;
-    let total;
+    let discount=calculateDiscount();
+    let total=calculateTotalPay();
     let flag;
     window.onload = displayMainMenu();
 
@@ -30,8 +30,7 @@
                 "Press 2: Display customer information\n" +
                 "Press 3: Display total pay of customer\n" +
                 "Press 4: Edit customer information\n" +
-                "Press 5: Delete customer\n" +
-                "Press 6: Exit\n" +
+                "Press 5: Exit\n" +
                 "Enter your choice:", "");
             switch (input) {
                 case '1':
@@ -47,9 +46,6 @@
                     editCustomer();
                     break;
                 case '5':
-                    deleteCustomer();
-                    break;
-                case '6':
                     return;
                 default:
                     alert("Please select an option from menu!");
@@ -437,10 +433,6 @@
             }
         } while (!flag);
         displayMainMenu();
-    }
-
-    function deleteCustomer() {
-
     }
 
     function calculateDiscount() {

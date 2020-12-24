@@ -11,17 +11,6 @@
         "295 Nguyen Tat Thanh", "Gold", 3, 7, "House", "Vip"];
     arrListCustomers[0][arrListCustomers[0].length] = calculateDiscount(0);
     arrListCustomers[0][arrListCustomers[0].length] = calculateTotalPay(0);
-    let fullName;
-    let cmnd;
-    let birthday;
-    let email;
-    let city;
-    let address;
-    let customerType;
-    let quantityIncluded;
-    let rentDays;
-    let serviceType;
-    let roomType;
     let flag;
     window.onload = displayMainMenu();
 
@@ -62,6 +51,8 @@
     }
 
     function addNewCustomer() {
+        let fullName, cmnd, birthday, email, city, address, customerType,
+            quantityIncluded, rentDays, serviceType, roomType;
         do {
             fullName = normalize(prompt("Enter customer's fullname:", ""));
             if (fullName == "") {
@@ -288,6 +279,8 @@
     }
 
     function editCustomer() {
+        let fullName, cmnd, birthday, email, city, address, customerType,
+            quantityIncluded, rentDays, serviceType, roomType;
         let index;
         let list = "Select the customer you want to edit from list below\n";
         for (let i = 0; i < arrListCustomers.length; i++) {
@@ -384,8 +377,8 @@
                         }
                     } while (!flag);
                     arrListCustomers[index][4] = city;
-                    arrListCustomers[index][11] = calculateDiscount(index);
-                    arrListCustomers[index][12] = calculateTotalPay(index);
+                    arrListCustomers[index][arrListCustomers[index].length - 2] = calculateDiscount(index);
+                    arrListCustomers[index][arrListCustomers[index].length - 1] = calculateTotalPay(index);
                     break;
                 case '6':
                     address = normalize(prompt("Enter customer's address:", address));
@@ -425,8 +418,8 @@
                         }
                     } while (!flag);
                     arrListCustomers[index][6] = customerType;
-                    arrListCustomers[index][11] = calculateDiscount(index);
-                    arrListCustomers[index][12] = calculateTotalPay(index);
+                    arrListCustomers[index][arrListCustomers[index].length - 2] = calculateDiscount(index);
+                    arrListCustomers[index][arrListCustomers[index].length - 1] = calculateTotalPay(index);
                     break;
                 case '8':
                     do {
@@ -449,8 +442,8 @@
                         }
                     } while (!flag);
                     arrListCustomers[index][8] = rentDays;
-                    arrListCustomers[index][11] = calculateDiscount(index);
-                    arrListCustomers[index][12] = calculateTotalPay(index);
+                    arrListCustomers[index][arrListCustomers[index].length - 2] = calculateDiscount(index);
+                    arrListCustomers[index][arrListCustomers[index].length - 1] = calculateTotalPay(index);
                     break;
                 case '10':
                     do {
@@ -478,7 +471,7 @@
                         }
                     } while (!flag);
                     arrListCustomers[index][9] = serviceType;
-                    arrListCustomers[index][12] = calculateTotalPay(index);
+                    arrListCustomers[index][arrListCustomers[index].length - 1] = calculateTotalPay(index);
                     break;
                 case '11':
                     do {

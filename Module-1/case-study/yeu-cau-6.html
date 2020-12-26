@@ -20,8 +20,6 @@
             this.rentDays = rentDays;
             this.serviceType = serviceType;
             this.roomType = roomType;
-            this.setDiscount();
-            this.setTotal();
         }
 
         getCustomerName() {
@@ -113,59 +111,42 @@
         }
 
         getDiscount() {
-            return this.discount;
-        }
-
-        setDiscount() {
-            this.discount = this.calculateDiscount();
-        }
-
-        calculateDiscount() {
-            let value = 0;
+            let discount = 0;
             if (this.city == "Da Nang") {
-                value += 20;
+                discount += 20;
             } else if (this.city == "Hue") {
-                value += 10;
+                discount += 10;
             } else if (this.city == "Quang Nam") {
-                value += 5;
+                discount += 5;
             }
 
             if (this.rentDays > 7) {
-                value += 30;
+                discount += 30;
             } else if (this.rentDays >= 5 && this.rentDays <= 7) {
-                value += 20;
+                discount += 20;
             } else if (this.rentDays >= 2 && this.rentDays <= 4) {
-                value += 10;
+                discount += 10;
             }
 
             switch (this.customerType) {
                 case "Diamond":
-                    value += 15;
+                    discount += 15;
                     break;
                 case "Platinum":
-                    value += 10;
+                    discount += 10;
                     break;
                 case "Gold":
-                    value += 5;
+                    discount += 5;
                     break;
                 case "Silver":
-                    value += 2;
+                    discount += 2;
                     break;
             }
-            return value;
+            return discount;
         }
 
         getTotal() {
-            return this.total;
-        }
-
-        setTotal() {
-            this.setDiscount();
-            this.total = this.calculateTotalPay();
-        }
-
-        calculateTotalPay() {
-            let servicePrice, amount;
+            let servicePrice, total;
             if (this.serviceType == "Villa") {
                 servicePrice = 500;
             } else if (this.serviceType == "House") {
@@ -173,23 +154,20 @@
             } else {
                 servicePrice = 100;
             }
-            amount = servicePrice * this.rentDays - this.discount;
-            return amount;
+            total = servicePrice * this.rentDays - this.getDiscount();
+            return total;
         }
     }
 
     class Employee {
         constructor(employeeName, employeeBirthday, employeeId, employeePhone, employeeEmail, level, position) {
-            this.customerName = customerName;
+            this.employeeName = employeeName;
             this.employeeBirthday = employeeBirthday;
             this.employeeId = employeeId;
             this.employeePhone = employeePhone;
             this.employeeEmail = employeeEmail;
             this.level = level;
             this.position = position;
-            this.setDepartment();
-            this.setBenefit();
-            this.setSalary();
         }
 
         getEmployeeName() {
@@ -249,55 +227,47 @@
         }
 
         getDepartment() {
-            return this.department;
-        }
-
-        setDepartment() {
+            let department;
             switch (this.position) {
                 case "Receptionist":
                 case "Service staff":
-                    this.department = "Service";
+                    department = "Service";
                     break;
                 case "Specialist":
-                    this.department = "Sale-Marketing";
+                    department = "Sale-Marketing";
                     break;
                 case "Supervisor":
-                    this.department = "Administration";
+                    department = "Administration";
                     break;
                 case "Manager":
                 case "Director":
-                    this.department = "Management";
+                    department = "Management";
                     break;
             }
+            return department;
         }
 
         getBenefit() {
-            return this.benefit;
-        }
-
-        setBenefit() {
+            let benefit;
             switch (this.position) {
                 case "Receptionist":
                 case "Service staff":
-                    this.benefit = 100;
+                    benefit = 100;
                     break;
                 case "Specialist":
-                    this.benefit = 200;
+                    benefit = 200;
                     break;
                 case "Supervisor":
-                    this.benefit = 300;
+                    benefit = 300;
                     break;
                 case "Manager":
-                    this.benefit = 400;
+                    benefit = 400;
                     break;
                 case "Director":
-                    this.benefit = 500;
+                    benefit = 500;
                     break;
             }
-        }
-
-        getSalary() {
-            return this.salary;
+            return benefit;
         }
 
         getBasicSalary() {
@@ -325,9 +295,8 @@
             return basicSalary;
         }
 
-        setSalary() {
-            this.setBenefit();
-            this.salary = this.benefit + this.getBasicSalary();
+        getSalary() {
+            this.salary = this.getBenefit() + this.getBasicSalary();
         }
     }
 
@@ -381,7 +350,7 @@
                     addNewCustomer();
                     break;
                 case '2':
-                    displayCustomer();
+                    displayCustomers();
                     break;
                 case '3':
                     displayTotalPay();
@@ -602,62 +571,15 @@
         displayCMMenu();
     }
 
-    function displayCustomer() {
-        let index;
+    function displayCustomers() {
         let list = "Select a customer from list below to view his/her information\n";
-        for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
-        }
-        do {
-            flag = true;
-            let input = prompt(list, "");
-            if (!isNaN(input)) {
-                input = parseFloat(input);
-                if (Number.isInteger(input) && input >= 1 && input <= listCustomers.length) {
-                    index = input - 1;
-                }
-            } else {
-                alert("Failed!");
-                flag = false;
-            }
-        } while (!flag);
-
-        alert((index + 1) + "." +
-            "\nFull name: " + listCustomers[index].getCustomerName() +
-            "\nId card number: " + listCustomers[index].getCustomerId() +
-            "\nDate of birth: " + listCustomers[index].getCustomerBirthday() +
-            "\nEmail: " + listCustomers[index].getCustomerEmail() +
-            "\nAddress: " + listCustomers[index].getAddress() +
-            "\nCity: " + listCustomers[index].getCity() +
-            "\nCustomer type: " + listCustomers[index].getCustomerType() +
-            "\nNumber of people included: " + listCustomers[index].getQuantityIncluded() +
-            "\nNumber of rent days: " + listCustomers[index].getRentDays() +
-            "\nService type: " + listCustomers[index].getServiceType() +
-            "\nRoom type: " + listCustomers[index].getRoomType() +
-            "\nDiscount: " + listCustomers[index].getDiscount() + "$\n\n");
-
-        displayCMMenu();
+        let index = getIndexOfSelection("customer", list);
+        displayCustomerInfo(index);
     }
 
     function displayTotalPay() {
-        let index;
         let list = "Select a customer from list below to view his/her total pay\n";
-        for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
-        }
-        do {
-            flag = true;
-            let input = prompt(list, "");
-            if (!isNaN(input)) {
-                input = parseFloat(input);
-                if (Number.isInteger(input) && input >= 1 && input <= listCustomers.length) {
-                    index = input - 1;
-                }
-            } else {
-                alert("Failed!");
-                flag = false;
-            }
-        } while (!flag);
+        let index = getIndexOfSelection("customer", list);
         alert("Total pay of " + listCustomers[index].getCustomerName() + ": " + listCustomers[index].getTotal() + "$");
         displayCMMenu();
     }
@@ -665,24 +587,8 @@
     function editCustomer() {
         let fullName, id, birthday, email, city, address, customerType,
             quantityIncluded, rentDays, serviceType, roomType;
-        let index;
         let list = "Select the customer you want to edit from list below\n";
-        for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
-        }
-        do {
-            flag = true;
-            let input = prompt(list, "");
-            if (!isNaN(input)) {
-                input = parseFloat(input);
-                if (Number.isInteger(input) && input >= 1 && input <= listCustomers.length) {
-                    index = input - 1;
-                }
-            } else {
-                alert("Failed!");
-                flag = false;
-            }
-        } while (!flag);
+        let index = getIndexOfSelection("customer", list);
         do {
             flag = true;
             let input = prompt("Select the property you want to edit from list below\n" +
@@ -773,7 +679,6 @@
                     } while (!flag);
                     if (city != "") {
                         listCustomers[index].setCity(city);
-                        listCustomers[index].setTotal();
                     }
                     break;
                 case '6':
@@ -817,7 +722,6 @@
                     } while (!flag);
                     if (customerType != "") {
                         listCustomers[index].setCustomerType(customerType);
-                        listCustomers[index].setTotal();
                     }
                     break;
                 case '8':
@@ -847,7 +751,6 @@
                     } while (!flag);
                     if (rentDays != "") {
                         listCustomers[index].setRentDays(rentDays);
-                        listCustomers[index].setTotal();
                     }
                     break;
                 case '10':
@@ -878,7 +781,6 @@
                     } while (!flag);
                     if (serviceType != "") {
                         listCustomers[index].setServiceType(serviceType);
-                        listCustomers[index].setTotal();
                     }
                     break;
                 case '11':
@@ -917,30 +819,14 @@
                     flag = false;
             }
         } while (!flag);
-        displayCustomer();
+        displayCustomerInfo(index);
     }
 
     function deleteCustomer() {
-        let index;
         let list = "Select the customer you want to delete from list below\n";
-        for (let i = 0; i < listCustomers.length; i++) {
-            list += "Press " + (i + 1) + ": " + listCustomers[i].getCustomerName() + "\n";
-        }
-        do {
-            flag = true;
-            let input = prompt(list, "");
-            if (!isNaN(input)) {
-                input = parseFloat(input);
-                if (Number.isInteger(input) && input >= 1 && input <= listCustomers.length) {
-                    index = input - 1;
-                }
-            } else {
-                alert("Failed!");
-                flag = false;
-            }
-        } while (!flag);
+        let index = getIndexOfSelection("customer", list);
         listCustomers.splice(index, 1);
-        displayCustomer();
+        displayCustomers();
     }
 
     function addNewEmployee() {
@@ -1048,24 +934,8 @@
     }
 
     function displayEmployee() {
-        let index;
         let list = "Select an employee from list below to view his/her information\n";
-        for (let i = 0; i < listEmployees.length; i++) {
-            list += "Press " + (i + 1) + ": " + listEmployees[i].getEmployeeName() + "\n";
-        }
-        do {
-            flag = true;
-            let input = prompt(list, "");
-            if (!isNaN(input)) {
-                input = parseFloat(input);
-                if (Number.isInteger(input) && input >= 1 && input <= listEmployees.length) {
-                    index = input - 1;
-                }
-            } else {
-                alert("Failed!");
-                flag = false;
-            }
-        } while (!flag);
+        let index = getIndexOfSelection("employee", list);
 
         alert((index + 1) + "." +
             "\nFull name: " + listEmployees[index].getEmployeeName() +
@@ -1082,26 +952,61 @@
     }
 
     function displaySalary() {
-        let index;
         let list = "Select an employee from list below to view his/her salary\n";
-        for (let i = 0; i < listEmployees.length; i++) {
-            list += "Press " + (i + 1) + ": " + listEmployees[i].getEmployeeName() + "\n";
+        let index = getIndexOfSelection("employee", list);
+
+        alert("Salary of " + listEmployees[index].getEmployeeName() + ": " + listEmployees[index].getSalary() + "$");
+        displayEMMenu();
+    }
+
+    function getIndexOfSelection(objName, string) {
+        let array;
+        let result;
+        let flag;
+        if (objName == "customer") {
+            array = listCustomers;
+            for (let i = 0; i < array.length; i++) {
+                string += "Press " + (i + 1) + ": " + array[i].getCustomerName() + "\n";
+            }
+        } else if (objName == "employee") {
+            array = listEmployees;
+            for (let i = 0; i < array.length; i++) {
+                string += "Press " + (i + 1) + ": " + array[i].getEmployeeName() + "\n";
+            }
         }
         do {
             flag = true;
-            let input = prompt(list, "");
+            let input = prompt(string, "");
             if (!isNaN(input)) {
                 input = parseFloat(input);
-                if (Number.isInteger(input) && input >= 1 && input <= listEmployees.length) {
-                    index = input - 1;
+                if (Number.isInteger(input) && input >= 1 && input <= array.length) {
+                    result = input - 1;
+                } else {
+                    flag = false;
                 }
             } else {
                 alert("Failed!");
                 flag = false;
             }
         } while (!flag);
-        alert("Salary of " + listEmployees[index].getEmployeeName() + ": " + listEmployees[index].getSalary() + "$");
-        displayEMMenu();
+        return result;
+    }
+
+    function displayCustomerInfo(index) {
+        alert((index + 1) + "." +
+            "\nFull name: " + listCustomers[index].getCustomerName() +
+            "\nId card number: " + listCustomers[index].getCustomerId() +
+            "\nDate of birth: " + listCustomers[index].getCustomerBirthday() +
+            "\nEmail: " + listCustomers[index].getCustomerEmail() +
+            "\nAddress: " + listCustomers[index].getAddress() +
+            "\nCity: " + listCustomers[index].getCity() +
+            "\nCustomer type: " + listCustomers[index].getCustomerType() +
+            "\nNumber of people included: " + listCustomers[index].getQuantityIncluded() +
+            "\nNumber of rent days: " + listCustomers[index].getRentDays() +
+            "\nService type: " + listCustomers[index].getServiceType() +
+            "\nRoom type: " + listCustomers[index].getRoomType() +
+            "\nDiscount: " + listCustomers[index].getDiscount() + "$\n\n");
+        displayCMMenu();
     }
 
     function checkEmail(email) {

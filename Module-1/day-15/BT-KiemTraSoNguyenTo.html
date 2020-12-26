@@ -14,16 +14,15 @@
     document.write(primeList);
 
     function isPrime(number) {
-        let count = 0;
-        for (let i = 1; i <= number; i++) {
+        if (number <= 1) {
+            return false;
+        }
+        for (let i = 2; i < number; i++) {
             if (number % i === 0) {
-                count++
+                return false;
             }
         }
-        if (count === 2)
-            return true;
-        else
-            return false;
+        return true;
     }
 </script>
 </body>

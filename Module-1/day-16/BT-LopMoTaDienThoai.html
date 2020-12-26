@@ -16,11 +16,10 @@
         }
 
         checkOnStatus() {
-            if (this.battery == 0) {
+            if (this.status && this.battery == 0) {
                 console.log("Low battery! Goodbye!");
                 this.status = false;
             }
-            //console.log("status check: " + this.status);
             return this.status;
         }
 
@@ -28,13 +27,12 @@
             if (this.checkOnStatus()) {
                 console.log("Shutting down... Goodbye!");
                 this.status = false;
-            } else if (this.battery == 0) {
-                console.log("Low battery!");
             } else {
-                console.log("Launching... Hello!");
-                this.status = true;
+                if (this.battery != 0) {
+                    console.log("Launching... Hello!");
+                    this.status = true;
+                }
             }
-            //console.log("status turn on/off: " + this.status);
         }
 
         charge(minutes) {
@@ -51,39 +49,29 @@
         text(message) {
             if (this.checkOnStatus()) {
                 this.draft.push(message);
+                console.log("Message saved");
                 this.battery--;
-                // console.log("battery: " + this.battery);
-                // console.log("draft: " + this.memoryForDraft);
-                // console.log("inbox: " + this.memoryForInbox);
-                // console.log("sent: " + this.memoryForSent);
             } else
                 return;
         }
 
-        receiveMessage(message) {
-            if (this.checkOnStatus()) {
-                console.log("New message!");
-                this.inbox.push(message);
-                this.battery--;
-                // console.log("battery: " + this.battery);
-                // console.log("draft: " + this.memoryForDraft);
-                // console.log("inbox: " + this.memoryForInbox);
-                // console.log("sent: " + this.memoryForSent);
-            } else
-                return;
-        }
-
-        sendMessage(index) {
+        sendMessage(phone, index) {
             if (this.checkOnStatus()) {
                 let message = this.draft[index];
                 this.sent.push(message);
                 this.draft.splice(index, 1);
                 console.log("Message is sent!")
                 this.battery--;
-                // console.log("battery: " + this.battery);
-                // console.log("draft: " + this.memoryForDraft);
-                // console.log("inbox: " + this.memoryForInbox);
-                // console.log("sent: " + this.memoryForSent);
+                phone.receiveMessage(message);
+            } else
+                return;
+        }
+
+        receiveMessage(message) {
+            this.inbox.push(message);
+            if (this.checkOnStatus()) {
+                console.log("New message!");
+                this.battery--;
             } else
                 return;
         }
@@ -107,15 +95,12 @@
 
     let nokia = new Mobile(false, 50);
     let iphone = new Mobile(true, 0);
-    let message = "Hello C1120G1!";
     nokia.turnOnOff();
-    nokia.text(message);
-    nokia.sendMessage(0);
-    iphone.receiveMessage();
-    iphone.turnOnOff();
+    nokia.text("Hello C1120G1!");
+    nokia.sendMessage(iphone, 0);
+    iphone.readInbox(0);
     iphone.charge(120);
     iphone.turnOnOff();
-    iphone.receiveMessage(message);
     iphone.readInbox(0);
 </script>
 </body>

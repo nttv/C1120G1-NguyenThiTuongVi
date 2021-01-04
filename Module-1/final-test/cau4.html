@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 4</title>
+</head>
+<body>
+<script>
+    class Product {
+        constructor(id, name, manufacturer, price) {
+            this.id = id;
+            this.name = name;
+            this.manufacturer = manufacturer;
+            this.price = price;
+        }
+
+        getId() {
+            return this.id;
+        }
+
+        setId(id) {
+            this.id = id;
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        setName(name) {
+            this.name = name;
+        }
+
+        getManufacturer() {
+            return this.manufacturer;
+        }
+
+        setManufacturer(manufacturer) {
+            this.manufacturer = manufacturer;
+        }
+
+        getPrice() {
+            return this.price;
+        }
+
+        setPrice(price) {
+            this.price = price;
+        }
+
+        toString() {
+            return "Product ID: " + this.id + ", Name: " + this.name +
+                ", Manufacturer: " + this.manufacturer + ", Price: " + this.price + "$";
+        }
+    }
+
+    let listProducts = [];
+    window.onload = displayMenu();
+
+    function displayMenu() {
+        let input;
+        do {
+            input = prompt("Chon mot trong nhung lua chon duoi day:\n" +
+                "Nhap 1: Them moi 1 san pham\n" +
+                "Nhap 2: Hien thi danh sach san pham\n" +
+                "Nhap 3: Thoat");
+        } while (input != '1' && input != '2' && input != '3');
+        if (input == '1') {
+            addProduct();
+        } else if (input == '2') {
+            displayListProducts();
+        } else {
+            return;
+        }
+    }
+
+    function addProduct() {
+        let id = prompt("Nhap ma san pham");
+        let name = prompt("Nhap ten san pham");
+        let manufacturer = prompt("Nhap hang san xuat");
+        let price = prompt("Nhap gia san pham");
+        let product = new Product(id, name, manufacturer, price);
+        listProducts.push(product);
+        displayMenu();
+    }
+
+    function displayListProducts() {
+        let output = "";
+        for (let i of listProducts) {
+            output += i.toString() + "\n";
+        }
+        alert(output);
+        displayMenu();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 2</title>
+</head>
+<body>
+<script>
+    let input = prompt("Nhap mot chuoi de kiem tra doi xung");
+    kiemTraDoiXung(input);
+
+    function kiemTraDoiXung(string) {
+        let check = true;
+        for (let i = 0; i < string.length; i++) {
+            if (string[i] != string[string.length - i - 1]) {
+                check = false;
+                break;
+            }
+        }
+        if (check) {
+            alert('Chuoi "' + string + '" la chuoi doi xung');
+        } else {
+            alert('Chuoi "' + string + '" la chuoi khong doi xung');
+        }
+    }
+</script>
+</body>
+</html>

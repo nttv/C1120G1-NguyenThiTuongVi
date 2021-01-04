@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 1</title>
+</head>
+<body>
+<script>
+    let n;
+    let array = [];
+    let arrValue = [];
+    let arrCount = [];
+    let output = "";
+    let check;
+    do {
+        n = parseInt(prompt("Nhap so phan tu cua mang (<=20)"));
+    } while (n <= 0 || n > 20);
+
+    for (let i = 0; i < n; i++) {
+        array[i] = prompt("Nhap ky tu tai vi tri i = " + i);
+        check = false;
+        for (let j = 0; j < arrValue.length; j++) {
+            if (array[i] === arrValue[j]) {
+                check = true;
+                arrCount[j] += 1;
+                break;
+            }
+        }
+        if (!check) {
+            arrValue.push(array[i]);
+            arrCount.push(1);
+        }
+    }
+    output = array.toString() + "<br/>";
+    for (let i = 0; i < arrCount.length; i++) {
+        output += arrValue[i] + " : " + arrCount[i] + "<br/>";
+    }
+    document.write(output);
+</script>
+</body>
+</html>

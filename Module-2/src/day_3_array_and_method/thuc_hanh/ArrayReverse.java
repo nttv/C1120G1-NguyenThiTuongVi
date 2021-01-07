@@ -24,7 +24,7 @@ public class ArrayReverse {
             array[i] = array[array.length - i - 1];
             array[array.length - i - 1] = tmp;
         }
-        System.out.print("Mang dao nguoc: ");
+        System.out.print("\nMang dao nguoc: ");
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + "\t");
         }

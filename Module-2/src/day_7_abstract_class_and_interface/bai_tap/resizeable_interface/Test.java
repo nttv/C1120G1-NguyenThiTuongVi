@@ -4,6 +4,12 @@ import day_6_inheritance.thuc_hanh.Shape;
 
 public class Test {
     public static void main(String[] args) {
+//        ResizeableCircle re = new ResizeableCircle(3.6);
+//        System.out.println(re);
+//        re.resize(20);
+//        System.out.println("After-resized (increase 20%):");
+//        System.out.println(re);
+
         Shape[] shapes = new Shape[3];
         shapes[0] = new ResizeableCircle(3.6);
         shapes[1] = new ResizeableRectangle(3, 5);

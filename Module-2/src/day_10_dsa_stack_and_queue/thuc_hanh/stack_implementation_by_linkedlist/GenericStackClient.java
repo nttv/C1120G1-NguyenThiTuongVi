@@ -1,4 +1,4 @@
-package day_10_dsa_stack_and_queue.thuc_hanh.stack_implementation;
+package day_10_dsa_stack_and_queue.thuc_hanh.stack_implementation_by_linkedlist;
 
 public class GenericStackClient {
     public static void stackOfStrings() {

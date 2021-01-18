@@ -1,4 +1,4 @@
-package day_10_dsa_stack_and_queue.thuc_hanh.queue_implementation;
+package day_10_dsa_stack_and_queue.thuc_hanh.queue_implementation_by_linkedlist;
 
 public class LinkedListQueueClient {
     public static void main(String[] args) {

@@ -12,8 +12,8 @@ public class TennisGame {
     public static final String ALL = "All";
 
     public static String getScore(String player1Name, String player2Name, int player1Score, int player2Score) {
-        String player1 = "player 1";
-        String player2 = "player 2";
+        String player1 = "player1";
+        String player2 = "player2";
         String player1Score_string = getPlayerScore(player1Score);
         String player2Score_string = getPlayerScore(player2Score);
         String score = player1Score_string + "-";

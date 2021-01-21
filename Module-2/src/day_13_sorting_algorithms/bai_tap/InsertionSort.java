@@ -13,12 +13,8 @@ public class InsertionSort {
         for (int i = 1; i < list.length; i++) {
             int currentElement = list[i];
             int j;
-            for (j = i - 1; j >= 0; j--) {
-                if (currentElement < list[j]) {
-                    list[j + 1] = list[j];
-                } else {
-                    break;
-                }
+            for (j = i - 1; j >= 0 && currentElement < list[j]; j--) {
+                list[j + 1] = list[j];
             }
             list[j + 1] = currentElement;
         }

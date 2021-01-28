@@ -1,12 +1,12 @@
-package FuramaResort.Services;
+package furama_resort.services;
 
-import FuramaResort.Commons.FuncReadAndWrite;
-import FuramaResort.Models.Room;
+import furama_resort.commons.FuncReadAndWrite;
+import furama_resort.models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoomManager extends Service<Room> {
+public class RoomManager extends AdditionalService<Room> {
     static FuncReadAndWrite<Room> funcReadAndWrite = new FuncReadAndWrite<>();
 
     @Override

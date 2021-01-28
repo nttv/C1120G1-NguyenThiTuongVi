@@ -1,4 +1,4 @@
-package FuramaResort.Commons;
+package furama_resort.commons;
 
 import java.io.*;
 import java.util.ArrayList;

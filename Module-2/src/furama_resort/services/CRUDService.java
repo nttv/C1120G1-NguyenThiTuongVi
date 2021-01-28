@@ -1,4 +1,4 @@
-package FuramaResort.Services;
+package furama_resort.services;
 
 import java.util.List;
 

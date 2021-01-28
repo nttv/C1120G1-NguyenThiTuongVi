@@ -1,12 +1,12 @@
-package FuramaResort.Services;
+package furama_resort.services;
 
-import FuramaResort.Commons.FuncReadAndWrite;
-import FuramaResort.Models.Villa;
+import furama_resort.commons.FuncReadAndWrite;
+import furama_resort.models.Villa;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VillaManager extends Service<Villa> {
+public class VillaManager extends AdditionalService<Villa> {
     static FuncReadAndWrite<Villa> funcReadAndWrite = new FuncReadAndWrite<>();
 
     @Override
@@ -60,5 +60,13 @@ public class VillaManager extends Service<Villa> {
         int index = listVilla.indexOf(temp);
         listVilla.remove(index);
         funcReadAndWrite.writeFile("Villa.csv", listVilla, false);
+    }
+
+    public List<Villa> convert() {
+        List<String[]> list = funcReadAndWrite.readFile("Villa.csv");
+        List<Villa> listVilla = new ArrayList<>();
+        for (String[] s : list) {
+            Villa villa = new Villa();
+        }
     }
 }

@@ -1,28 +1,25 @@
-package FuramaResort.Models;
+package furama_resort.models;
 
-public class Villa extends Services {
+public class House extends Service {
     private String roomStandard;
     private String otherFacilities;
-    private int poolArea;
     private int noOfFloors;
 
-    public Villa() {
+    public House() {
     }
 
-    public Villa(String serviceId, String serviceName, int usableArea, int rentalCost, int maxNoOfPeople, String rentalType, String roomStandard, String otherFacilities, int poolArea, int noOfFloors) {
+    public House(String serviceId, String serviceName, double usableArea, double rentalCost, int maxNoOfPeople, String rentalType, String roomStandard, String otherFacilities, int noOfFloors) {
         super(serviceId, serviceName, usableArea, rentalCost, maxNoOfPeople, rentalType);
         this.roomStandard = roomStandard;
         this.otherFacilities = otherFacilities;
-        this.poolArea = poolArea;
         this.noOfFloors = noOfFloors;
     }
 
-    public Villa(String[] villaInfo) {
-        super(villaInfo[0], villaInfo[1], Integer.parseInt(villaInfo[2]), Integer.parseInt(villaInfo[3]), Integer.parseInt(villaInfo[4]), villaInfo[5]);
-        this.roomStandard = villaInfo[6];
-        this.otherFacilities = villaInfo[7];
-        this.poolArea = Integer.parseInt(villaInfo[8]);
-        this.noOfFloors = Integer.parseInt(villaInfo[9]);
+    public House(String[] houseInfo) {
+        super(houseInfo[0], houseInfo[1], Double.parseDouble(houseInfo[2]), Double.parseDouble(houseInfo[3]), Integer.parseInt(houseInfo[4]), houseInfo[5]);
+        this.roomStandard = houseInfo[6];
+        this.otherFacilities = houseInfo[7];
+        this.noOfFloors = Integer.parseInt(houseInfo[8]);
     }
 
     public String getRoomStandard() {
@@ -39,14 +36,6 @@ public class Villa extends Services {
 
     public void setOtherFacilities(String otherFacilities) {
         this.otherFacilities = otherFacilities;
-    }
-
-    public int getPoolArea() {
-        return poolArea;
-    }
-
-    public void setPoolArea(int poolArea) {
-        this.poolArea = poolArea;
     }
 
     public int getNoOfFloors() {
@@ -67,13 +56,13 @@ public class Villa extends Services {
                 getRentalType() + ',' +
                 roomStandard + ',' +
                 otherFacilities + ',' +
-                poolArea + ',' +
                 noOfFloors;
     }
 
     @Override
     public void showInfor() {
-        System.out.println("Villa {serviceId='" + getServiceId() + '\'' +
+        System.out.println("House{" +
+                "serviceId='" + getServiceId() + '\'' +
                 ", serviceName='" + getServiceName() + '\'' +
                 ", usableArea=" + getUsableArea() +
                 ", rentalCost=" + getRentalCost() +
@@ -81,12 +70,7 @@ public class Villa extends Services {
                 ", rentalType='" + getRentalType() + '\'' +
                 ", roomStandard='" + roomStandard + '\'' +
                 ", otherFacilities='" + otherFacilities + '\'' +
-                ", poolArea=" + poolArea +
-                ", noOfFloors=" + noOfFloors + "}");
-    }
-
-    public static void main(String[] args) {
-        Services service = new Villa("1", "Villa", 200, 1000, 5, "monthly", "Vip", "Pool", 200, 3);
-        service.showInfor();
+                ", noOfFloors=" + noOfFloors +
+                '}');
     }
 }

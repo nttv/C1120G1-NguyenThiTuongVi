@@ -1,17 +1,19 @@
-package FuramaResort.Models;
+package furama_resort.models;
 
-public abstract class Services {
+import java.util.regex.Pattern;
+
+public abstract class Service {
     private String serviceId;
     private String serviceName;
-    private int usableArea;
-    private int rentalCost;
+    private double usableArea;
+    private double rentalCost;
     private int maxNoOfPeople;
     private String rentalType;
 
-    public Services() {
+    public Service() {
     }
 
-    public Services(String serviceId, String serviceName, int usableArea, int rentalCost, int maxNoOfPeople, String rentalType) {
+    public Service(String serviceId, String serviceName, double usableArea, double rentalCost, int maxNoOfPeople, String rentalType) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.usableArea = usableArea;
@@ -32,19 +34,19 @@ public abstract class Services {
         this.serviceName = serviceName;
     }
 
-    public int getUsableArea() {
+    public double getUsableArea() {
         return usableArea;
     }
 
-    public void setUsableArea(int usableArea) {
+    public void setUsableArea(double usableArea) {
         this.usableArea = usableArea;
     }
 
-    public int getRentalCost() {
+    public double getRentalCost() {
         return rentalCost;
     }
 
-    public void setRentalCost(int rentalCost) {
+    public void setRentalCost(double rentalCost) {
         this.rentalCost = rentalCost;
     }
 

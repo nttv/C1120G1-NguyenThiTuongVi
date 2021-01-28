@@ -1,18 +1,18 @@
-package FuramaResort.Models;
+package furama_resort.models;
 
-public class Room extends Services {
+public class Room extends Service {
     private String freeServicesIncluded;
 
     public Room() {
     }
 
-    public Room(String serviceId, String serviceName, int usableArea, int rentalCost, int maxNoOfPeople, String rentalType, String freeServicesIncluded) {
+    public Room(String serviceId, String serviceName, double usableArea, double rentalCost, int maxNoOfPeople, String rentalType, String freeServicesIncluded) {
         super(serviceId, serviceName, usableArea, rentalCost, maxNoOfPeople, rentalType);
         this.freeServicesIncluded = freeServicesIncluded;
     }
 
     public Room(String[] roomInfo) {
-        super(roomInfo[0], roomInfo[1], Integer.parseInt(roomInfo[2]), Integer.parseInt(roomInfo[3]), Integer.parseInt(roomInfo[4]), roomInfo[5]);
+        super(roomInfo[0], roomInfo[1], Double.parseDouble(roomInfo[2]), Double.parseDouble(roomInfo[3]), Integer.parseInt(roomInfo[4]), roomInfo[5]);
         this.freeServicesIncluded = roomInfo[6];
     }
 

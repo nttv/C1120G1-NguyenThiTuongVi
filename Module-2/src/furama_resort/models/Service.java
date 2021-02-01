@@ -1,7 +1,5 @@
 package furama_resort.models;
 
-import java.util.regex.Pattern;
-
 public abstract class Service {
     private String serviceId;
     private String serviceName;
@@ -13,7 +11,8 @@ public abstract class Service {
     public Service() {
     }
 
-    public Service(String serviceId, String serviceName, double usableArea, double rentalCost, int maxNoOfPeople, String rentalType) {
+    public Service(String serviceId, String serviceName, double usableArea, double rentalCost,
+                   int maxNoOfPeople, String rentalType) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.usableArea = usableArea;
@@ -68,14 +67,12 @@ public abstract class Service {
 
     @Override
     public String toString() {
-        return "Services{" +
-                "serviceId='" + serviceId + '\'' +
-                ", serviceName='" + serviceName + '\'' +
-                ", usableArea=" + usableArea +
-                ", rentalCost=" + rentalCost +
-                ", maxNoOfPeople=" + maxNoOfPeople +
-                ", rentalType='" + rentalType + '\'' +
-                '}';
+        return serviceId + ',' +
+                serviceName + ',' +
+                usableArea + ',' +
+                rentalCost + ',' +
+                maxNoOfPeople + ',' +
+                rentalType;
     }
 
     public abstract void showInfor();

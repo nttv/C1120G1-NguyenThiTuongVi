@@ -1,5 +1,7 @@
 package furama_resort.models;
 
+import java.util.List;
+
 public class Villa extends Service {
     private String roomStandard;
     private String otherFacilities;
@@ -9,7 +11,8 @@ public class Villa extends Service {
     public Villa() {
     }
 
-    public Villa(String serviceId, String serviceName, double usableArea, double rentalCost, int maxNoOfPeople, String rentalType, String roomStandard, String otherFacilities, double poolArea, int noOfFloors) {
+    public Villa(String serviceId, String serviceName, double usableArea, double rentalCost, int maxNoOfPeople,
+                 String rentalType, String roomStandard, String otherFacilities, double poolArea, int noOfFloors) {
         super(serviceId, serviceName, usableArea, rentalCost, maxNoOfPeople, rentalType);
         this.roomStandard = roomStandard;
         this.otherFacilities = otherFacilities;
@@ -18,7 +21,8 @@ public class Villa extends Service {
     }
 
     public Villa(String[] villaInfo) {
-        super(villaInfo[0], villaInfo[1], Double.parseDouble(villaInfo[2]), Double.parseDouble(villaInfo[3]), Integer.parseInt(villaInfo[4]), villaInfo[5]);
+        super(villaInfo[0], villaInfo[1], Double.parseDouble(villaInfo[2]),
+                Double.parseDouble(villaInfo[3]), Integer.parseInt(villaInfo[4]), villaInfo[5]);
         this.roomStandard = villaInfo[6];
         this.otherFacilities = villaInfo[7];
         this.poolArea = Double.parseDouble(villaInfo[8]);
@@ -59,12 +63,7 @@ public class Villa extends Service {
 
     @Override
     public String toString() {
-        return getServiceId() + ',' +
-                getServiceName() + ',' +
-                getUsableArea() + ',' +
-                getRentalCost() + ',' +
-                getMaxNoOfPeople() + ',' +
-                getRentalType() + ',' +
+        return super.toString() + ',' +
                 roomStandard + ',' +
                 otherFacilities + ',' +
                 poolArea + ',' +

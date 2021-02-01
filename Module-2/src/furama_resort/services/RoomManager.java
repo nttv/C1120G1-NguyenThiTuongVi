@@ -1,10 +1,13 @@
 package furama_resort.services;
 
 import furama_resort.commons.FuncReadAndWrite;
+import furama_resort.models.House;
 import furama_resort.models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class RoomManager extends AdditionalService<Room> {
     static FuncReadAndWrite<Room> funcReadAndWrite = new FuncReadAndWrite<>();
@@ -60,5 +63,14 @@ public class RoomManager extends AdditionalService<Room> {
         int index = listRoom.indexOf(temp);
         listRoom.remove(index);
         funcReadAndWrite.writeFile("Room.csv", listRoom, false);
+    }
+
+    public Set<String> findAllName() {
+        List<Room> listRoom = findAll();
+        Set<String> listNameRoom = new TreeSet<>();
+        for (Room room : listRoom) {
+            listNameRoom.add(room.getServiceName());
+        }
+        return listNameRoom;
     }
 }

@@ -42,7 +42,10 @@ public class EmployeeManager {
         Map.Entry<String, Employee> file;
         while (!files.isEmpty()) {
             file = files.pop();
+            System.out.print(file.getKey() + ". ");
+            file.getValue().showInfor();
             if (file.getKey().equals(key)) {
+                System.out.println("FOUND!");
                 return file;
             }
         }

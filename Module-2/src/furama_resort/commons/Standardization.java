@@ -2,10 +2,10 @@ package furama_resort.commons;
 
 public class Standardization {
     public static String standardizeString(String str) {
-        String newStr = str.toLowerCase();
+        String newStr = str.toLowerCase().trim().replaceAll("\\s+", " ");
         String[] arrTemp = newStr.split("");
-        newStr = arrTemp[0].toUpperCase() + arrTemp[1];
-        for (int i = 2; i < arrTemp.length; i++) {
+        newStr = arrTemp[0].toUpperCase();
+        for (int i = 1; i < arrTemp.length; i++) {
             if (arrTemp[i - 1].equals(" ")) {
                 newStr += arrTemp[i].toUpperCase();
             } else {

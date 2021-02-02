@@ -104,215 +104,6 @@ public class MainController {
         }
     }
 
-    public void showServices() {
-        while (true) {
-            System.out.print("\nSelect an option from the list below:\n" +
-                    "1.	Show All Villa\n" +
-                    "2.	Show All House\n" +
-                    "3.	Show All Room\n" +
-                    "4.	Show All Name Villa Not Duplicate\n" +
-                    "5.	Show All Name House Not Duplicate\n" +
-                    "6.	Show All Name Room Not Duplicate\n" +
-                    "7.	Back to menu\n" +
-                    "8.	Exit\n" +
-                    "Enter your choice: ");
-            String choice = sc.nextLine().trim();
-            switch (choice) {
-                case "1":
-                    showAllVilla();
-                    break;
-                case "2":
-                    showAllHouse();
-                    break;
-                case "3":
-                    showAllRoom();
-                    break;
-                case "4":
-                    showAllNameVilla();
-                    break;
-                case "5":
-                    showAllNameHouse();
-                    return;
-                case "6":
-                    showAllNameRoom();
-                    return;
-                case "7":
-                    displayMainMenu();
-                    break;
-                case "8":
-                    System.exit(0);
-                default:
-                    System.out.println("Input is out of range");
-            }
-        }
-    }
-
-    public void addNewCustomer() {
-        String customerName;
-        do {
-            System.out.print("\nEnter customer name: ");
-            customerName = sc.nextLine();
-        } while (!Validation.validateString(customerName));
-
-        String customerBirthday;
-        do {
-            System.out.print("Enter customer birthday (dd/mm/yyyy): ");
-            customerBirthday = sc.nextLine();
-        } while (!Validation.validateBirthday(customerBirthday));
-
-        String customerGender;
-        do {
-            System.out.print("Enter customer gender (Male/Female/Unknown): ");
-            customerGender = sc.nextLine();
-        } while (!Validation.validateGender(customerGender));
-        customerGender = Standardization.standardizeString(customerGender);
-
-        String customerIdNumber;
-        do {
-            System.out.print("Enter customer id card number (XXX XXX XXX): ");
-            customerIdNumber = sc.nextLine();
-        } while (!Validation.validateIdCard(customerIdNumber));
-
-        String customerPhone;
-        do {
-            System.out.print("Enter customer phone number: ");
-            customerPhone = sc.nextLine();
-        } while (!Validation.validatePhone(customerPhone));
-
-        String customerEmail;
-        do {
-            System.out.print("Enter customer email: ");
-            customerEmail = sc.nextLine();
-        } while (!Validation.validateEmail(customerEmail));
-
-        String customerType;
-        do {
-            System.out.print("Enter customer type: ");
-            customerType = sc.nextLine();
-        } while (!Validation.validateString(customerType));
-
-        String customerAddress;
-        do {
-            System.out.print("Enter customer address: ");
-            customerAddress = sc.nextLine();
-        } while (!Validation.validateAddress(customerAddress));
-
-        String[] customerInfo = {customerName, customerBirthday, customerGender, customerIdNumber,
-                customerPhone, customerEmail, customerType, customerAddress};
-        Customer customer = new Customer(customerInfo);
-        customerManager.add(customer);
-    }
-
-    public void showInformationCustomers() {
-        List<Customer> listCustomer = customerManager.findAll();
-        listCustomer.sort(new CustomerSortingComparator());
-        for (int i = 0; i < listCustomer.size(); i++) {
-            System.out.print((i + 1) + ". ");
-            listCustomer.get(i).showInfor();
-        }
-    }
-
-    public void addNewBooking() {
-        int customerIndex = chooseCustomer();
-        List<Customer> listCustomer = customerManager.findAll();
-        Customer customer = listCustomer.get(customerIndex);
-
-        String serviceId = null;
-        boolean flag = true;
-        do {
-            System.out.print("\nSelect an option from the list below:\n" +
-                    "1.	Booking Villa\n" +
-                    "2.	Booking House\n" +
-                    "3.	Booking Room\n" +
-                    "4.	Back to Menu\n" +
-                    "5.	Exit\n" +
-                    "Enter your choice: ");
-            String choice = sc.nextLine().trim();
-            switch (choice) {
-                case "1":
-                    serviceId = bookVilla();
-                    flag = false;
-                    break;
-                case "2":
-                    serviceId = bookHouse();
-                    flag = false;
-                    break;
-                case "3":
-                    serviceId = bookRoom();
-                    flag = false;
-                    break;
-                case "4":
-                    displayMainMenu();
-                    break;
-                case "5":
-                    System.exit(0);
-                default:
-                    System.out.println("Input is out of range");
-            }
-        } while (flag);
-        String externalServices = bookExternalServices();
-        serviceManager.addNewBooking(customer, serviceId, externalServices);
-    }
-
-    public void manageCinemaService() {
-        Queue<Customer> customers = new LinkedList<>();
-        int noOfTickets = 5;
-        while (true) {
-            System.out.print("\nSelect an option from the list below:\n" +
-                    "1.	Buy Cinema Ticket\n" +
-                    "2.	Show All Customers\n" +
-                    "3.	Back to menu\n" +
-                    "4.	Back to menu\n" +
-                    "5.	Exit\n" +
-                    "Enter your choice: ");
-            String choice = sc.nextLine().trim();
-            switch (choice) {
-                case "1":
-                    if (customers.size() < noOfTickets) {
-                        addNewBuying(customers);
-                    } else {
-                        System.out.println("Tickets are sold out");
-                        showCustomersBought(customers);
-                    }
-                    break;
-                case "2":
-                    showCustomersBought(customers);
-                    break;
-                case "3":
-                    showCustomersBought(customers);
-                    break;
-                case "4":
-                    displayMainMenu();
-                    break;
-                case "5":
-                    System.exit(0);
-                default:
-                    System.out.println("Input is out of range");
-            }
-        }
-    }
-
-    public void showInformationEmployees() {
-        Map<String, Employee> employeeMap = employeeManager.getEmployeesData();
-        Set<String> keySet = employeeMap.keySet();
-        for (String key : keySet) {
-            System.out.print(key + ": ");
-            employeeMap.get(key).showInfor();
-        }
-    }
-
-    public void manageFilingCabinet() {
-        System.out.print("Enter the employee number: ");
-        String employeeId = sc.nextLine();
-        Map.Entry<String, Employee> file = employeeManager.getFile(employeeId);
-        if (file == null) {
-            System.out.println("No file of employee with id " + employeeId);
-        } else {
-            System.out.print(file.getKey() + ". ");
-            file.getValue().showInfor();
-        }
-    }
-
     public List<String> addNewService(int serviceType) {
         List<String> service = new ArrayList<>();
         String serviceId;
@@ -437,6 +228,49 @@ public class MainController {
         roomManager.add(room);
     }
 
+    public void showServices() {
+        while (true) {
+            System.out.print("\nSelect an option from the list below:\n" +
+                    "1.	Show All Villa\n" +
+                    "2.	Show All House\n" +
+                    "3.	Show All Room\n" +
+                    "4.	Show All Name Villa Not Duplicate\n" +
+                    "5.	Show All Name House Not Duplicate\n" +
+                    "6.	Show All Name Room Not Duplicate\n" +
+                    "7.	Back to menu\n" +
+                    "8.	Exit\n" +
+                    "Enter your choice: ");
+            String choice = sc.nextLine().trim();
+            switch (choice) {
+                case "1":
+                    showAllVilla();
+                    break;
+                case "2":
+                    showAllHouse();
+                    break;
+                case "3":
+                    showAllRoom();
+                    break;
+                case "4":
+                    showAllNameVilla();
+                    break;
+                case "5":
+                    showAllNameHouse();
+                    return;
+                case "6":
+                    showAllNameRoom();
+                    return;
+                case "7":
+                    displayMainMenu();
+                    break;
+                case "8":
+                    System.exit(0);
+                default:
+                    System.out.println("Input is out of range");
+            }
+        }
+    }
+
     public List<Villa> showAllVilla() {
         List<Villa> listVilla = villaManager.findAll();
         for (int i = 0; i < listVilla.size(); i++) {
@@ -483,6 +317,113 @@ public class MainController {
         for (String name : listNameRoom) {
             System.out.println(name);
         }
+    }
+
+    public void addNewCustomer() {
+        String customerName;
+        do {
+            System.out.print("\nEnter customer name: ");
+            customerName = sc.nextLine();
+        } while (!Validation.validateString(customerName));
+
+        String customerBirthday;
+        do {
+            System.out.print("Enter customer birthday (dd/mm/yyyy): ");
+            customerBirthday = sc.nextLine();
+        } while (!Validation.validateBirthday(customerBirthday));
+
+        String customerGender;
+        do {
+            System.out.print("Enter customer gender (Male/Female/Unknown): ");
+            customerGender = sc.nextLine();
+        } while (!Validation.validateGender(customerGender));
+        customerGender = Standardization.standardizeString(customerGender);
+
+        String customerIdNumber;
+        do {
+            System.out.print("Enter customer id card number (XXX XXX XXX): ");
+            customerIdNumber = sc.nextLine();
+        } while (!Validation.validateIdCard(customerIdNumber));
+
+        String customerPhone;
+        do {
+            System.out.print("Enter customer phone number: ");
+            customerPhone = sc.nextLine();
+        } while (!Validation.validatePhone(customerPhone));
+
+        String customerEmail;
+        do {
+            System.out.print("Enter customer email: ");
+            customerEmail = sc.nextLine();
+        } while (!Validation.validateEmail(customerEmail));
+
+        String customerType;
+        do {
+            System.out.print("Enter customer type: ");
+            customerType = sc.nextLine();
+        } while (!Validation.validateString(customerType));
+
+        String customerAddress;
+        do {
+            System.out.print("Enter customer address: ");
+            customerAddress = sc.nextLine();
+        } while (!Validation.validateAddress(customerAddress));
+
+        String[] customerInfo = {customerName, customerBirthday, customerGender, customerIdNumber,
+                customerPhone, customerEmail, customerType, customerAddress};
+        Customer customer = new Customer(customerInfo);
+        customerManager.add(customer);
+    }
+
+    public void showInformationCustomers() {
+        List<Customer> listCustomer = customerManager.findAll();
+        listCustomer.sort(new CustomerSortingComparator());
+        for (int i = 0; i < listCustomer.size(); i++) {
+            System.out.print((i + 1) + ". ");
+            listCustomer.get(i).showInfor();
+        }
+    }
+
+    public void addNewBooking() {
+        int customerIndex = chooseCustomer();
+        List<Customer> listCustomer = customerManager.findAll();
+        Customer customer = listCustomer.get(customerIndex);
+
+        String serviceId = null;
+        boolean flag = true;
+        do {
+            System.out.print("\nSelect an option from the list below:\n" +
+                    "1.	Booking Villa\n" +
+                    "2.	Booking House\n" +
+                    "3.	Booking Room\n" +
+                    "4.	Back to Menu\n" +
+                    "5.	Exit\n" +
+                    "Enter your choice: ");
+            String choice = sc.nextLine().trim();
+            switch (choice) {
+                case "1":
+                    serviceId = bookVilla();
+                    flag = false;
+                    break;
+                case "2":
+                    serviceId = bookHouse();
+                    flag = false;
+                    break;
+                case "3":
+                    serviceId = bookRoom();
+                    flag = false;
+                    break;
+                case "4":
+                    displayMainMenu();
+                    break;
+                case "5":
+                    System.exit(0);
+                default:
+                    System.out.println("Input is out of range");
+            }
+        } while (flag);
+        String externalServices = bookExternalServices();
+        serviceManager.addNewBooking(customer, serviceId, externalServices);
     }
 
     public int chooseCustomer() {
@@ -589,6 +530,39 @@ public class MainController {
         } while (true);
     }
 
+    public void manageCinemaService() {
+        int noOfTickets = 5;
+        Queue<Customer> customers = new LinkedList<>();
+        while (true) {
+            System.out.print("\nSelect an option from the list below:\n" +
+                    "1.	Buy Cinema Ticket\n" +
+                    "2.	Show All Customers\n" +
+                    "3.	Back to menu\n" +
+                    "4.	Exit\n" +
+                    "Enter your choice: ");
+            String choice = sc.nextLine().trim();
+            switch (choice) {
+                case "1":
+                    if (customers.size() >= noOfTickets) {
+                        System.out.println("Tickets are sold out");
+                    } else {
+                        addNewBuying(customers);
+                    }
+                    break;
+                case "2":
+                    showCustomersBought(customers);
+                    break;
+                case "3":
+                    displayMainMenu();
+                    break;
+                case "4":
+                    System.exit(0);
+                default:
+                    System.out.println("Input is out of range");
+            }
+        }
+    }
+
     public void addNewBuying(Queue<Customer> customers) {
         int customerIndex = chooseCustomer();
         List<Customer> listCustomer = customerManager.findAll();
@@ -597,15 +571,37 @@ public class MainController {
     }
 
     public void showCustomersBought(Queue<Customer> customers) {
-        if (customers.isEmpty()) {
-            System.out.println();
+        int index = 1;
+        if (customers.size() == 5) {
+            while (!customers.isEmpty()) {
+                System.out.print(index + ". ");
+                customers.poll().showInfor();
+                index++;
+            }
         } else {
-            int index = 1;
             for (Customer customer : customers) {
                 System.out.print(index + ". ");
                 customer.showInfor();
                 index++;
             }
+        }
+    }
+
+    public void showInformationEmployees() {
+        Map<String, Employee> employeeMap = employeeManager.getEmployeesData();
+        Set<String> keySet = employeeMap.keySet();
+        for (String key : keySet) {
+            System.out.print(key + ": ");
+            employeeMap.get(key).showInfor();
+        }
+    }
+
+    public void manageFilingCabinet() {
+        System.out.print("Enter the employee number: ");
+        String employeeId = sc.nextLine();
+        Map.Entry<String, Employee> file = employeeManager.getFile(employeeId);
+        if (file == null) {
+            System.out.println("No file of employee with id " + employeeId);
         }
     }
 

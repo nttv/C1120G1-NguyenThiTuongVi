@@ -1,21 +1,16 @@
 package furama_resort.services;
 
 import furama_resort.commons.FuncReadAndWrite;
-import furama_resort.models.House;
 import furama_resort.models.Room;
+import furama_resort.models.Villa;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class RoomManager extends AdditionalService<Room> {
+public class RoomManager implements CRUDService<Room> {
     static FuncReadAndWrite<Room> funcReadAndWrite = new FuncReadAndWrite<>();
-
-    @Override
-    public List<Room> sortById() {
-        return null;
-    }
 
     @Override
     public List<Room> findAll() {
@@ -49,20 +44,26 @@ public class RoomManager extends AdditionalService<Room> {
     @Override
     public void edit(Room room, String id) {
         List<Room> listRoom = findAll();
-        Room temp = findById(id);
-        int index = listRoom.indexOf(temp);
-        listRoom.remove(index);
-        listRoom.add(index, room);
-        funcReadAndWrite.writeFile("Room.csv", listRoom, false);
+        for (int i = 0; i < listRoom.size(); i++) {
+            if (listRoom.get(i).getServiceId().equals(id)) {
+                listRoom.remove(i);
+                listRoom.add(i, room);
+                funcReadAndWrite.writeFile("Room.csv", listRoom, false);
+                return;
+            }
+        }
     }
 
     @Override
     public void remove(String id) {
         List<Room> listRoom = findAll();
-        Room temp = findById(id);
-        int index = listRoom.indexOf(temp);
-        listRoom.remove(index);
-        funcReadAndWrite.writeFile("Room.csv", listRoom, false);
+        for (Room room : listRoom) {
+            if (room.getServiceId().equals(id)) {
+                listRoom.remove(room);
+                funcReadAndWrite.writeFile("Room.csv", listRoom, false);
+                return;
+            }
+        }
     }
 
     public Set<String> findAllName() {

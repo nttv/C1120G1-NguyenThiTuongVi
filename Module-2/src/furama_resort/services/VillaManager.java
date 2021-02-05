@@ -8,13 +8,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class VillaManager extends AdditionalService<Villa> {
+public class VillaManager implements CRUDService<Villa> {
     static FuncReadAndWrite<Villa> funcReadAndWrite = new FuncReadAndWrite<>();
-
-    @Override
-    public List<Villa> sortById() {
-        return null;
-    }
 
     @Override
     public List<Villa> findAll() {
@@ -48,27 +43,26 @@ public class VillaManager extends AdditionalService<Villa> {
     @Override
     public void edit(Villa villa, String id) {
         List<Villa> listVilla = findAll();
-        int index = -1;
         for (int i = 0; i < listVilla.size(); i++) {
             if (listVilla.get(i).getServiceId().equals(id)) {
-                index = i;
-                break;
+                listVilla.remove(i);
+                listVilla.add(i, villa);
+                funcReadAndWrite.writeFile("Villa.csv", listVilla, false);
+                return;
             }
-        }
-        if (index != -1) {
-            listVilla.remove(index);
-            listVilla.add(index, villa);
-            funcReadAndWrite.writeFile("Villa.csv", listVilla, false);
         }
     }
 
     @Override
     public void remove(String id) {
         List<Villa> listVilla = findAll();
-        Villa temp = findById(id);
-        int index = listVilla.indexOf(temp);
-        listVilla.remove(index);
-        funcReadAndWrite.writeFile("Villa.csv", listVilla, false);
+        for (Villa villa : listVilla) {
+            if (villa.getServiceId().equals(id)) {
+                listVilla.remove(villa);
+                funcReadAndWrite.writeFile("Villa.csv", listVilla, false);
+                return;
+            }
+        }
     }
 
     public Set<String> findAllName() {

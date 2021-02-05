@@ -9,13 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class HouseManager extends AdditionalService<House> {
+public class HouseManager implements CRUDService<House> {
     static FuncReadAndWrite<House> funcReadAndWrite = new FuncReadAndWrite<>();
-
-    @Override
-    public List<House> sortById() {
-        return null;
-    }
 
     @Override
     public List<House> findAll() {
@@ -49,20 +44,26 @@ public class HouseManager extends AdditionalService<House> {
     @Override
     public void edit(House house, String id) {
         List<House> listHouse = findAll();
-        House temp = findById(id);
-        int index = listHouse.indexOf(temp);
-        listHouse.remove(index);
-        listHouse.add(index, house);
-        funcReadAndWrite.writeFile("House.csv", listHouse, false);
+        for (int i = 0; i < listHouse.size(); i++) {
+            if (listHouse.get(i).getServiceId().equals(id)) {
+                listHouse.remove(i);
+                listHouse.add(i, house);
+                funcReadAndWrite.writeFile("House.csv", listHouse, false);
+                return;
+            }
+        }
     }
 
     @Override
     public void remove(String id) {
         List<House> listHouse = findAll();
-        House temp = findById(id);
-        int index = listHouse.indexOf(temp);
-        listHouse.remove(index);
-        funcReadAndWrite.writeFile("House.csv", listHouse, false);
+        for (House house : listHouse) {
+            if (house.getServiceId().equals(id)) {
+                listHouse.remove(house);
+                funcReadAndWrite.writeFile("House.csv", listHouse, false);
+                return;
+            }
+        }
     }
 
     public Set<String> findAllName() {

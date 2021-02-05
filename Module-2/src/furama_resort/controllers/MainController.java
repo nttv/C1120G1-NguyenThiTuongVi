@@ -14,7 +14,7 @@ public class MainController {
     private static final int SERVICE_ROOM = 3;
 
     Scanner sc = new Scanner(System.in);
-    ServiceManager serviceManager = new ServiceManager();
+    BookingManager bookingManager = new BookingManager();
     VillaManager villaManager = new VillaManager();
     HouseManager houseManager = new HouseManager();
     RoomManager roomManager = new RoomManager();
@@ -28,7 +28,8 @@ public class MainController {
 
     public void displayMainMenu() {
         while (true) {
-            System.out.print("\nSelect an option from the list below:\n" +
+            System.out.print("\nWELCOME TO FURAMA RESORT\n" +
+                    "Select an option from the list below:\n" +
                     "1.	Add New Service\n" +
                     "2.	Show Services\n" +
                     "3.	Add New Customer\n" +
@@ -42,27 +43,35 @@ public class MainController {
             String choice = sc.nextLine().trim();
             switch (choice) {
                 case "1":
+                    System.out.println("\n====== Add New Service ======");
                     addNewServices();
                     break;
                 case "2":
+                    System.out.println("\n====== Show Services ======");
                     showServices();
                     break;
                 case "3":
+                    System.out.println("\n====== Add New Customer ======");
                     addNewCustomer();
                     break;
                 case "4":
+                    System.out.println("\n====== List of Customers ======");
                     showInformationCustomers();
                     break;
                 case "5":
+                    System.out.println("\n====== Add New Booking ======");
                     addNewBooking();
                     break;
                 case "6":
+                    System.out.println("\n====== Manage Cinema Service ======");
                     manageCinemaService();
                     break;
                 case "7":
+                    System.out.println("\n====== List of Employees ======");
                     showInformationEmployees();
                     break;
                 case "8":
+                    System.out.println("\n====== Manage Filing Cabinet ======");
                     manageFilingCabinet();
                     break;
                 case "9":
@@ -75,7 +84,7 @@ public class MainController {
 
     public void addNewServices() {
         while (true) {
-            System.out.print("\nSelect an option from the list below:\n" +
+            System.out.print("Select an option from the list below:\n" +
                     "1.	Add New Villa\n" +
                     "2.	Add New House\n" +
                     "3.	Add New Room\n" +
@@ -85,12 +94,15 @@ public class MainController {
             String choice = sc.nextLine().trim();
             switch (choice) {
                 case "1":
+                    System.out.println("\n====== Add New Villa ======");
                     addNewVilla();
                     break;
                 case "2":
+                    System.out.println("\n====== Add New House ======");
                     addNewHouse();
                     break;
                 case "3":
+                    System.out.println("\n====== Add New Room ======");
                     addNewRoom();
                     break;
                 case "4":
@@ -230,7 +242,7 @@ public class MainController {
 
     public void showServices() {
         while (true) {
-            System.out.print("\nSelect an option from the list below:\n" +
+            System.out.print("Select an option from the list below:\n" +
                     "1.	Show All Villa\n" +
                     "2.	Show All House\n" +
                     "3.	Show All Room\n" +
@@ -243,21 +255,27 @@ public class MainController {
             String choice = sc.nextLine().trim();
             switch (choice) {
                 case "1":
+                    System.out.println("\n====== List of Villas ======");
                     showAllVilla();
                     break;
                 case "2":
+                    System.out.println("\n====== List of Houses ======");
                     showAllHouse();
                     break;
                 case "3":
+                    System.out.println("\n====== List of Rooms ======");
                     showAllRoom();
                     break;
                 case "4":
+                    System.out.println("\n====== List of Villa Names ======");
                     showAllNameVilla();
                     break;
                 case "5":
+                    System.out.println("\n====== List of Houses Names ======");
                     showAllNameHouse();
                     return;
                 case "6":
+                    System.out.println("\n====== List of Rooms Names ======");
                     showAllNameRoom();
                     return;
                 case "7":
@@ -423,7 +441,7 @@ public class MainController {
             }
         } while (flag);
         String externalServices = bookExternalServices();
-        serviceManager.addNewBooking(customer, serviceId, externalServices);
+        bookingManager.addNewBooking(customer, serviceId, externalServices);
     }
 
     public int chooseCustomer() {
@@ -456,8 +474,12 @@ public class MainController {
             System.out.print("\nSelect a villa: ");
             try {
                 index = Integer.parseInt(sc.nextLine());
-                index -= 1;
-                return listVilla.get(index).getServiceId();
+                if (index > 0 && index <= listVilla.size()) {
+                    index -= 1;
+                    return listVilla.get(index).getServiceId();
+                } else {
+                    System.out.println("Index is out of range");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Input must be an integer and is the index of chosen villa");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -473,8 +495,12 @@ public class MainController {
             System.out.print("\nSelect a house: ");
             try {
                 index = Integer.parseInt(sc.nextLine());
-                index -= 1;
-                return listHouse.get(index).getServiceId();
+                if (index > 0 && index <= listHouse.size()) {
+                    index -= 1;
+                    return listHouse.get(index).getServiceId();
+                } else {
+                    System.out.println("Index is out of range");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Input must be an integer and is the index of chosen house");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -486,23 +512,28 @@ public class MainController {
     public String bookRoom() {
         List<Room> listRoom = showAllRoom();
         int index;
-        do {
+        while (true) {
             System.out.print("\nSelect a room: ");
             try {
                 index = Integer.parseInt(sc.nextLine());
-                index -= 1;
-                return listRoom.get(index).getServiceId();
+                if (index > 0 && index <= listRoom.size()) {
+                    index -= 1;
+                    return listRoom.get(index).getServiceId();
+                } else {
+                    System.out.println("Index is out of range");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Input must be an integer and is the index of chosen room");
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Index is out of range");
             }
-        } while (true);
+        }
+
     }
 
     public String bookExternalServices() {
         String externalServices = "";
-        do {
+        while (true) {
             System.out.print("\nDo you want to book external services (y/n): ");
             String choice = sc.nextLine().trim().toLowerCase();
             if (choice.equals("y")) {
@@ -527,7 +558,7 @@ public class MainController {
                 }
                 return externalServices;
             }
-        } while (true);
+        }
     }
 
     public void manageCinemaService() {
@@ -597,7 +628,7 @@ public class MainController {
     }
 
     public void manageFilingCabinet() {
-        System.out.print("Enter the employee number: ");
+        System.out.print("Enter the employee number you want to find: ");
         String employeeId = sc.nextLine();
         Map.Entry<String, Employee> file = employeeManager.getFile(employeeId);
         if (file == null) {

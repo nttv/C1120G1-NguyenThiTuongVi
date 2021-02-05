@@ -7,7 +7,7 @@ import furama_resort.models.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceManager {
+public class BookingManager {
     public Service findServiceById(String serviceId) {
         try {
             String serviceType = serviceId.substring(2, 4);

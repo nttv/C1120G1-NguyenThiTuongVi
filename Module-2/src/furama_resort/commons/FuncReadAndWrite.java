@@ -31,7 +31,7 @@ public class FuncReadAndWrite<T> {
         }
     }
 
-    public List<String[]> readFile(String fileName) {
+    public static List<String[]> readFile(String fileName) {
         List<String[]> list = new ArrayList<>();
         File file = new File(PATH + fileName);
         BufferedReader bufferedReader = null;

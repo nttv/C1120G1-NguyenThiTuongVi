@@ -1,5 +1,9 @@
 package commons;
 
+import models.Customer;
+import services.CustomerManager;
+
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Validation {
@@ -16,5 +20,15 @@ public class Validation {
 
     public static boolean validateCustomerId(String customerId, int customerNationality) {
         return true;
+    }
+
+    public static boolean validateExistCustomerId(String customerId) {
+        List<Customer> list = new CustomerManager().findAllCustomers();
+        for (Customer customer : list) {
+            if (customer.getCustomerId().equals(customerId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

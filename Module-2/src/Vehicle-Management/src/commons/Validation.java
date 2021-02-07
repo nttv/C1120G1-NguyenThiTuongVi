@@ -14,7 +14,7 @@ public class Validation {
     private static final int VEHICLE_CAR = 2;
     private static final int VEHICLE_MOTORBIKE = 3;
 
-    private static final String REQUIRED_STRING_REGEX = "^\\w+$";
+    private static final String REQUIRED_STRING_REGEX = "^\\w.*$";
     private static final String NO_PLATE_TRUCK_REGEX = "^\\d{2}C-\\d{3}\\.\\d{2}$";
     private static final String NO_PLATE_CAR_REGEX = "^\\d{2}Y-\\d{3}\\.\\d{2}$";
     private static final String NO_PLATE_MOTORBIKE_REGEX = "^\\d{2}-[A-Z]\\d-\\d{3}\\.\\d{2}$";
@@ -23,7 +23,7 @@ public class Validation {
         if (Pattern.matches(REQUIRED_STRING_REGEX, string)) {
             return false;
         }
-        System.out.println("Trường bắt buộc nhập giá trị");
+        System.out.println("TRƯỜNG NÀY LÀ BẮT BUỘC NHẬP GIÁ TRỊ");
         return true;
     }
 
@@ -46,12 +46,12 @@ public class Validation {
         if (Pattern.matches(NO_PLATE_TRUCK_REGEX, noPlate)) {
             Truck truck = new TruckManager().findById(noPlate);
             if (truck != null) {
-                System.out.println("Số biển kiểm soát đã tồn tại");
+                System.out.println("SỐ BIỂN KIỂM SOÁT ĐÃ TỒN TẠI");
                 return false;
             }
             return true;
         }
-        System.out.println("Biển kiểm soát phải đúng định dạng XXC-XXX.XX (X: 0-9)");
+        System.out.println("BIỂN KIỂM SOÁT PHẢI ĐÚNG ĐỊNH DẠNG XXC-XXX.XX (X: 0-9)");
         return false;
     }
 
@@ -59,12 +59,12 @@ public class Validation {
         if (Pattern.matches(NO_PLATE_CAR_REGEX, noPlate)) {
             Car car = new CarManager().findById(noPlate);
             if (car != null) {
-                System.out.println("Số biển kiểm soát đã tồn tại");
+                System.out.println("SỐ BIỂN KIỂM SOÁT ĐÃ TỒN TẠI");
                 return false;
             }
             return true;
         }
-        System.out.println("Biển kiểm soát phải đúng định dạng XXY-XXX.XX (X: 0-9)");
+        System.out.println("BIỂN KIỂM SOÁT PHẢI ĐÚNG ĐỊNH DẠNG XXY-XXX.XX (X: 0-9)");
         return false;
     }
 
@@ -72,12 +72,12 @@ public class Validation {
         if (Pattern.matches(NO_PLATE_MOTORBIKE_REGEX, noPlate)) {
             Motorbike motorbike = new MotorbikeManager().findById(noPlate);
             if (motorbike != null) {
-                System.out.println("Số biển kiểm soát đã tồn tại");
+                System.out.println("SỐ BIỂN KIỂM SOÁT ĐÃ TỒN TẠI");
                 return false;
             }
             return true;
         }
-        System.out.println("Biển kiểm soát phải đúng định dạng XX-YZ-XXX.XX (X: 0-9)");
+        System.out.println("BIỂN KIỂM SOÁT PHẢI ĐÚNG ĐỊNH DẠNG XX-YZ-XXX.XX (X: 0-9)");
         return false;
     }
 }

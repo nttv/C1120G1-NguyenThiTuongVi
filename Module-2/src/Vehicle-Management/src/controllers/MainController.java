@@ -1,6 +1,6 @@
 package controllers;
 
-import commons.NotFoundVehicelException;
+import commons.NotFoundVehicleException;
 import commons.Validation;
 import models.Car;
 import models.Motorbike;
@@ -33,7 +33,7 @@ public class MainController {
     public void displayMenu() {
         while (true) {
             System.out.println("\nCHƯƠNG TRÌNH QUẢN LÝ PHƯƠNG TIỆN GIAO THÔNG\n"
-                    + "Chọn chức năng:\n"
+                    + "CHỌN CHỨC NĂNG:\n"
                     + "1. Thêm mới phương tiện\n"
                     + "2. Hiển thị phương tiện\n"
                     + "3. Chỉnh sửa phương tiện\n"
@@ -55,13 +55,15 @@ public class MainController {
                     break;
                 case "5":
                     System.exit(0);
+                default:
+                    System.out.println("VUI LÒNG CHỌN MỘT CHỨC NĂNG TRONG DANH SÁCH");
             }
         }
     }
 
     public void addNewVehicle() {
         while (true) {
-            System.out.println("\nChọn chức năng:\n"
+            System.out.println("\nCHỌN MỘT CHỨC NĂNG TRONG DANH SÁCH SAU:\n"
                     + "1. Thêm xe tải\n"
                     + "2. Thêm ô tô\n"
                     + "3. Thêm xe máy\n"
@@ -83,53 +85,59 @@ public class MainController {
                     break;
                 case "5":
                     System.exit(0);
+                default:
+                    System.out.println("VUI LÒNG CHỌN MỘT CHỨC NĂNG TRONG DANH SÁCH");
             }
         }
     }
 
     public List<String> addVehicle(int vehicleType) {
+        System.out.println("\n==== THÊM PHƯƠNG TIỆN MỚI ====");
         List<String> list = new ArrayList<>();
         String noPlate;
         do {
-            System.out.print("\nNhập số biển kiểm soát: ");
+            System.out.print("NHẬP SỐ BIỂN KIỂM SOÁT: ");
             noPlate = sc.nextLine();
         } while (!Validation.validateNoPlate(noPlate, vehicleType));
         list.add(noPlate);
 
         List<String[]> listBrands = BrandManager.findAllBrand();
-        int brandIndex = 0;
+        int brandIndex;
         while (true) {
-            System.out.println("Chọn hãng sản xuất trong list sau:");
+            System.out.println("CHỌN HÃNG SẢN XUẤT TRONG DANH SÁCH SAU:");
             BrandManager.showAllBrand();
-            try {
-                brandIndex = Integer.parseInt(sc.nextLine());
-                if (brandIndex > 0 && brandIndex <= listBrands.size()) {
+            while (true) {
+                try {
+                    brandIndex = Integer.parseInt(sc.nextLine());
                     break;
-                } else {
-                    System.out.println("Chỉ mục bạn nhập không đúng.");
+                } catch (NumberFormatException e) {
+                    System.out.println("VUI LÒNG NHẬP CHỈ MỤC CỦA HÃNG SẢN XUẤT");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Vui lòng nhập chỉ mục của hãng sản xuất.");
+            }
+            if (brandIndex > 0 && brandIndex <= listBrands.size()) {
+                break;
+            } else {
+                System.out.println("CHỈ MỤC BẠN NHẬP KHÔNG ĐÚNG");
             }
         }
         String brand = listBrands.get(brandIndex - 1)[1];
         list.add(brand);
 
-        int yearOfProduction = 0;
+        int yearOfProduction;
         while (true) {
-            System.out.print("Nhập năm sản xuất: ");
+            System.out.print("NHẬP NĂM SẢN XUẤT: ");
             try {
                 yearOfProduction = Integer.parseInt(sc.nextLine());
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Năm sản xuất phải là định dạng số.");
+                System.out.println("NĂM SẢN XUẤT PHẢI LÀ ĐỊNH DẠNG SỐ");
             }
         }
         list.add(yearOfProduction + "");
 
         String owner;
         do {
-            System.out.print("Nhập tên chủ sở hữu: ");
+            System.out.print("NHẬP TÊN CHỦ SỞ HỮU: ");
             owner = sc.nextLine();
         } while (Validation.isEmpty(owner));
         list.add(owner);
@@ -140,14 +148,14 @@ public class MainController {
     public void addNewTruck() {
         List<String> list = addVehicle(VEHICLE_TRUCK);
 
-        int payload = 0;
+        int payload;
         while (true) {
-            System.out.print("Nhập tải trọng: ");
+            System.out.print("NHẬP TẢI TRỌNG: ");
             try {
                 payload = Integer.parseInt(sc.nextLine());
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Tải trọng phải là định dạng số.");
+                System.out.println("TẢI TRỌNG PHẢI LÀ ĐỊNH DẠNG SỐ");
             }
         }
         list.add(payload + "");
@@ -160,21 +168,21 @@ public class MainController {
     public void addNewCar() {
         List<String> list = addVehicle(VEHICLE_CAR);
 
-        int noOfSeats = 0;
+        int noOfSeats;
         while (true) {
-            System.out.print("Nhập số chỗ ngồi: ");
+            System.out.print("NHẬP SỐ CHỖ NGỒI: ");
             try {
                 noOfSeats = Integer.parseInt(sc.nextLine());
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Số chỗ ngồi phải là định dạng số.");
+                System.out.println("SỐ CHỖ NGỒI PHẢI LÀ ĐỊNH DẠNG SỐ");
             }
         }
         list.add(noOfSeats + "");
 
         String model;
         do {
-            System.out.print("Nhập kiểu xe: ");
+            System.out.print("NHẬP KIỂU XE: ");
             model = sc.nextLine();
         } while (Validation.isEmpty(model));
         list.add(model);
@@ -187,14 +195,14 @@ public class MainController {
     public void addNewMotorbike() {
         List<String> list = addVehicle(VEHICLE_MOTORBIKE);
 
-        int capacity = 0;
+        int capacity;
         while (true) {
-            System.out.print("Nhập công suất: ");
+            System.out.print("NHẬP CÔNG SUẤT: ");
             try {
                 capacity = Integer.parseInt(sc.nextLine());
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Công suất phải là định dạng số.");
+                System.out.println("CÔNG SUẤT PHẢI LÀ ĐỊNH DẠNG SỐ");
             }
         }
         list.add(capacity + "");
@@ -206,7 +214,7 @@ public class MainController {
 
     public void showAllVehicles() {
         while (true) {
-            System.out.println("\nChọn chức năng:\n"
+            System.out.println("\nCHỌN MỘT CHỨC NĂNG TRONG DANH SÁCH SAU:\n"
                     + "1. Hiển thị xe tải\n"
                     + "2. Hiển thị ô tô\n"
                     + "3. Hiển thị xe máy\n"
@@ -234,32 +242,27 @@ public class MainController {
     }
 
     public void showAllTrucks() {
-        List<Truck> list = truckManager.findAll();
-        for (Truck truck : list) {
-            truck.showInfo();
-        }
+        System.out.println("\n==== DANH SÁCH XE TẢI ====");
+        truckManager.show();
     }
 
     public void showAllCars() {
-        List<Car> list = carManager.findAll();
-        for (Car car : list) {
-            car.showInfo();
-        }
+        System.out.println("\n==== DANH SÁCH Ô TÔ ====");
+        carManager.show();
     }
 
     public void showAllMotorbikes() {
-        List<Motorbike> list = motorbikeManager.findAll();
-        for (Motorbike motorbike : list) {
-            motorbike.showInfo();
-        }
+        System.out.println("\n==== DANH SÁCH XE MÁY ====");
+        motorbikeManager.show();
     }
 
     public void updateVehicleInfo() {
+        System.out.println("\n==== CHỈNH SỬA THÔNG TIN PHƯƠNG TIỆN ====");
+        Vehicle vehicle;
+        int vehicleType = 0;
         while (true) {
-            System.out.print("\nNhập số biển kiểm soát của phương tiện muốn sửa: ");
+            System.out.print("NHẬP SỐ BIỂN KIỂM SOÁT CỦA PHƯƠNG TIỆN MUỐN SỬA: ");
             String noPlate = sc.nextLine();
-            Vehicle vehicle;
-            int vehicleType = 0;
             if ((vehicle = truckManager.findById(noPlate)) != null) {
                 vehicleType = 1;
             } else if ((vehicle = carManager.findById(noPlate)) != null) {
@@ -268,175 +271,60 @@ public class MainController {
                 vehicleType = 3;
             }
             try {
-                switch (vehicleType) {
-                    case 0:
-                        throw new NotFoundVehicelException();
-                    case 1:
-                        editTruck((Truck) vehicle);
-                        break;
-                    case 2:
-                        editCar((Car) vehicle);
-                        break;
-                    case 3:
-                        editMotorbike((Motorbike) vehicle);
-                        break;
+                if (vehicleType == 0) {
+                    throw new NotFoundVehicleException();
                 }
-//                while (true) {
-//                    System.out.println("Xác nhận xóa phương tiện với biển kiểm soát " + noPlate + "? (1. Yes/2. No)");
-//                    String choice = sc.nextLine();
-//                    if (choice.equals("1")) {
-//                        switch (vehicleType) {
-//                            case 1:
-//                                truckManager.delete(noPlate);
-//                                break;
-//                            case 2:
-//                                carManager.delete(noPlate);
-//                                break;
-//                            case 3:
-//                                motorbikeManager.delete(noPlate);
-//                                break;
-//                        }
-//                        System.out.println("Đã xóa thành công");
-//                        return;
-//                    } else if (choice.equals("2")) {
-//                        return;
-//                    }
-//                }
-            } catch (NotFoundVehicelException e) {
+                break;
+            } catch (NotFoundVehicleException e) {
                 System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public void editTruck(Truck truck) {
-        String noPlate = truck.getNoPlate();
-        boolean flag;
-        try {
-            do {
-                System.out.println("\nChọn thông tin muốn sửa:\n" +
-                        "1. Biển kiểm soát\n" +
-                        "2. Hãng sản xuất\n" +
-                        "3. Năm sản xuất\n" +
-                        "4. Chủ sở hữu\n" +
-                        "5. Tải trọng\n" +
-                        "6. Trở về");
-                String choice = sc.nextLine();
-                switch (choice) {
-                    case "1":
-                        String newNoPlate;
-                        do {
-                            System.out.print("\nNhập số biển kiểm soát: ");
-                            newNoPlate = sc.nextLine();
-                        } while (!Validation.validateNoPlate(newNoPlate, VEHICLE_TRUCK));
-                        truck.setNoPlate(newNoPlate);
-                    case "2":
-                        List<String[]> listBrands = BrandManager.findAllBrand();
-                        int brandIndex = 0;
-                        while (true) {
-                            System.out.println("Chọn hãng sản xuất trong list sau:");
-                            BrandManager.showAllBrand();
-                            try {
-                                brandIndex = Integer.parseInt(sc.nextLine());
-                                if (brandIndex > 0 && brandIndex <= listBrands.size()) {
-                                    break;
-                                } else {
-                                    System.out.println("Chỉ mục bạn nhập không đúng.");
-                                }
-                            } catch (NumberFormatException e) {
-                                System.out.println("Vui lòng nhập chỉ mục của hãng sản xuất.");
-                            }
-                        }
-                        String brand = listBrands.get(brandIndex - 1)[1];
-                        truck.setBrand(brand);
-                    case "3":
-                        int yearOfProduction = 0;
-                        while (true) {
-                            System.out.print("Nhập năm sản xuất: ");
-                            try {
-                                yearOfProduction = Integer.parseInt(sc.nextLine());
-                                break;
-                            } catch (NumberFormatException e) {
-                                System.out.println("Năm sản xuất phải là định dạng số.");
-                            }
-                        }
-                        truck.setYearOfProduction(yearOfProduction);
-                    case "4":
-                        String owner;
-                        do {
-                            System.out.print("Nhập tên chủ sở hữu: ");
-                            owner = sc.nextLine();
-                        } while (Validation.isEmpty(owner));
-                        truck.setOwner(owner);
-                    case "5":
-                        int payload = 0;
-                        while (true) {
-                            System.out.print("Nhập tải trọng: ");
-                            try {
-                                payload = Integer.parseInt(sc.nextLine());
-                                break;
-                            } catch (NumberFormatException e) {
-                                System.out.println("Tải trọng phải là định dạng số.");
-                            }
-                        }
-                        truck.setPayload(payload);
-                    case "6":
-                        return;
-                    default:
-                        System.out.println("Chỉ mục nhập vào không đúng.");
-                }
                 while (true) {
-                    System.out.println("Có cần sửa thêm thông tin nào không? (1. Có/ 2. Không)");
-                    choice = sc.nextLine();
-                    if (choice == "1") {
-                        flag = true;
+                    System.out.println("BẠN CÓ MUỐN THỬ LẠI? (1.CÓ | 2.KHÔNG)");
+                    String choice = sc.nextLine();
+                    if (choice.equals("1")) {
                         break;
-                    } else if (choice == "2") {
-                        flag = false;
-                        break;
+                    } else if (choice.equals("2")) {
+                        return;
                     }
                 }
-            } while (flag);
-        } finally {
-            while (true) {
-                System.out.println("Xác nhận lưu thay đổi? (1. Có/ 2. Không)");
-                String choice = sc.nextLine();
-                if (choice == "1") {
-                    truckManager.edit(truck, noPlate);
-                    System.out.println("Lưu chỉnh sửa thành công.");
-                    return;
-                } else if (choice == "2") {
-                    return;
-                }
             }
         }
-    }
+        String noPlate = vehicle.getNoPlate();
+        String owner;
+        do {
+            System.out.print("NHẬP TÊN CHỦ SỞ HỮU MỚI: ");
+            owner = sc.nextLine();
+        } while (Validation.isEmpty(owner));
+        vehicle.setOwner(owner);
 
-    public void editCar(Car car) {
-        System.out.println("\nChọn thông tin muốn sửa:\n" +
-                "1. Biển kiểm soát\n" +
-                "2. Hãng sản xuất\n" +
-                "3. Năm sản xuất\n" +
-                "4. Chủ sở hữu\n" +
-                "5. Số chỗ ngồi\n" +
-                "6. Kiểu xe");
-        String choice = sc.nextLine();
-    }
-
-    public void editMotorbike(Motorbike motorbike) {
-        System.out.println("\nChọn thông tin muốn sửa:\n" +
-                "1. Biển kiểm soát\n" +
-                "2. Hãng sản xuất\n" +
-                "3. Năm sản xuất\n" +
-                "4. Chủ sở hữu\n" +
-                "5. Công suất");
-        String choice = sc.nextLine();
+        while (true) {
+            System.out.println("XÁC NHẬN LƯU THAY ĐỔI CHO PHƯƠNG TIỆN? (1.CÓ | 2.KHÔNG)");
+            String choice = sc.nextLine();
+            if (choice.equals("1")) {
+                switch (vehicleType) {
+                    case 1:
+                        truckManager.edit((Truck) vehicle, noPlate);
+                        break;
+                    case 2:
+                        carManager.edit((Car) vehicle, noPlate);
+                        break;
+                    case 3:
+                        motorbikeManager.edit((Motorbike) vehicle, noPlate);
+                }
+                System.out.println("LƯU CHỈNH SỬA THÀNH CÔNG");
+                return;
+            } else if (choice.equals("2")) {
+                return;
+            }
+        }
     }
 
     public void removeVehicle() {
+        System.out.println("\n==== XÓA PHƯƠNG TIỆN ====");
+        String noPlate;
+        int vehicleType = 0;
         while (true) {
-            System.out.print("\nNhập số biển kiểm soát của phương tiện muốn xóa: ");
-            String noPlate = sc.nextLine();
-            int vehicleType = 0;
+            System.out.print("NHẬP SỐ BIỂN KIỂM SOÁT CỦA PHƯƠNG TIỆN MUỐN XÓA: ");
+            noPlate = sc.nextLine();
             if (truckManager.findById(noPlate) != null) {
                 vehicleType = 1;
             } else if (carManager.findById(noPlate) != null) {
@@ -446,31 +334,40 @@ public class MainController {
             }
             try {
                 if (vehicleType == 0) {
-                    throw new NotFoundVehicelException();
+                    throw new NotFoundVehicleException();
                 }
+                break;
+            } catch (NotFoundVehicleException e) {
+                System.out.println(e.getMessage());
                 while (true) {
-                    System.out.println("Xác nhận xóa phương tiện với biển kiểm soát " + noPlate + "? (1. Yes/2. No)");
+                    System.out.println("BẠN CÓ MUỐN THỬ LẠI? (1.CÓ | 2.KHÔNG)");
                     String choice = sc.nextLine();
                     if (choice.equals("1")) {
-                        switch (vehicleType) {
-                            case 1:
-                                truckManager.delete(noPlate);
-                                break;
-                            case 2:
-                                carManager.delete(noPlate);
-                                break;
-                            case 3:
-                                motorbikeManager.delete(noPlate);
-                                break;
-                        }
-                        System.out.println("Đã xóa thành công");
-                        return;
+                        break;
                     } else if (choice.equals("2")) {
                         return;
                     }
                 }
-            } catch (NotFoundVehicelException e) {
-                System.out.println(e.getMessage());
+            }
+        }
+        while (true) {
+            System.out.println("XÁC NHẬN XÓA PHƯƠNG TIỆN VỚI BIỂN KIỂM SOÁT " + noPlate + "? (1.CÓ | 2.KHÔNG)");
+            String choice = sc.nextLine();
+            if (choice.equals("1")) {
+                switch (vehicleType) {
+                    case 1:
+                        truckManager.delete(noPlate);
+                        break;
+                    case 2:
+                        carManager.delete(noPlate);
+                        break;
+                    case 3:
+                        motorbikeManager.delete(noPlate);
+                }
+                System.out.println("ĐÃ XÓA THÀNH CÔNG");
+                return;
+            } else if (choice.equals("2")) {
+                return;
             }
         }
     }

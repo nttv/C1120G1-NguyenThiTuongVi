@@ -31,6 +31,20 @@ public class MotorbikeManager implements IService<Motorbike> {
         return null;
     }
 
+    public void show() {
+        List<Motorbike> list = findAll();
+        if (list.size() == 0) {
+            System.out.println("KHÔNG CÓ PHƯƠNG TIỆN XE MÁY NÀO ĐƯỢC LƯU TRONG DANH SÁCH");
+            return;
+        }
+        int i = 1;
+        for (Motorbike motorbike : list) {
+            System.out.print(i + ". ");
+            motorbike.showInfo();
+            i++;
+        }
+    }
+
     @Override
     public void add(Motorbike motorbike) {
         List<Motorbike> list = new ArrayList<>();

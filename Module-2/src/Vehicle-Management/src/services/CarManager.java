@@ -4,7 +4,6 @@ import commons.FuncReadAndWrite;
 import models.Car;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CarManager implements IService<Car> {
@@ -22,9 +21,16 @@ public class CarManager implements IService<Car> {
     }
 
     public void show() {
-        List<String[]> list = FuncReadAndWrite.readFile("oto.csv");
-        for (String[] line : list) {
-            System.out.println(Arrays.toString(line));
+        List<Car> list = findAll();
+        if (list.size() == 0) {
+            System.out.println("KHÔNG CÓ PHƯƠNG TIỆN Ô TÔ NÀO ĐƯỢC LƯU TRONG DANH SÁCH");
+            return;
+        }
+        int i = 1;
+        for (Car car : list) {
+            System.out.print(i + ". ");
+            car.showInfo();
+            i++;
         }
     }
 

@@ -31,6 +31,20 @@ public class TruckManager implements IService<Truck> {
         return null;
     }
 
+    public void show() {
+        List<Truck> list = findAll();
+        if (list.size() == 0) {
+            System.out.println("KHÔNG CÓ PHƯƠNG TIỆN XE TẢI NÀO ĐƯỢC LƯU TRONG DANH SÁCH");
+            return;
+        }
+        int i = 1;
+        for (Truck truck : list) {
+            System.out.print(i + ". ");
+            truck.showInfo();
+            i++;
+        }
+    }
+
     @Override
     public void add(Truck truck) {
         List<Truck> list = new ArrayList<>();

@@ -86,17 +86,13 @@ public class BillManager {
 
     public void edit(Bill newBill, String billId) {
         List<Bill> list = findAllBills();
-        boolean check = false;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getBillId().equals(billId)) {
                 list.remove(i);
                 list.add(i, newBill);
-                check = true;
-                break;
+                funcReadAndWrite.writeFile("bill.csv", list, false);
+                return;
             }
-        }
-        if (check) {
-            funcReadAndWrite.writeFile("bill.csv", list, false);
         }
     }
 }

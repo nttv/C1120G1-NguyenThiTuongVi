@@ -20,7 +20,7 @@ public class FuncReadAndWrite<T> {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error in writing file.");
+            System.out.println("ERROR IN WRITING FILE");
             e.printStackTrace();
         } finally {
             try {
@@ -47,7 +47,7 @@ public class FuncReadAndWrite<T> {
                 list.add(temp);
             }
         } catch (IOException e) {
-            System.out.println("Error in reading file.");
+            System.out.println("ERROR IN READING FILE");
             e.printStackTrace();
         } finally {
             try {

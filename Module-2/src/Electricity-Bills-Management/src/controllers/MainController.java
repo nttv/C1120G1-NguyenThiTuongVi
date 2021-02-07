@@ -124,9 +124,8 @@ public class MainController {
             }
             if (typeIndex > 0 && typeIndex <= customerTypes.size()) {
                 break;
-            } else {
-                System.out.println("CHỈ MỤC BẠN NHẬP KHÔNG ĐÚNG");
             }
+            System.out.println("CHỈ MỤC BẠN NHẬP KHÔNG ĐÚNG");
         }
         String customerType = customerTypes.get(typeIndex - 1)[1];
         list.add(customerType);
@@ -192,8 +191,12 @@ public class MainController {
 
     public void addNewBill() {
         System.out.println("\n==== THÊM HÓA ĐƠN MỚI ====");
-        String billId = billManager.getIncrementBillId();
         Customer customer = chooseCustomer();
+        if (customer == null) {
+            return;
+        }
+
+        String billId = billManager.getIncrementBillId();
         String customerId = customer.getCustomerId();
 
         String invoiceDate;
@@ -232,6 +235,10 @@ public class MainController {
     public Customer chooseCustomer() {
         System.out.println("DANH SÁCH KHÁCH HÀNG:");
         List<Customer> listCustomer = customerManager.findAllCustomers();
+        if (listCustomer.size() == 0) {
+            System.out.println("CHƯA CÓ KHÁCH HÀNG TRONG DANH SÁCH");
+            return null;
+        }
         customerManager.showCustomers();
         int index;
         do {
@@ -256,6 +263,10 @@ public class MainController {
         System.out.println("\n==== DANH SÁCH HÓA ĐƠN ====");
         billManager.showAllBills();
         List<Bill> list = billManager.findAllBills();
+        if (list.size() == 0) {
+            System.out.println("CHƯA CÓ HÓA ĐƠN NÀO TRONG DANH SÁCH");
+            return;
+        }
         int index;
         while (true) {
             System.out.print("CHỌN HÓA ĐƠN MUỐN CHỈNH SỬA TỪ DANH SÁCH HÓA ĐƠN TRÊN: ");

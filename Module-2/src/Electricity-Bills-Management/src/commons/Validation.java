@@ -17,32 +17,32 @@ public class Validation {
         if (Pattern.matches(NOT_EMPTY_REGEX, string)) {
             return false;
         } else {
-            System.out.println("Trường này là bắt buộc nhập");
+            System.out.println("TRƯỜNG NÀY LÀ BẮT BUỘC NHẬP GIÁ TRỊ");
             return true;
         }
     }
 
     public static boolean validateCustomerId(String customerId, int customerNationality) {
         if (!Pattern.matches(CUSTOMER_ID_REGEX, customerId)) {
-            System.out.println("Mã khách hàng sai định dạng KH(VN|NN)-XXXXX");
+            System.out.println("MÃ KHÁCH HÀNG SAI ĐỊNH DẠNG KH(VN|NN)-XXXXX");
             return false;
         }
         String signal = customerId.substring(2, 4);
         switch (customerNationality) {
             case CUSTOMER_VIETNAMESE:
                 if (!signal.equals("VN")) {
-                    System.out.println("Mã khách hàng sai định dạng KHVN-XXXXX");
+                    System.out.println("MÃ KHÁCH HÀNG SAI ĐỊNH DẠNG KHVN-XXXXX");
                     return false;
                 }
                 break;
             case CUSTOMER_FOREIGNER:
                 if (!signal.equals("NN")) {
-                    System.out.println("Mã khách hàng sai định dạng KHNN-XXXXX");
+                    System.out.println("MÃ KHÁCH HÀNG SAI ĐỊNH DẠNG KHNN-XXXXX");
                     return false;
                 }
         }
         if (validateExistCustomerId(customerId)) {
-            System.out.println("Mã khách hàng đã tồn tại");
+            System.out.println("MÃ KHÁCH HÀNG ĐÃ TỒN TẠI");
             return false;
         }
         return true;

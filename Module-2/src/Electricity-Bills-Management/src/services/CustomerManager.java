@@ -17,7 +17,7 @@ public class CustomerManager {
     }
 
     public void showAllCustomerType() {
-        List<String[]> list = FuncReadAndWrite.readFile("customerType.csv");
+        List<String[]> list = findAllCustomerType();
         int i = 1;
         for (String[] line : list) {
             System.out.println(i + ". " +
@@ -29,7 +29,7 @@ public class CustomerManager {
 
     public List<Customer> findAllCustomers() {
         List<String[]> list = FuncReadAndWrite.readFile("customer.csv");
-        List<Customer> listCustomer = new ArrayList<>();
+        List<Customer> listCustomers = new ArrayList<>();
         for (String[] line : list) {
             Customer customer;
             String signal = line[0].substring(2, 4);
@@ -38,19 +38,9 @@ public class CustomerManager {
             } else {
                 customer = new Foreigner(line);
             }
-            listCustomer.add(customer);
+            listCustomers.add(customer);
         }
-        return listCustomer;
-    }
-
-    public void showCustomers() {
-        List<Customer> list = findAllCustomers();
-        int i = 1;
-        for (Customer customer : list) {
-            System.out.print(i + ". ");
-            customer.showInfo();
-            i++;
-        }
+        return listCustomers;
     }
 
     public Customer findCustomerById(String id) {
@@ -63,13 +53,23 @@ public class CustomerManager {
         return null;
     }
 
+    public void showCustomers() {
+        List<Customer> list = findAllCustomers();
+        int i = 1;
+        for (Customer customer : list) {
+            System.out.print(i + ". ");
+            customer.showInfo();
+            i++;
+        }
+    }
+
     public void add(Customer customer) {
         List<Customer> list = new ArrayList<>();
         list.add(customer);
         funcReadAndWrite.writeFile("customer.csv", list, true);
     }
 
-    public Customer search(String customerName) {
+    public Customer findCustomerByName(String customerName) {
         List<Customer> list = findAllCustomers();
         for (Customer customer : list) {
             if (customer.getCustomerName().contains(customerName)) {

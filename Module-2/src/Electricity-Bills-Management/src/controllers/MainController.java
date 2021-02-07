@@ -173,7 +173,7 @@ public class MainController {
             System.out.print("NHẬP TÊN KHÁCH HÀNG BẠN MUỐN TÌM: ");
             String customerName = sc.nextLine();
             Customer customer;
-            if ((customer = customerManager.search(customerName)) != null) {
+            if ((customer = customerManager.findCustomerByName(customerName)) != null) {
                 customer.showInfo();
                 return;
             }
@@ -224,13 +224,13 @@ public class MainController {
             }
         }
         Bill bill = new Bill(billId, customerId, invoiceDate, consumption, price);
-        int total = billManager.calculateTotal(customer, bill);
+        int total = billManager.calculateTotal(bill);
         bill.setTotal(total);
         billManager.add(bill);
     }
 
     public Customer chooseCustomer() {
-        System.out.println("\nDANH SÁCH KHÁCH HÀNG:");
+        System.out.println("DANH SÁCH KHÁCH HÀNG:");
         List<Customer> listCustomer = customerManager.findAllCustomers();
         customerManager.showCustomers();
         int index;

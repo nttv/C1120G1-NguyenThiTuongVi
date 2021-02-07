@@ -15,30 +15,14 @@ public class BillManager {
         List<Bill> list = findAllBills();
         int lastId = Integer.parseInt(list.get(list.size() - 1).getBillId().substring(4));
         String idStr = ++lastId + "";
-        String billId = idStr;
         for (int i = 0; i < 3 - idStr.length(); i++) {
-            billId = "0" + billId;
+            idStr = "0" + idStr;
         }
-        return "MHD-" + billId;
+        return "MHD-" + idStr;
     }
 
-    public List<Bill> findAllBills() {
-        List<String[]> list = funcReadAndWrite.readFile("bill.csv");
-        List<Bill> listBills = new ArrayList<>();
-        for (String[] line : list) {
-            Bill bill = new Bill(line);
-            listBills.add(bill);
-        }
-        return listBills;
-    }
-
-    public void add(Bill bill) {
-        List<Bill> list = new ArrayList<>();
-        list.add(bill);
-        funcReadAndWrite.writeFile("bill.csv", list, true);
-    }
-
-    public int calculateTotal(Customer customer, Bill bill) {
+    public int calculateTotal(Bill bill) {
+        Customer customer = new CustomerManager().findCustomerById(bill.getCustomerId());
         if (customer instanceof Vietnamese) {
             int consumptionLimit = ((Vietnamese) customer).getConsumption();
             if (bill.getConsumption() <= consumptionLimit) {
@@ -51,6 +35,26 @@ public class BillManager {
             return bill.getConsumption() * bill.getPrice();
         }
     }
+
+    public List<Bill> findAllBills() {
+        List<String[]> list = funcReadAndWrite.readFile("bill.csv");
+        List<Bill> listBills = new ArrayList<>();
+        for (String[] line : list) {
+            Bill bill = new Bill(line);
+            listBills.add(bill);
+        }
+        return listBills;
+    }
+
+//    public Bill findBillById(String id) {
+//        List<Bill> list = findAllBills();
+//        for (Bill bill : list) {
+//            if (bill.getBillId().equals(id)) {
+//                return bill;
+//            }
+//        }
+//        return null;
+//    }
 
     public void showAllBills() {
         List<Bill> list = findAllBills();
@@ -72,6 +76,12 @@ public class BillManager {
                 ", price=" + bill.getPrice() +
                 ", total=" + bill.getTotal() +
                 '}');
+    }
+
+    public void add(Bill bill) {
+        List<Bill> list = new ArrayList<>();
+        list.add(bill);
+        funcReadAndWrite.writeFile("bill.csv", list, true);
     }
 
     public void edit(Bill newBill, String billId) {

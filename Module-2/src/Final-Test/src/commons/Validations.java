@@ -18,27 +18,19 @@ public class Validations {
     public static boolean isValidInput(String regex, String string) {
         boolean check = Pattern.matches(regex, string);
         if (!check) {
-            System.out.println("INPUT KHÔNG HỢP LỆ");
+            System.out.println("INPUT KHÔNG HỢP LỆ.");
         }
         return check;
     }
 
-    public static boolean isExist(String maBenhAn) {
+    public static boolean isNotExist(String maBenhAn) throws DuplicateMedicalRecordException {
         List<BenhAn> list = FuncReadAndWrite.readFile();
-        boolean check = false;
-
         for (BenhAn benhAn : list) {
-            try {
-                if (benhAn.getMaBenhAn().equals(maBenhAn)) {
-                    check = true;
-                    throw new DuplicateMedicalRecordException("MÃ BỆNH ÁN ĐÃ TỒN TẠI.");
-                }
-            } catch (DuplicateMedicalRecordException e) {
-                System.out.println(e.getMessage());
-                break;
+            if (benhAn.getMaBenhAn().equals(maBenhAn)) {
+                throw new DuplicateMedicalRecordException();
             }
         }
-        return check;
+        return true;
     }
 
     public static boolean isAfter(String ngayNhapVien, String ngayRaVien) {

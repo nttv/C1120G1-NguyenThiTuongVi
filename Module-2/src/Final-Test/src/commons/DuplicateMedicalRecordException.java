@@ -1,12 +1,11 @@
 package commons;
 
 public class DuplicateMedicalRecordException extends Exception {
-    public DuplicateMedicalRecordException(String message) {
-        super(message);
+    public DuplicateMedicalRecordException() {
     }
 
     @Override
     public String getMessage() {
-        return super.getMessage();
+        return "MÃ BỆNH ÁN ĐÃ TỒN TẠI.";
     }
 }

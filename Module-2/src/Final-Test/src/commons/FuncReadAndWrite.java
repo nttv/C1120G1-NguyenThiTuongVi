@@ -24,7 +24,7 @@ public class FuncReadAndWrite {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            System.out.println("ERROR IN WRITING FILE");
+            System.out.println("ERROR IN WRITING FILE.");
             e.printStackTrace();
         } finally {
             try {
@@ -57,7 +57,7 @@ public class FuncReadAndWrite {
                 list.add(benhAn);
             }
         } catch (IOException e) {
-            System.out.println("ERROR IN READING FILE");
+            System.out.println("ERROR IN READING FILE.");
             e.printStackTrace();
         } finally {
             try {

@@ -1,5 +1,6 @@
 package controllers;
 
+import commons.DuplicateMedicalRecordException;
 import commons.Validations;
 import models.BenhAn;
 import models.BenhAnThuong;
@@ -14,7 +15,7 @@ public class MainController {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        MainController.displayMenu();
+        displayMenu();
     }
 
     public static void displayMenu() {
@@ -47,7 +48,7 @@ public class MainController {
 
     public static void add() {
         while (true) {
-            System.out.print("\nCHỌN LOẠI BỆNH ÁN:\n"
+            System.out.print("\n--THÊM BỆNH ÁN--\n"
                     + "1. Bệnh Án Thường\n"
                     + "2. Bệnh Án VIP\n"
                     + "3. Trở về menu trước\n"
@@ -57,13 +58,12 @@ public class MainController {
             switch (choice) {
                 case "1":
                     addBenhAn(BENH_AN_THUONG);
-                    break;
+                    return;
                 case "2":
                     addBenhAn(BENH_AN_VIP);
-                    break;
+                    return;
                 case "3":
                     displayMenu();
-                    break;
                 case "4":
                     System.exit(0);
                 default:
@@ -74,40 +74,48 @@ public class MainController {
 
     public static void addBenhAn(int loaiBenhAn) {
         BenhAn benhAn;
+        System.out.println("\n--NHẬP THÔNG TIN BỆNH ÁN--");
         String maBenhAn;
         do {
-            System.out.print("NHẬP MÃ BỆNH ÁN: ");
+            System.out.print("Mã bệnh án: ");
             maBenhAn = scanner.nextLine();
-        } while (Validations.isExist(maBenhAn) || !Validations.isValidInput(Validations.MA_BENH_AN_REGEX, maBenhAn));
+            try {
+                if (Validations.isValidInput(Validations.MA_BENH_AN_REGEX, maBenhAn) && Validations.isNotExist(maBenhAn)) {
+                    break;
+                }
+            } catch (DuplicateMedicalRecordException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
         String maBenhNhan;
         do {
-            System.out.print("NHẬP MÃ BỆNH NHÂN: ");
+            System.out.print("Mã bệnh nhân: ");
             maBenhNhan = scanner.nextLine();
         } while (!Validations.isValidInput(Validations.MA_BENH_NHAN_REGEX, maBenhNhan));
         String tenBenhNhan;
         do {
-            System.out.print("NHẬP TÊN BỆNH NHÂN: ");
+            System.out.print("Tên bệnh nhân: ");
             tenBenhNhan = scanner.nextLine();
         } while (!Validations.isValidInput(Validations.STRING_REQUIRED_REGEX, tenBenhNhan));
         String ngayNhapVien;
         do {
-            System.out.print("NHẬP NGÀY NHẬP VIỆN: ");
+            System.out.print("Ngày nhập viện: ");
             ngayNhapVien = scanner.nextLine();
         } while (!Validations.isValidInput(Validations.NGAY_REGEX, ngayNhapVien));
         String ngayRaVien;
         do {
-            System.out.print("NHẬP NGÀY RA VIỆN: ");
+            System.out.print("Ngày ra viện: ");
             ngayRaVien = scanner.nextLine();
         } while (!Validations.isValidInput(Validations.NGAY_REGEX, ngayRaVien) || !Validations.isAfter(ngayNhapVien, ngayRaVien));
         String lyDoNhapVien;
         do {
-            System.out.print("NHẬP LÝ DO NHẬP VIỆN: ");
+            System.out.print("Lý do nhập viện: ");
             lyDoNhapVien = scanner.nextLine();
         } while (!Validations.isValidInput(Validations.STRING_REQUIRED_REGEX, lyDoNhapVien));
         if (loaiBenhAn == BENH_AN_THUONG) {
             int phiNamVien;
             while (true) {
-                System.out.print("NHẬP PHÍ NẰM VIỆN: ");
+                System.out.print("Phí nằm viện: ");
                 try {
                     phiNamVien = Integer.parseInt(scanner.nextLine());
                     break;
@@ -119,55 +127,59 @@ public class MainController {
         } else {
             String loaiVIP;
             do {
-                System.out.print("NHẬP LOẠI VIP: ");
+                System.out.print("Loại VIP: ");
                 loaiVIP = scanner.nextLine();
             } while (!Validations.isValidInput(Validations.LOAI_VIP_REGEX, loaiVIP));
             String thoiHanVIP;
             do {
-                System.out.print("NHẬP THỜI HẠN VIP: ");
+                System.out.print("Thời hạn VIP: ");
                 thoiHanVIP = scanner.nextLine();
             } while (!Validations.isValidInput(Validations.NGAY_REGEX, thoiHanVIP));
             benhAn = new BenhAnVIP(maBenhAn, maBenhNhan, tenBenhNhan, ngayNhapVien, ngayRaVien, lyDoNhapVien, loaiVIP, thoiHanVIP);
         }
         QuanLyBenhAn.add(benhAn);
+        System.out.println("THÊM BỆNH ÁN THÀNH CÔNG.");
     }
 
     public static void delete() {
-        System.out.println("\n==== XÓA BỆNH ÁN ====");
+        System.out.println("\n--XÓA BỆNH ÁN--");
         String maBenhAn;
-        boolean check = false;
-        boolean flag = true;
         do {
-            System.out.print("NHẬP MÃ BỆNH ÁN MUỐN XÓA: ");
+            System.out.print("Mã bệnh án muốn xóa: ");
             maBenhAn = scanner.nextLine();
-            if (Validations.isExist(maBenhAn)) {
-                check = true;
+            try {
+                if (Validations.isNotExist(maBenhAn)) {
+                    System.out.println("MÃ BỆNH ÁN KHÔNG TỒN TẠI.");
+                }
+            } catch (DuplicateMedicalRecordException e) {
                 break;
             }
-            System.out.println("BẠN CÓ MUỐN THỬ LẠI? (1.CÓ | 2.KHÔNG)");
-            String choice = scanner.nextLine();
-            if (choice.equals("1")) {
-                break;
-            } else if (choice.equals("2")) {
-                flag = false;
-            }
-        } while (flag);
-        while (check) {
-            System.out.println("XÁC NHẬN XÓA BỆNH ÁN MÃ " + maBenhAn + "? (1.CÓ | 2.KHÔNG)");
+            do {
+                System.out.println("\nBạn có muốn thử lại? (1.CÓ | 2.KHÔNG)");
+                String choice = scanner.nextLine();
+                if (choice.equals("1")) {
+                    break;
+                } else if (choice.equals("2")) {
+                    return;
+                }
+            } while (true);
+        } while (true);
+        do {
+            System.out.println("\nXác nhận xóa bệnh án mã " + maBenhAn + "? (1.CÓ | 2.KHÔNG)");
             String choice = scanner.nextLine();
             if (choice.equals("1")) {
                 QuanLyBenhAn.delete(maBenhAn);
-                System.out.println("ĐÃ XÓA THÀNH CÔNG");
+                System.out.println("ĐÃ XÓA THÀNH CÔNG.");
                 show();
                 return;
             } else if (choice.equals("2")) {
                 return;
             }
-        }
-
+        } while (true);
     }
 
     public static void show() {
+        System.out.println("\n--DANH SÁCH BỆNH ÁN--");
         QuanLyBenhAn.showAll();
     }
 }

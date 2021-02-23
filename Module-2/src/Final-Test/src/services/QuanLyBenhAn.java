@@ -9,7 +9,6 @@ import java.util.List;
 public class QuanLyBenhAn {
 
     public static void showAll() {
-        System.out.println("\nDANH SÁCH BỆNH ÁN:");
         List<BenhAn> list = FuncReadAndWrite.readFile();
         if (list.isEmpty()) {
             System.out.println("KHÔNG CÓ BỆNH ÁN NÀO ĐƯỢC LƯU.");

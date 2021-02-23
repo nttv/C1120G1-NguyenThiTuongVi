@@ -22,7 +22,7 @@ public class CarManager implements IService<Car> {
 
     public void show() {
         List<Car> list = findAll();
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             System.out.println("KHÔNG CÓ PHƯƠNG TIỆN Ô TÔ NÀO ĐƯỢC LƯU TRONG DANH SÁCH");
             return;
         }

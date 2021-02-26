@@ -1,3 +1,3 @@
-create database my_db;
+create database ss1_db;
 
-drop database my_db;
+drop database ss1_db;

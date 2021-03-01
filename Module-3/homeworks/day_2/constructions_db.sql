@@ -1,0 +1,48 @@
+-- drop database hw_construction;
+create database hw_construction;
+use hw_construction;
+
+CREATE TABLE phong_ban (
+    MAPB INT PRIMARY KEY,
+    TENPB VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE cong_trinh (
+    MACT INT PRIMARY KEY,
+    TENCT VARCHAR(50) NOT NULL,
+    DIADIEM TEXT NOT NULL,
+    NGAYCAPGP DATE NOT NULL,
+    NGAYKC DATE NOT NULL,
+    NGAYHT DATE
+);
+
+CREATE TABLE nhan_vien (
+    MANV INT PRIMARY KEY,
+    HOTEN VARCHAR(50) NOT NULL,
+    NGAYSINH DATE NOT NULL,
+    PHAI VARCHAR(10) NOT NULL,
+    DIACHI TEXT NOT NULL,
+    MAPB INT NOT NULL,
+    FOREIGN KEY (MAPB)
+        REFERENCES phong_ban (MAPB)
+);
+
+CREATE TABLE ngay_cong (
+    MACT INT,
+    MANV INT,
+    SLNGAYCONG INT NOT NULL,
+    PRIMARY KEY (MACT , MANV),
+    FOREIGN KEY (MACT)
+        REFERENCES cong_trinh (MACT),
+    FOREIGN KEY (MANV)
+        REFERENCES nhan_vien (MANV)
+);
+
+CREATE TABLE so_bao_hiem (
+    MASOBH INT PRIMARY KEY,
+    NGAYCAP DATE NOT NULL,
+    THOIHAN DATE NOT NULL,
+    MANV INT NOT NULL UNIQUE,
+    FOREIGN KEY (MANV)
+        REFERENCES nhan_vien (MANV)
+);

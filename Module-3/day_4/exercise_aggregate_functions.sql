@@ -1,3 +1,4 @@
+drop database ss4_exercise;
 create database ss4_exercise;
 use ss4_exercise;
 
@@ -31,5 +32,6 @@ FROM Student
 WHERE ten = 'Huong';
 
 -- Viết câu lệnh lấy ra tên danh sách của tất cả học viên, không trùng lặp
-SELECT DISTINCT ID, TEN, TUOI, KHOAHOC
-FROM Student;
+SELECT TEN
+FROM Student
+GROUP BY TEN;

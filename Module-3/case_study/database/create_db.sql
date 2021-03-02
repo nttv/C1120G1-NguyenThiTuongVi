@@ -1,3 +1,4 @@
+drop database cs_database;
 create database cs_database;
 use cs_database;
 

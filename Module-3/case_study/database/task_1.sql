@@ -23,11 +23,11 @@ values
 
 insert into NhanVien(HoTen,IDViTri,IDTrinhDo,IDBoPhan,NgaySinh,SoCMTND,Luong,SDT,Email,DiaChi)
 values
-("Hoang Le Quang",1,1,3,"2004-01-01","111111111",350,"0901234567",null,null),
-("Hoang Nu Khanh Quynh",2,2,3,"2002-01-01","222222222",370,"0902345678",null,null),
+("Tran Quoc Hoang",1,1,3,"2004-01-01","111111111",350,"0901234567",null,null),
+("Ho Ngoc Dang Khoa",2,2,3,"2002-01-01","222222222",370,"0902345678",null,null),
 ("Trinh Thi Khanh Ngoc",3,3,1,"1990-01-01","333333333",400,"0903456789",null,null),
-("Nguyen Van A",4,2,2,"1989-01-01","444444444",500,"0904567890",null,null),
-("Kim Ly",5,3,2,"1995-01-01","555555555",700,"0905678901",null,null),
+("Nguyen Van T",4,2,2,"1989-01-01","444444444",500,"0904567890",null,null),
+("Nguyen Thi Kim",5,3,2,"1995-01-01","555555555",700,"0905678901",null,null),
 ("Tran Van Chanh",6,4,4,"1980-01-01","666666666",1300,"0906789012",null,null);
 
 insert into LoaiKhach(TenLoaiKhach)
@@ -40,12 +40,12 @@ values
 
 insert into KhachHang(IDLoaiKhach,HoTen,NgaySinh,SoCMTND,SDT,Email,DiaChi)
 values
-(1,"NVA","2004-01-01","111111111","0901234567",null,"Da Nang"),
-(2,"NVB","2002-01-01","222222222","0902345678",null,"Quang Tri"),
-(1,"NVC","1990-01-01","333333333","0903456789",null,"Hue"),
-(5,"NVD","1989-01-01","444444444","0904567890",null,"Quang Nam"),
-(3,"NVE","1995-01-01","555555555","0905678901",null,"Da Nang"),
-(4,"NVF","1980-01-01","666666666","0906789012",null,"Da Nang");
+(1,"Nguyen Van A","2004-01-01","111111111","0901234567",null,"Da Nang"),
+(2,"Nguyen Van B","2002-01-01","222222222","0902345678",null,"Quang Ngai"),
+(1,"Nguyen Van C","1990-01-01","333333333","0903456789",null,"Vinh"),
+(5,"Nguyen Van D","1989-01-01","444444444","0904567890",null,"Quang Tri"),
+(2,"Nguyen Van F","2003-05-01","555555555","0905678901",null,"Da Nang"),
+(4,"Nguyen Van F","1980-01-01","666666666","0906789012",null,"Hue");
 
 insert into KieuThue(TenKieuThue,Gia)
 values
@@ -70,23 +70,31 @@ values
 
 insert into HopDong(IDNhanVien,IDKhachHang,IDDichVu,NgayLamHopDong,NgayKetThuc,TienDatCoc,TongTien)
 values
-(1,2,2,"2018-12-12","2019-03-12",100,0),
-(1,1,5,"2018-01-12","2019-08-12",100,0),
-(2,5,4,"2020-01-12","2020-10-12",100,0),
-(5,1,5,"2021-01-12",null,100,0),
-(4,3,3,"2019-05-01","2021-05-01",100,0),
-(4,3,3,"2018-05-01","2021-05-01",100,0);
+(1,2,2,"2015-12-12","2019-03-12",100,400),
+(1,2,2,"2018-12-12","2019-03-12",100,400),
+(1,3,5,"2018-01-12","2019-08-12",100,300),
+(1,1,5,"2018-01-12","2019-08-12",100,250),
+(1,1,5,"2018-01-12","2019-08-12",100,700),
+(2,5,4,"2019-01-12","2020-10-12",100,550),
+(5,1,5,"2021-01-12",null,100,190),
+(4,3,3,"2019-05-01","2021-05-01",100,560),
+(4,6,3,"2018-05-01","2021-05-01",100,450),
+(3,4,3,"2019-10-01","2021-05-01",100,300),
+(3,4,3,"2019-10-20","2021-05-01",100,670);
 
 insert into DichVuDiKem(TenDichVuDiKem,Gia,DonVi,TrangThaiKhaDung)
 values
-("Massage",10,1,"not available"),
-("Karaoke",15,1,"available"),
-("Thuc an",20,1,"not available"),
-("Nuoc uong",15,1,"not available"),
-("Thue xe",50,1,"available");
+("Massage",10,1,"Not available"),
+("Karaoke",15,1,"Available"),
+("Thuc an",20,1,"Not available"),
+("Nuoc uong",15,1,"Not available"),
+("Thue xe",50,1,"Available");
 
 insert into HopDongChiTiet(IDHopDong,IDDichVuDiKem,SoLuong)
 values
-(1,1,3),
+(6,1,3),
+(6,4,2),
 (2,3,3),
-(2,4,5);
+(2,4,5),
+(6,2,4),
+(8,1,4);

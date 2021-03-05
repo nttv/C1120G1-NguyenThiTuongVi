@@ -27,11 +27,11 @@ CREATE TABLE NhanVien (
     Email VARCHAR(45),
     DiaChi VARCHAR(45),
     FOREIGN KEY (IDViTri)
-        REFERENCES ViTri (IDViTri),
+        REFERENCES ViTri (IDViTri) on update cascade on delete cascade,
     FOREIGN KEY (IDTrinhDo)
-        REFERENCES TrinhDo (IDTrinhDo),
+        REFERENCES TrinhDo (IDTrinhDo) on update cascade on delete cascade,
     FOREIGN KEY (IDBoPhan)
-        REFERENCES BoPhan (IDBoPhan)
+        REFERENCES BoPhan (IDBoPhan) on update cascade on delete cascade
 );
 CREATE TABLE LoaiKhach (
     IDLoaiKhach INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,7 +47,7 @@ CREATE TABLE KhachHang (
     Email VARCHAR(45),
     DiaChi VARCHAR(45),
     FOREIGN KEY (IDLoaiKhach)
-        REFERENCES LoaiKhach (IDLoaiKhach)
+        REFERENCES LoaiKhach (IDLoaiKhach) on update cascade on delete cascade
 );
 CREATE TABLE KieuThue (
     IDKieuThue INT AUTO_INCREMENT PRIMARY KEY,
@@ -69,9 +69,9 @@ CREATE TABLE DichVu (
     IDLoaiDichVu INT,
     TrangThai VARCHAR(45),
     FOREIGN KEY (IDKieuThue)
-        REFERENCES KieuThue (IDKieuThue),
+        REFERENCES KieuThue (IDKieuThue) on update cascade on delete cascade,
     FOREIGN KEY (IDLoaiDichVu)
-        REFERENCES LoaiDichVu (IDLoaiDichVu)
+        REFERENCES LoaiDichVu (IDLoaiDichVu) on update cascade on delete cascade
 );
 CREATE TABLE HopDong (
     IDHopDong INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,11 +83,11 @@ CREATE TABLE HopDong (
     TienDatCoc INT NOT NULL,
     TongTien INT NOT NULL,
     FOREIGN KEY (IDNhanVien)
-        REFERENCES NhanVien (IDNhanVien),
+        REFERENCES NhanVien (IDNhanVien) on update cascade on delete cascade,
     FOREIGN KEY (IDKhachHang)
-        REFERENCES KhachHang (IDKhachHang),
+        REFERENCES KhachHang (IDKhachHang) on update cascade on delete cascade,
     FOREIGN KEY (IDDichVu)
-        REFERENCES DichVu (IDDichVu)
+        REFERENCES DichVu (IDDichVu) on update cascade on delete cascade
 );
 CREATE TABLE DichVuDiKem (
     IDDichVuDiKem INT AUTO_INCREMENT PRIMARY KEY,
@@ -102,8 +102,8 @@ CREATE TABLE HopDongChiTiet (
     IDDichVuDiKem INT,
     SoLuong INT,
     FOREIGN KEY (IDHopDong)
-        REFERENCES HopDong (IDHopDong),
+        REFERENCES HopDong (IDHopDong) on update cascade on delete cascade,
     FOREIGN KEY (IDDichVuDiKem)
-        REFERENCES DichVuDiKem (IDDichVuDiKem)
+        REFERENCES DichVuDiKem (IDDichVuDiKem) on update cascade on delete cascade
 );
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2ce7e68b-5396-4a33-a7fd-357fbcb8d4f0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../Module-2/src/Electricity-Bills-Management/src/commons/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Module-2/src/Electricity-Bills-Management/src/commons/Validation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Module-2/src/Furama-Resort/src/commons/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Module-2/src/Furama-Resort/src/commons/Validation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/out/production/Vehicle-Management/commons/Validation.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/out/production/Vehicle-Management/commons/Validation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/out/production/Vehicle-Management/data/xeTai.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/out/production/Vehicle-Management/data/xeTai.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/out/production/Vehicle-Management/services/CarManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/out/production/Vehicle-Management/services/CarManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/src/commons/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Module-2/src/Vehicle-Management/src/commons/Validation.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="JupyterTrust" id="73c08f1a-2b9a-42f2-b5a2-3c07ba0a91cb" />
+  <component name="ProjectId" id="1pau1TulP29cCF8JY6iGBv9yq9q" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2ce7e68b-5396-4a33-a7fd-357fbcb8d4f0" name="Default Changelist" comment="" />
+      <created>1615433308423</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615433308423</updated>
+      <workItem from="1615433310337" duration="9000" />
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

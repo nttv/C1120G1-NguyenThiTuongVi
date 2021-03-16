@@ -9,9 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Customer List</title>
+    <title>Customer Management Application</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <style>
         .container {
             margin: auto;
@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Customers</h1>
+    <h1>Customer List</h1>
     <p>
         <a href="customer?action=create">Create new customer</a>
     </p>

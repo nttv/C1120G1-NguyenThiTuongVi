@@ -49,7 +49,7 @@
             </tr>
             <tr>
                 <th>Customer Address:</th>
-                <td><input type="text" name="country" size="15"/></td>
+                <td><input type="text" name="address" size="15"/></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">

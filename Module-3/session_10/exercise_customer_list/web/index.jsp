@@ -17,6 +17,10 @@
             text-align: center;
         }
 
+        .table th, .table td {
+            vertical-align: inherit;
+        }
+
         img {
             width: 50px;
             height: 50px;

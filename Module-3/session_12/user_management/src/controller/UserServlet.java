@@ -144,7 +144,6 @@ public class UserServlet extends HttpServlet {
             listUsers(request, response);
         } else {
             request.setAttribute("users", service.findByCountry(country));
-            request.setAttribute("sort", "unsorted");
             RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
             try {
                 dispatcher.forward(request, response);
@@ -158,7 +157,6 @@ public class UserServlet extends HttpServlet {
         List<User> users = service.findAll();
         Collections.sort(users);
         request.setAttribute("users", users);
-        request.setAttribute("sort", "unsorted");
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         try {
             dispatcher.forward(request, response);

@@ -20,11 +20,14 @@ public class CalculatorController {
     @GetMapping("/calculate")
     public String calculate(@RequestParam double number1, @RequestParam double number2,
                             @RequestParam String operator, Model model) {
-        double result = calculatorService.calculate(number1, number2, operator);
         model.addAttribute("number1", number1);
         model.addAttribute("number2", number2);
         model.addAttribute("operator", operator);
-        model.addAttribute("result", result);
+        if (number2 == 0 && operator.equals("Division")) {
+            model.addAttribute("result", "Error divide by 0");
+        } else {
+            model.addAttribute("result", calculatorService.calculate(number1, number2, operator));
+        }
         return "index";
     }
 }

@@ -18,7 +18,8 @@ public class CalculatorController {
     }
 
     @GetMapping("/calculate")
-    public String calculate(@RequestParam double number1, @RequestParam double number2,
+    public String calculate(@RequestParam(required = false, defaultValue = "0") double number1,
+                            @RequestParam(required = false, defaultValue = "0") double number2,
                             @RequestParam String operator, Model model) {
         model.addAttribute("number1", number1);
         model.addAttribute("number2", number2);

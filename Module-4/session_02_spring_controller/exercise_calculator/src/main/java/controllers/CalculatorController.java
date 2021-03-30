@@ -1,11 +1,11 @@
-package org.example.controllers;
+package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.example.services.CalculatorService;
+import services.CalculatorService;
 
 @Controller
 public class CalculatorController {
@@ -23,10 +23,10 @@ public class CalculatorController {
         model.addAttribute("number1", number1);
         model.addAttribute("number2", number2);
         model.addAttribute("operator", operator);
-        if (number2 == 0 && operator.equals("Division")) {
-            model.addAttribute("result", "Error divide by 0");
-        } else {
+        try {
             model.addAttribute("result", calculatorService.calculate(number1, number2, operator));
+        } catch (ArithmeticException e) {
+            model.addAttribute("result", e.getMessage());
         }
         return "index";
     }

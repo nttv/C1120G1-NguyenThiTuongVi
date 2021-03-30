@@ -1,6 +1,6 @@
-package org.example.services.impl;
+package services.impl;
 
-import org.example.services.CalculatorService;
+import services.CalculatorService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +19,11 @@ public class CalculatorServiceImpl implements CalculatorService {
                 result = number1 * number2;
                 break;
             case "Division":
-                result = number1 / number2;
-                break;
+                if (number2 != 0) {
+                    result = number1 / number2;
+                } else {
+                    throw new ArithmeticException("Error divide by 0");
+                }
         }
         return result;
     }

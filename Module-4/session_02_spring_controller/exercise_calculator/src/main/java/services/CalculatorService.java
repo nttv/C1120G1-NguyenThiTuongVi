@@ -1,4 +1,4 @@
-package org.example.services;
+package services;
 
 public interface CalculatorService {
     double calculate(double number1, double number2, String operator);

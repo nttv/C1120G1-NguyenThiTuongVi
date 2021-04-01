@@ -8,19 +8,19 @@
           novalidate="novalidate">
         <table class="table table-borderless">
             <tr class="form-group">
-                <td class="font-weight-bold align-middle"><label>Product ID</label></td>
+                <td class="font-weight-bold align-middle">Product ID</td>
                 <td><input class="form-control" type="text" th:field="*{id}" readonly/></td>
             </tr>
             <tr class="form-group">
-                <td class="font-weight-bold align-middle"><label>Product Name</label></td>
+                <td class="font-weight-bold align-middle">Product Name</td>
                 <td><input class="form-control" type="text" th:field="*{name}"/></td>
             </tr>
             <tr class="form-group">
-                <td class="font-weight-bold align-middle"><label>Price</label></td>
+                <td class="font-weight-bold align-middle">Price</td>
                 <td><input class="form-control w-50" type="number" th:field="*{price}"/></td>
             </tr>
             <tr>
-                <td class="font-weight-bold align-middle"><label>Product Type</label></td>
+                <td class="font-weight-bold align-middle">Product Type</td>
                 <td>
                     <select class="custom-select w-50" th:field="*{type}">
                         <option th:each="type : ${productTypes}" th:value="${type}" th:text="${type}"></option>

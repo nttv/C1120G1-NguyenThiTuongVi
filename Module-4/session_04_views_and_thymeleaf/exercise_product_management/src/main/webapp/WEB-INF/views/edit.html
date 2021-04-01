@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head"></head>
+<body>
+<div class="container">
+    <h1 class="text-center my-3">Edit Product</h1>
+    <form class="form w-75 border mx-auto" th:action="@{/product/update}" th:object="${product}" method="POST"
+          novalidate="novalidate">
+        <table class="table table-borderless">
+            <tr class="form-group">
+                <td class="font-weight-bold align-middle"><label>Product ID</label></td>
+                <td><input class="form-control" type="text" th:field="*{id}" readonly/></td>
+            </tr>
+            <tr class="form-group">
+                <td class="font-weight-bold align-middle"><label>Product Name</label></td>
+                <td><input class="form-control" type="text" th:field="*{name}"/></td>
+            </tr>
+            <tr class="form-group">
+                <td class="font-weight-bold align-middle"><label>Price</label></td>
+                <td><input class="form-control w-50" type="number" th:field="*{price}"/></td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold align-middle"><label>Product Type</label></td>
+                <td>
+                    <select class="custom-select w-50" th:field="*{type}">
+                        <option th:each="type : ${productTypes}" th:value="${type}" th:text="${type}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <a class="text-decoration-none" th:href="@{/}">
+                        <input type="button" class="btn btn-secondary" value="Cancel"/>
+                    </a>
+                    <input type="submit" class="btn btn-warning" value="Update"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<footer th:replace="/layout :: script"></footer>
+</body>
+</html>

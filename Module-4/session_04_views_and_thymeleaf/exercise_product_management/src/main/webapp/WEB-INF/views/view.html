@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head"></head>
+<body>
+<div class="container">
+    <h1 class="text-center my-3">View Product</h1>
+    <table class="table table-borderless w-50 border mx-auto">
+        <tr>
+            <td class="font-weight-bold align-middle">Product ID</td>
+            <td><p th:text="${product.id}"></p></td>
+        </tr>
+        <tr>
+            <td class="font-weight-bold align-middle">Product Name</td>
+            <td><p th:text="${product.name}"></p></td>
+        </tr>
+        <tr>
+            <td class="font-weight-bold align-middle">Price</td>
+            <td><p th:text="${product.price}"></p></td>
+        </tr>
+        <tr>
+            <td class="font-weight-bold align-middle"><label>Product Type</label></td>
+            <td><p th:text="${product.type}"></p></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <a class="text-decoration-none" th:href="@{/}">
+                    <button class="btn btn-secondary">Back</button>
+                </a>
+                <a class="text-decoration-none" th:href="@{/product/edit(id=${product.id})}">
+                    <button class="btn btn-warning">Edit</button>
+                </a>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                        th:onclick="'javascript:productSetId(\''+ ${product.id} +'\');'">Delete
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="/layout :: deleteModal"></footer>
+<footer th:replace="/layout :: script"></footer>
+</body>
+</html>

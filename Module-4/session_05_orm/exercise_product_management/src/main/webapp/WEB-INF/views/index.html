@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center my-3">Product List</h1>
+    <div th:if="${message}">
+        <div class="alert alert-success alert-dismissible fade show font-weight-bold">
+            <button type="button" class="close btn shadow-none float-right" data-dismiss="alert">&times;</button>
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+    <table class="table table-hover table-striped" id="products">
+        <thead>
+        <tr>
+            <th class="align-middle">Product ID</th>
+            <th class="align-middle">Product Name</th>
+            <th class="align-middle">Price</th>
+            <th class="align-middle">Product Type</th>
+            <th class="align-middle">
+                <a class="btn btn-success" th:href="@{/product/create}">Add new product</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product,iterStat : ${products}">
+            <td class="align-middle" th:text="${product.id}"></td>
+            <td class="align-middle" th:text="${product.name}"></td>
+            <td class="align-middle" th:text="${product.price}"></td>
+            <td class="align-middle" th:text="${product.type}"></td>
+            <td>
+                <a class="btn btn-info" th:href="@{/product/view(id=${product.id})}"><i class="far fa-eye"></i></a>
+                <a class="btn btn-warning" th:href="@{/product/edit(id=${product.id})}"><i class="far fa-edit"></i></a>
+<!--                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"-->
+<!--                        th:onclick="|productSetId('${product.id}')|">-->
+<!--                    <i class="fas fa-ban"></i>-->
+<!--                </button>-->
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                        th:onclick="'productSetId(\''+ ${product.id} +'\')'">
+                    <i class="fas fa-ban"></i>
+                </button>
+<!--                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"-->
+<!--                        th:productId="${product.id}" onclick="productSetId(this.getAttribute('productId'))">-->
+<!--                    <i class="fas fa-ban"></i>-->
+<!--                </button>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="/layout :: deleteModal"></div>
+<div th:replace="/layout :: script"></div>
+</body>
+</html>

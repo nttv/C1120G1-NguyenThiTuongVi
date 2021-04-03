@@ -1,4 +1,4 @@
-package example.repositories;
+package org.example.repositories;
 
 import org.example.models.Product;
 
@@ -9,9 +9,9 @@ public interface ProductRepository {
 
     List<Product> findAll();
 
-    void save(Product product);
-
     Product findById(int id);
+
+    void save(Product product);
 
     void update(Product product);
 

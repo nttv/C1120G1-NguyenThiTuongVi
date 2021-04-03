@@ -1,4 +1,4 @@
-package example.controllers;
+package org.example.controllers;
 
 import org.example.models.Product;
 import org.example.services.ProductService;

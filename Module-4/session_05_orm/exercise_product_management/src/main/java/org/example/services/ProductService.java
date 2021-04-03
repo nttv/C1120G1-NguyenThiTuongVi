@@ -1,4 +1,4 @@
-package example.services;
+package org.example.services;
 
 import org.example.models.Product;
 
@@ -9,9 +9,9 @@ public interface ProductService {
 
     List<Product> findAll();
 
-    void save(Product product);
-
     Product findById(int id);
+
+    void save(Product product);
 
     void update(Product product);
 

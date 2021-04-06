@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container-fluid">
+    <h1 class="my-3 float-left">Blog List</h1>
+    <a class="btn btn-success float-right my-3" th:href="@{/blog/create}">Add new blog</a>
+    <div th:if="${message}">
+        <div class="alert alert-success alert-dismissible fade show font-weight-bold">
+            <button type="button" class="close btn shadow-none float-right" data-dismiss="alert">&times;</button>
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+    <table class="table table-hover table-striped" id="blogs">
+        <thead>
+        <tr>
+            <th class="align-middle">ID</th>
+            <th class="align-middle">Title</th>
+            <th class="align-middle">Author</th>
+            <th class="align-middle">Date</th>
+            <th class="align-middle">Category</th>
+            <th class="align-middle">Image</th>
+            <th class="align-middle">Description</th>
+            <th class="align-middle">
+
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="blog,iterStat : ${blogs}">
+            <td class="align-middle" th:text="${blog.id}"></td>
+            <td class="align-middle" th:text="${blog.title}"></td>
+            <td class="align-middle" th:text="${blog.author}"></td>
+            <td class="align-middle" th:text="${blog.date}"></td>
+            <td class="align-middle" th:text="${blog.category}"></td>
+            <td class="align-middle"><img th:src="@{/images/{img}(img=${blog.image})}"/></td>
+            <td class="align-middle" th:text="${blog.description}"></td>
+            <td>
+                <a class="btn btn-info" th:href="@{/blog/view(id=${blog.id})}"><i class="far fa-eye"></i></a>
+                <a class="btn btn-warning" th:href="@{/blog/edit(id=${blog.id})}"><i class="far fa-edit"></i></a>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                        th:onclick="|parseBlogId('${blog.id}')|">
+                    <i class="fas fa-ban"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="/layout :: deleteModal"></div>
+<div th:replace="/layout :: script"></div>
+</body>
+</html>

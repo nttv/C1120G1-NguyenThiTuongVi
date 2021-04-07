@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Result</title>
+</head>
+<body>
+<h1>Registered successfully!</h1>
+<br>
+<div th:object="${user}">
+    <table>
+        <tr>
+            <td>First Name:</td>
+            <td th:text="*{firstName}"></td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td th:text="*{lastName}"></td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td th:text="*{phoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td th:text="*{age}"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td th:text="*{email}"></td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/}">
+                    <button type="button">Back</button>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

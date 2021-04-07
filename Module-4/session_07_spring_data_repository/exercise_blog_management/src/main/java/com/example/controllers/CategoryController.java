@@ -1,8 +1,11 @@
 package com.example.controllers;
 
 import com.example.models.Category;
+import com.example.services.BlogService;
 import com.example.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +21,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private BlogService blogService;
+
     @GetMapping
-    public String listCategories(Model model) {
-        model.addAttribute("categories", categoryService.findAll());
+    public String listCategories(@PageableDefault(value = 2) Pageable pageable, Model model) {
+        model.addAttribute("categories", categoryService.findAll(pageable));
         model.addAttribute("category", new Category());
         return "category/list";
     }
@@ -33,8 +39,8 @@ public class CategoryController {
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam int id, Model model) {
-        model.addAttribute("categories", categoryService.findAll());
+    public String edit(@RequestParam int id, @PageableDefault(value = 2) Pageable pageable, Model model) {
+        model.addAttribute("categories", categoryService.findAll(pageable));
         model.addAttribute("category", categoryService.findById(id));
         return "category/edit";
     }
@@ -47,11 +53,11 @@ public class CategoryController {
     }
 
     @GetMapping("/blogs")
-    public String view(@RequestParam Integer id, Model model) {
+    public String view(@RequestParam Integer id, @PageableDefault(value = 2) Pageable pageable, Model model) {
         Category category = categoryService.findById(id);
-        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("categories", categoryService.findAll(pageable));
         model.addAttribute("category", category);
-        model.addAttribute("blogs", category.getBlogs());
+        model.addAttribute("blogs", blogService.findByCategory(category, pageable));
         return "category/view";
     }
 }

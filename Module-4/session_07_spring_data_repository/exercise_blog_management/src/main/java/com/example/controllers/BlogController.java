@@ -4,14 +4,15 @@ import com.example.models.Blog;
 import com.example.services.BlogService;
 import com.example.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 public class BlogController {
@@ -22,15 +23,13 @@ public class BlogController {
     private CategoryService categoryService;
 
     @GetMapping("")
-    public String getHomePage(Model model) {
-        List<Blog> blogList = blogService.findAll();
-        model.addAttribute("blogs", blogList);
-        return "blog/index";
+    public ModelAndView getHomePage(@PageableDefault(value = 2) Pageable pageable) {
+        return new ModelAndView("blog/index", "blogs", blogService.findAll(pageable));
     }
 
     @GetMapping("/blog/create")
-    public String create(Model model) {
-        model.addAttribute("categories", categoryService.findAll());
+    public String create(Pageable pageable, Model model) {
+        model.addAttribute("categories", categoryService.findAll(pageable));
         model.addAttribute("blog", new Blog());
         return "blog/create";
     }
@@ -43,8 +42,8 @@ public class BlogController {
     }
 
     @GetMapping("/blog/edit")
-    public String edit(@RequestParam int id, Model model) {
-        model.addAttribute("categories", categoryService.findAll());
+    public String edit(@RequestParam int id, Pageable pageable, Model model) {
+        model.addAttribute("categories", categoryService.findAll(pageable));
         model.addAttribute("blog", blogService.findById(id));
         return "blog/edit";
     }
@@ -67,5 +66,10 @@ public class BlogController {
     public String view(@RequestParam int id, Model model) {
         model.addAttribute("blog", blogService.findById(id));
         return "blog/view";
+    }
+
+    @GetMapping("/blog/search")
+    public ModelAndView searchInTitle(@RequestParam String key, @PageableDefault(value = 2) Pageable pageable) {
+        return new ModelAndView("blog/index", "blogs", blogService.searchInTitle(key, pageable));
     }
 }

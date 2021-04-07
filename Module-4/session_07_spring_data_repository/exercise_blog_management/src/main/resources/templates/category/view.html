@@ -48,6 +48,13 @@
                 </th:block>
                 </tbody>
             </table>
+            <div>
+                <a th:href="@{/category/blogs(id=${category.id})(page=${blogs.number - 1})}"
+                   th:if="${blogs.hasPrevious()}">Previous</a>
+                <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+                <a th:href="@{/category/blogs(id=${category.id})(page=${blogs.number + 1})}"
+                   th:if="${blogs.hasNext()}">Next</a>
+            </div>
         </div>
     </div>
 </div>

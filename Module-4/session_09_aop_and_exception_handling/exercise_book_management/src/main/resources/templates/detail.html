@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td {
+            border: 1px solid;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+<h2>Book Detail</h2>
+<table style="border: 1px solid">
+    <tr>
+        <td>Id</td>
+        <td th:text="${book.id}"></td>
+    </tr>
+    <tr>
+        <td>Title</td>
+        <td th:text="${book.title}"></td>
+    </tr>
+    <tr>
+        <td>Quantity</td>
+        <td th:text="${book.quantity}"></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: center">
+            <a th:href="@{/}">
+                <button type="button">Back</button>
+            </a>
+            <a th:href="@{/borrow(id=${book.id})}">
+                <button type="button">Borrow</button>
+            </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

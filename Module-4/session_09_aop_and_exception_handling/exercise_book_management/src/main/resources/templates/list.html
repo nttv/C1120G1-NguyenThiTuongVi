@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <style>
+        td {
+            border: 1px solid;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+<h2>Book List</h2>
+<br>
+<p th:if="${message}" th:text="${message}" style="font-weight: bold;background-color: mediumaquamarine"></p>
+<table style="border: 1px solid">
+    <tr>
+        <td>No</td>
+        <td>Id</td>
+        <td>Title</td>
+        <td>Quantity</td>
+        <td>Borrow</td>
+    </tr>
+    <tr th:each="book, iterStat: ${books}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td><a th:href="@{/detail(id=${book.id})}">
+            <button type="button">Detail</button>
+        </a></td>
+    </tr>
+</table>
+<br>
+<form th:action="@{/return}">
+    <input type="text" name="id"/>
+    <button type="submit">Return</button>
+</form>
+</body>
+</html>

@@ -26,6 +26,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public boolean isAvailable(Book book) {
+        return book.getQuantity() > 0;
+    }
+
+    @Override
     public void borrowBook(String id) throws OutOfRemainQuantityException {
         Book book = findById(id);
         if (isAvailable(book)) {
@@ -37,14 +42,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean isAvailable(Book book) {
-        return book.getQuantity() > 0;
-    }
-
-    @Override
     public void returnBook(String id) throws WrongBookIdException {
-        if (bookRepository.existsById(id)) {
-            Book book = findById(id);
+        Book book = findById(id);
+        if (book != null) {
             book.setQuantity(book.getQuantity() + 1);
             bookRepository.save(book);
         } else {

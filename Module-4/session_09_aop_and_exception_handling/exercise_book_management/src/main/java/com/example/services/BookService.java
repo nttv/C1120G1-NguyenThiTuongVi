@@ -11,9 +11,9 @@ public interface BookService {
 
     Book findById(String id);
 
-    void borrowBook(String id) throws OutOfRemainQuantityException;
-
     boolean isAvailable(Book book);
+
+    void borrowBook(String id) throws OutOfRemainQuantityException;
 
     void returnBook(String id) throws WrongBookIdException;
 }

@@ -9,6 +9,8 @@ import java.util.List;
 public interface CategoryService {
     Page<Category> findAll(Pageable pageable);
 
+    List<Category> findAll();
+
     Category findById(int id);
 
     void save(Category category);

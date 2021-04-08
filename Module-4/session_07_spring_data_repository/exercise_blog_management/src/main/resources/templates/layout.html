@@ -29,16 +29,16 @@
         </li>
     </ul>
     <!-- Search -->
-    <form class="form-inline mr-0" th:action="@{/blog/search}">
+    <form class="form-inline mr-0" th:action="@{/blog}">
         <input class="form-control mr-sm-2" type="text" name="key" placeholder="Search">
         <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
     </form>
 </nav>
 
 <!-- Side Category Menu -->
-<div class="col-4 nav bg-light p-3" th:fragment="sidebar (categories)">
+<div class="col-4 nav bg-light p-3" th:fragment="sidebar (categoryList)">
     <ul class="nav flex-column">
-        <li class="nav-item" th:each="category : ${categories}">
+        <li class="nav-item" th:each="category : ${categoryList}">
             <a class="nav-link" th:href="@{/category/blogs(id=${category.id})}" th:text="${category.name}"></a>
         </li>
     </ul>

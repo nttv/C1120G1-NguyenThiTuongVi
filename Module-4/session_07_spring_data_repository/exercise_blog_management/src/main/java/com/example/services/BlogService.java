@@ -19,4 +19,6 @@ public interface BlogService {
     Page<Blog> searchInTitle(String title, Pageable pageable);
 
     Page<Blog> findByCategory(Category category, Pageable pageable);
+
+    Page<Blog> sortByTitleDesc(Pageable pageable);
 }

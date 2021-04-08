@@ -6,7 +6,7 @@
 
 <div class="container-fluid p-0">
     <div class="row p-0">
-        <div th:insert="/layout :: sidebar (${categories})"></div>
+        <div th:insert="/layout :: sidebar (${categoryList})"></div>
         <div class="col">
             <h1 class="text-center my-3">Edit Category</h1>
             <form class="form w-75 border mx-auto p-3" th:action="@{/category/save}" th:object="${category}">

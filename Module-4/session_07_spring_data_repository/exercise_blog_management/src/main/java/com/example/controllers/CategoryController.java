@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
@@ -27,6 +25,7 @@ public class CategoryController {
     @GetMapping
     public String listCategories(@PageableDefault(value = 2) Pageable pageable, Model model) {
         model.addAttribute("categories", categoryService.findAll(pageable));
+        model.addAttribute("categoryList", categoryService.findAll());
         model.addAttribute("category", new Category());
         return "category/list";
     }
@@ -39,8 +38,8 @@ public class CategoryController {
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam int id, @PageableDefault(value = 2) Pageable pageable, Model model) {
-        model.addAttribute("categories", categoryService.findAll(pageable));
+    public String edit(@RequestParam int id, Model model) {
+        model.addAttribute("categoryList", categoryService.findAll());
         model.addAttribute("category", categoryService.findById(id));
         return "category/edit";
     }
@@ -55,7 +54,7 @@ public class CategoryController {
     @GetMapping("/blogs")
     public String view(@RequestParam Integer id, @PageableDefault(value = 2) Pageable pageable, Model model) {
         Category category = categoryService.findById(id);
-        model.addAttribute("categories", categoryService.findAll(pageable));
+        model.addAttribute("categoryList", categoryService.findAll());
         model.addAttribute("category", category);
         model.addAttribute("blogs", blogService.findByCategory(category, pageable));
         return "category/view";

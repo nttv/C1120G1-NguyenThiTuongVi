@@ -7,7 +7,7 @@
 
 <div class="container-fluid p-0">
     <div class="row p-0">
-        <div th:insert="/layout :: sidebar (${categories})"></div>
+        <div th:insert="/layout :: sidebar (${categoryList})"></div>
         <div class="col">
             <h1 class="text-center my-3">Category List</h1>
             <div th:if="${message}">
@@ -45,9 +45,9 @@
                 </tbody>
             </table>
             <div>
-                <a th:href="@{/(page=${categories.number - 1})}" th:if="${categories.hasPrevious()}">Previous</a>
+                <a th:href="@{/category(page=${categories.number - 1})}" th:if="${categories.hasPrevious()}">Previous</a>
                 <span th:text="${categories.number + 1}"></span>/<span th:text="${categories.totalPages}"></span>
-                <a th:href="@{/(page=${categories.number + 1})}" th:if="${categories.hasNext()}">Next</a>
+                <a th:href="@{/category(page=${categories.number + 1})}" th:if="${categories.hasNext()}">Next</a>
             </div>
         </div>
     </div>

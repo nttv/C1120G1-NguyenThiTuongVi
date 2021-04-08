@@ -50,4 +50,9 @@ public class BlogServiceImpl implements BlogService {
     public Page<Blog> findByCategory(Category category, Pageable pageable) {
         return blogRepository.findByCategory(category, pageable);
     }
+
+    @Override
+    public Page<Blog> sortByTitleDesc(Pageable pageable) {
+        return blogRepository.findByOrderByTitleDesc(pageable);
+    }
 }

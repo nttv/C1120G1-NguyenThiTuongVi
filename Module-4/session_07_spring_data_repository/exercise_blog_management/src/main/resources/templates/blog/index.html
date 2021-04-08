@@ -19,7 +19,16 @@
         <thead>
         <tr>
             <th class="align-middle">ID</th>
-            <th class="align-middle">Title</th>
+            <th class="align-middle">Title
+                <span th:if="${order=='desc'}">
+                    <a th:if="${key}" th:href="@{/(key=${key}, order='asc')}"><i class="fas fa-sort-alpha-down"></i></a>
+                    <a th:unless="${key}" th:href="@{/(order='asc')}"><i class="fas fa-sort-alpha-down"></i></a>
+                </span>
+                <span th:unless="${order=='desc'}">
+                    <a th:if="${key}" th:href="@{/(key=${key}, order='desc')}"><i class="fas fa-sort-alpha-down-alt"></i></a>
+                    <a th:unless="${key}" th:href="@{/(order='desc')}"><i class="fas fa-sort-alpha-down-alt"></i></a>
+                </span>
+            </th>
             <th class="align-middle">Author</th>
             <th class="align-middle">Date</th>
             <th class="align-middle">Category</th>
@@ -48,7 +57,13 @@
         </tr>
         </tbody>
     </table>
-    <div>
+    <div th:if="${key}">
+        <a th:href="@{/(key=${key}, page=${blogs.number - 1})}"
+           th:if="${blogs.hasPrevious()}">Previous</a>
+        <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+        <a th:href="@{/(key=${key}, page=${blogs.number + 1})}" th:if="${blogs.hasNext()}">Next</a>
+    </div>
+    <div th:unless="${key}">
         <a th:href="@{/(page=${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Previous</a>
         <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
         <a th:href="@{/(page=${blogs.number + 1})}" th:if="${blogs.hasNext()}">Next</a>

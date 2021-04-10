@@ -22,7 +22,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findById(String id) {
-        return bookRepository.findById(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void borrowBook(String id) throws OutOfRemainQuantityException {
-        Book book = findById(id);
+        Book book = bookRepository.getOne(id);
         if (isAvailable(book)) {
             book.setQuantity(book.getQuantity() - 1);
             bookRepository.save(book);

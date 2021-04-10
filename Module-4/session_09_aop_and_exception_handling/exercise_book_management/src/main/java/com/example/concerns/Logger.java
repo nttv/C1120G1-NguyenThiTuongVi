@@ -1,6 +1,6 @@
 package com.example.concerns;
 
-import com.example.models.Log;
+import com.example.models.Book;
 import com.example.services.LogService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -13,9 +13,7 @@ public class Logger {
 
     @Before("execution(* com.example.controllers.BookController.listBooks(..))")
     public void initializeLog(JoinPoint joinPoint) {
-        if (logService.getSize() == 0) {
-            logService.save(new Log());
-        }
+        logService.initialize();
     }
 
     @After("execution(* com.example.controllers.BookController.listBooks(..))")

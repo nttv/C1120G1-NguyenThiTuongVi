@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BookController {
@@ -27,19 +28,17 @@ public class BookController {
     }
 
     @GetMapping("/borrow")
-    public String borrowBook(@RequestParam String id, Model model) throws OutOfRemainQuantityException {
+    public String borrowBook(@RequestParam String id, RedirectAttributes redirect) throws OutOfRemainQuantityException {
         bookService.borrowBook(id);
-        model.addAttribute("message", "Borrowed successfully!");
-        model.addAttribute("books", bookService.findAll());
-        return "list";
+        redirect.addFlashAttribute("message", "Borrowed successfully!");
+        return "redirect:/";
     }
 
     @GetMapping("/return")
-    public String returnBook(@RequestParam String id, Model model) throws WrongBookIdException {
+    public String returnBook(@RequestParam String id, RedirectAttributes redirect) throws WrongBookIdException {
         bookService.returnBook(id);
-        model.addAttribute("message", "Returned successfully!");
-        model.addAttribute("books", bookService.findAll());
-        return "list";
+        redirect.addFlashAttribute("message", "Returned successfully!");
+        return "redirect:/";
     }
 
     @ExceptionHandler({OutOfRemainQuantityException.class, WrongBookIdException.class})

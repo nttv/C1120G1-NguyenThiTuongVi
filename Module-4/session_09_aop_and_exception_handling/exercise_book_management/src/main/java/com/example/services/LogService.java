@@ -3,9 +3,9 @@ package com.example.services;
 import com.example.models.Log;
 
 public interface LogService {
-    int getSize();
+    long getSize();
 
-    void save(Log log);
+    void initialize();
 
     int getVisitorNumber(Integer id);
 

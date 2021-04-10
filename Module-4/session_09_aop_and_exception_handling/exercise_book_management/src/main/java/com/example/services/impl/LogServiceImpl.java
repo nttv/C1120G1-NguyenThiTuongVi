@@ -12,30 +12,27 @@ public class LogServiceImpl implements LogService {
     private LogRepository logRepository;
 
     @Override
-    public int getSize() {
+    public long getSize() {
         return logRepository.findAll().size();
     }
 
     @Override
-    public void save(Log log) {
-        logRepository.save(log);
+    public void initialize() {
+        if (getSize() == 0) {
+            logRepository.save(new Log());
+        }
     }
 
     @Override
     public int getVisitorNumber(Integer id) {
-        Log log = logRepository.findById(id).orElse(null);
-        if (log != null) {
-            return log.getVisitors();
-        }
-        return 0;
+        Log log = logRepository.getOne(id);
+        return log.getVisitors();
     }
 
     @Override
     public void addVisitor(Integer id) {
-        Log log = logRepository.findById(id).orElse(null);
-        if (log != null) {
-            log.setVisitors(log.getVisitors() + 1);
-            logRepository.save(log);
-        }
+        Log log = logRepository.getOne(id);
+        log.setVisitors(log.getVisitors() + 1);
+        logRepository.save(log);
     }
 }

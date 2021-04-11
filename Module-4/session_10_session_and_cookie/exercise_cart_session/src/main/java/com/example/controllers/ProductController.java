@@ -33,7 +33,7 @@ public class ProductController {
         return "detail";
     }
 
-    @PostMapping("/detail/add")
+    @PostMapping("/detail")
     public String addToCart(@ModelAttribute("cart") Cart cart, Product product, Model model) {
         cart.addToCart(product);
         model.addAttribute("product", product);
@@ -42,9 +42,7 @@ public class ProductController {
     }
 
     @GetMapping("/cart")
-    public String viewCart(@ModelAttribute("cart") Cart cart, Model model) {
-        model.addAttribute("size", cart.getSize());
-        model.addAttribute("total", cart.getTotalAmount());
+    public String viewCart() {
         return "cart";
     }
 
@@ -52,8 +50,7 @@ public class ProductController {
     public String updateCart(@ModelAttribute(name = "cart") Cart cart,
                              @RequestParam(name = "changeId") Optional<Integer> changeId,
                              @RequestParam(name = "changeValue") Optional<Integer> changeValue,
-                             @RequestParam(name = "deleteId") Optional<Integer> deleteId,
-                             Model model) {
+                             @RequestParam(name = "deleteId") Optional<Integer> deleteId) {
         if (changeId.isPresent() && changeValue.isPresent()) {
             Product product = productService.findById(changeId.get());
             cart.changeQuantity(product, changeValue.get());
@@ -61,8 +58,6 @@ public class ProductController {
             Product product = productService.findById(deleteId.get());
             cart.removeProduct(product);
         }
-        model.addAttribute("size", cart.getSize());
-        model.addAttribute("total", cart.getTotalAmount());
         return "cart";
     }
 }

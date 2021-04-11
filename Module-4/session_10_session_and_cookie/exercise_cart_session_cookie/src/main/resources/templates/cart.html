@@ -12,7 +12,7 @@
         <table class="table table-striped">
             <thead>
             <tr class="row">
-                <th class="col"><h2 th:text="'Cart (' + ${size} + ')'"></h2></th>
+                <th class="col"><h2 th:text="'Cart (' + ${cart.size} + ')'"></h2></th>
             </tr>
             <tr class="row">
                 <th class="col-1">No</th>
@@ -43,7 +43,7 @@
             </tbody>
             <tfoot>
             <tr class="row">
-                <td class="col text-right font-weight-bold" th:text="'Total: ' + ${total}"></td>
+                <td class="col text-right font-weight-bold" th:text="'Total: ' + ${cart.totalAmount}"></td>
             </tr>
             <tr class="row">
                 <td class="col"><a class="btn btn-secondary" th:href="@{/}">Back</a></td>
@@ -68,7 +68,7 @@
                     <h4 class="modal-title w-100 text-center mt-4">Are you sure?</h4>
                 </div>
                 <div class="modal-body text-center border-0">
-                    <p th:text="'Do you really want to remove this product from cart?'"></p>
+                    <p>"Do you really want to remove this product from cart?"</p>
                 </div>
                 <div class="modal-footer justify-content-center text-center border-0 mb-3">
                     <form th:action="@{/cart}" th:method="post">

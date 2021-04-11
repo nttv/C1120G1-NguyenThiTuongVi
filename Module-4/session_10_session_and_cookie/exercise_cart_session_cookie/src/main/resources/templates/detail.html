@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <form th:action="@{/detail/add}" th:method="post" th:object="${product}">
+        <form th:action="@{/detail}" th:method="post" th:object="${product}">
             <input type="hidden" th:field="*{id}" th:value="*{id}">
             <input type="hidden" th:field="*{name}" th:value="*{name}">
             <input type="hidden" th:field="*{price}" th:value="*{price}">

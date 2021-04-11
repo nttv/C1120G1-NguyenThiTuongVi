@@ -36,7 +36,7 @@ public class ProductController {
         return "detail";
     }
 
-    @PostMapping("/detail/add")
+    @PostMapping("/detail")
     public String addToCart(@ModelAttribute("cart") Cart cart,
                             @CookieValue(name = "cartCookie", defaultValue = "") String cartCookieValue,
                             Product product, Model model,
@@ -53,9 +53,7 @@ public class ProductController {
     }
 
     @GetMapping("/cart")
-    public String viewCart(@ModelAttribute("cart") Cart cart, Model model) {
-        model.addAttribute("size", cart.getSize());
-        model.addAttribute("total", cart.getTotalAmount());
+    public String viewCart(@ModelAttribute("cart") Cart cart) {
         return "cart";
     }
 
@@ -65,7 +63,7 @@ public class ProductController {
                              @RequestParam(name = "changeValue") Optional<Integer> changeValue,
                              @RequestParam(name = "deleteId") Optional<Integer> deleteId,
                              @CookieValue(name = "cartCookie", defaultValue = "") String cartCookieValue,
-                             Model model, HttpServletResponse response) {
+                             HttpServletResponse response) {
         if (changeId.isPresent() && changeValue.isPresent()) {
             Product product = productService.findById(changeId.get());
             cart.changeQuantity(product, changeValue.get());
@@ -78,8 +76,6 @@ public class ProductController {
         cookie.setMaxAge(24 * 60 * 60);
         response.addCookie(cookie);
 
-        model.addAttribute("size", cart.getSize());
-        model.addAttribute("total", cart.getTotalAmount());
         return "cart";
     }
 

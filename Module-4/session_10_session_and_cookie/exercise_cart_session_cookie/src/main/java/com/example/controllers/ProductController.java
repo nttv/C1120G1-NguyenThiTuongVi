@@ -24,8 +24,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public String listProducts(@CookieValue(name = "cartCookie", defaultValue = "") String cartCookieValue,
-                               @ModelAttribute("cart") Cart cart, Model model) {
+    public String listProducts(@ModelAttribute("cart") Cart cart, Model model) {
         model.addAttribute("products", productService.findAll());
         return "index";
     }
@@ -39,8 +38,7 @@ public class ProductController {
     @PostMapping("/detail")
     public String addToCart(@ModelAttribute("cart") Cart cart,
                             @CookieValue(name = "cartCookie", defaultValue = "") String cartCookieValue,
-                            Product product, Model model,
-                            HttpServletResponse response) {
+                            Product product, Model model, HttpServletResponse response) {
         cart.addToCart(product);
 
         Cookie cookie = new Cookie("cartCookie", createCartString(cart));

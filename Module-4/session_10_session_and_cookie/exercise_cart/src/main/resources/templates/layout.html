@@ -7,42 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-    <title>Blog Management</title>
-
-    <style type="text/css">
-
-    </style>
 </head>
 <body>
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:fragment="navbar">
-    <!-- Brand -->
-    <a class="navbar-brand" th:href="@{/}">BLOG</a>
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/}">Blog Posts</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/category}">Categories</a>
-        </li>
-    </ul>
-    <!-- Search -->
-    <form class="form-inline mr-0" th:action="@{/blog}">
-        <input class="form-control mr-sm-2" type="text" name="key" placeholder="Search">
-        <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
-    </form>
-</nav>
-
-<!-- Side Category Menu -->
-<div class="col-4 nav bg-light p-3" th:fragment="sidebar (categoryList)">
-    <ul class="nav flex-column">
-        <li class="nav-item" th:each="category : ${categoryList}">
-            <a class="nav-link" th:href="@{/category/blogs(id=${category.id})}" th:text="${category.name}"></a>
-        </li>
-    </ul>
-</div>
 
 <!-- Delete Confirm Modal -->
 <div th:fragment="deleteModal (entity)">

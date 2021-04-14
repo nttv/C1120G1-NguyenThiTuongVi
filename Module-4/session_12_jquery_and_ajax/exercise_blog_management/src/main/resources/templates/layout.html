@@ -30,9 +30,6 @@
                aria-expanded="false"></a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
             </div>
         </li>
     </ul>
@@ -40,7 +37,7 @@
     <!-- Search -->
     <!--    <form class="form-inline mr-0" th:action="@{/blog}">-->
     <div class="d-inline mr-0">
-        <input id="keySearch" class="mr-sm-2" type="text" name="key" placeholder="Search">
+        <input id="keySearch" class="mr-sm-2" type="text" placeholder="Search">
         <button id="btnSearch" class="btn btn-success d-inline"><i class="fas fa-search"></i></button>
     </div>
 </nav>
@@ -95,14 +92,93 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        $.ajax({
+            type: "GET",
+            url: "/list",
+            dataType: "json",
+            success: function (blogs) {
+                let result = "";
+                for (let blog of blogs) {
+                    result += "<tr>";
+                    result += "<td class='align-middle'>" + blog.id + "</td>";
+                    result += "<td class='align-middle'>" + blog.title + "</td>";
+                    result += "<td class='align-middle'>" + blog.author + "</td>";
+                    result += "<td class='align-middle'>" + blog.date + "</td>";
+                    result += "<td class='align-middle'>" + blog.category.name + "</td>";
+                    result += "<td class='align-middle'>" + blog.description + "</td>";
+                    result += "<td>" +
+                        "<a class='btn btn-info' href='/blog/view?id=" + blog.id + "'>" +
+                        "<i class='far fa-eye'></i></a><br>" +
+                        "<a class='btn btn-warning' href='/blog/edit?id=" + blog.id + "'>" +
+                        "<i class='far fa-edit'></i></a><br>" +
+                        "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal' " +
+                        "onclick='parseId(" + blog.id + ")'><i class='fas fa-ban'></i></button>" +
+                        "</td>";
+                    result += "</tr>";
+                }
+                $("#table-content").html(result);
+            }
+        });
         $(document).ready(function () {
             $("#btnSearch").click(function () {
                 $.ajax({
                     type: "GET",
                     url: "/search?key=" + $("#keySearch").val(),
-                    dataType: "HTML",
-                    success: function (data) {
-                        $('#blogList').html(data);
+                    dataType: "json",
+                    success: function (blogs) {
+                        let result = "";
+                        for (let blog of blogs) {
+                            result += "<tr>";
+                            result += "<td class='align-middle'>" + blog.id + "</td>";
+                            result += "<td class='align-middle'>" + blog.title + "</td>";
+                            result += "<td class='align-middle'>" + blog.author + "</td>";
+                            result += "<td class='align-middle'>" + blog.date + "</td>";
+                            result += "<td class='align-middle'>" + blog.category.name + "</td>";
+                            result += "<td class='align-middle'>" + blog.description + "</td>";
+                            result += "<td>" +
+                                "<a class='btn btn-info' href='/blog/view?id=" + blog.id + "'>" +
+                                "<i class='far fa-eye'></i></a><br>" +
+                                "<a class='btn btn-warning' href='/blog/edit?id=" + blog.id + "'>" +
+                                "<i class='far fa-edit'></i></a><br>" +
+                                "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal' " +
+                                "onclick='parseId(" + blog.id + ")'><i class='fas fa-ban'></i></button>" +
+                                "</td>";
+                            result += "</tr>";
+                        }
+                        $("#table-content").html(result);
+                    },
+                });
+            });
+
+            $("#load-more").click(function () {
+                let page = parseInt($("#load-more").val());
+                $.ajax({
+                    type: "GET",
+                    url: "/search?key=" + $("#keySearch").val() + "&page=" + page,
+                    dataType: "json",
+                    success: function (blogs) {
+                        let content = $("#table-content").html();
+                        // let result = "";
+                        for (let blog of blogs) {
+                            content += "<tr>";
+                            content += "<td class='align-middle'>" + blog.id + "</td>";
+                            content += "<td class='align-middle'>" + blog.title + "</td>";
+                            content += "<td class='align-middle'>" + blog.author + "</td>";
+                            content += "<td class='align-middle'>" + blog.date + "</td>";
+                            content += "<td class='align-middle'>" + blog.category.name + "</td>";
+                            content += "<td class='align-middle'>" + blog.description + "</td>";
+                            content += "<td>" +
+                                "<a class='btn btn-info' href='/blog/view?id=" + blog.id + "'>" +
+                                "<i class='far fa-eye'></i></a><br>" +
+                                "<a class='btn btn-warning' href='/blog/edit?id=" + blog.id + "'>" +
+                                "<i class='far fa-edit'></i></a><br>" +
+                                "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal' " +
+                                "onclick='parseId(" + blog.id + ")'><i class='fas fa-ban'></i></button>" +
+                                "</td>";
+                            content += "</tr>";
+                        }
+                        $("#table-content").html(content);
+                        $("#load-more").val(++page);
                     },
                 });
             })
@@ -110,6 +186,7 @@
 
     </script>
 </div>
+
 
 </body>
 </html>

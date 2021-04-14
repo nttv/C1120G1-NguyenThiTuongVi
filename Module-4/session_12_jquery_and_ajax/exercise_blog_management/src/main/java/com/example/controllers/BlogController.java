@@ -11,12 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -28,27 +26,39 @@ public class BlogController {
     @Autowired
     private CategoryService categoryService;
 
+    @GetMapping("/list")
+    @ResponseBody
+    public List<Blog> getBlogList(@PageableDefault(value = 2) Pageable pageable) {
+        Page<Blog> blogs = blogService.findAll(pageable);
+        return blogs.getContent();
+    }
+
     @GetMapping("")
-    public String listBlogs(@RequestParam Optional<String> key, @RequestParam Optional<String> order,
-                            @PageableDefault(value = 2) Pageable pageable, Model model) {
-        Page<Blog> blogs;
-        if (order.isPresent()) {
-            if (order.get().equals("asc")) {
-                pageable = PageRequest.of(pageable.getPageNumber(), 2, Sort.by("title").ascending());
-            } else {
-                pageable = PageRequest.of(pageable.getPageNumber(), 2, Sort.by("title").descending());
-            }
-            model.addAttribute("order", order.get());
-        }
-        if (key.isPresent() && !key.get().trim().equals("")) {
-            model.addAttribute("key", key.get());
-            blogs = blogService.searchInTitle(key.get(), pageable);
-        } else {
-            blogs = blogService.findAll(pageable);
-        }
-        model.addAttribute("blogs", blogs);
+    public String showBlogList() {
         return "blog/index";
     }
+
+//    @GetMapping("")
+//    public String listBlogs(@RequestParam Optional<String> key, @RequestParam Optional<String> order,
+//                            @PageableDefault(value = 2) Pageable pageable, Model model) {
+//        Page<Blog> blogs;
+//        if (order.isPresent()) {
+//            if (order.get().equals("asc")) {
+//                pageable = PageRequest.of(pageable.getPageNumber(), 2, Sort.by("title").ascending());
+//            } else {
+//                pageable = PageRequest.of(pageable.getPageNumber(), 2, Sort.by("title").descending());
+//            }
+//            model.addAttribute("order", order.get());
+//        }
+//        if (key.isPresent() && !key.get().trim().equals("")) {
+//            model.addAttribute("key", key.get());
+//            blogs = blogService.searchInTitle(key.get(), pageable);
+//        } else {
+//            blogs = blogService.findAll(pageable);
+//        }
+//        model.addAttribute("blogs", blogs);
+//        return "blog/index";
+//    }
 
     @GetMapping("/create")
     public String create(Pageable pageable, Model model) {
@@ -91,14 +101,26 @@ public class BlogController {
         return "blog/view";
     }
 
-    @GetMapping("/search")
-    public String searchInTitle(@RequestParam String key, @PageableDefault(value = 2) Pageable pageable, Model model) {
-        if (key.trim().equals("")) {
-            model.addAttribute("blogs", blogService.findAll(pageable));
-        } else {
+//    @GetMapping("/search")
+//    public String searchInTitle(@RequestParam String key, @PageableDefault(value = 2) Pageable pageable, Model model) {
+//        if (key.trim().equals("")) {
+//            model.addAttribute("blogs", blogService.findAll(pageable));
+//        } else {
 //            model.addAttribute("key", key);
-            model.addAttribute("blogs", blogService.searchInTitle(key, pageable));
+//            model.addAttribute("blogs", blogService.searchInTitle(key, pageable));
+//        }
+//        return "blog/index";
+//    }
+
+    @GetMapping("/search")
+    @ResponseBody
+    public List<Blog> searchInTitle(@RequestParam String key, @PageableDefault(value = 2) Pageable pageable) {
+        Page<Blog> blogs;
+        if (key.trim().equals("")) {
+            blogs = blogService.findAll(pageable);
+        } else {
+            blogs = blogService.searchInTitle(key, pageable);
         }
-        return "blog/index";
+        return blogs.getContent();
     }
 }

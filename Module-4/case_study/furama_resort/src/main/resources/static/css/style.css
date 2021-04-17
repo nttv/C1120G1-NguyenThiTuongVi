@@ -1,0 +1,63 @@
+body.custom-background {
+    background-image: url("/img/background.jpg");
+    background-position: right bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+#page-content {
+    flex: 1 0 auto;
+}
+
+header i {
+    color: #046056;
+    margin-top: auto;
+}
+
+.navbar {
+    background-color: #046056;
+}
+
+.header-logo img {
+    height: 100px;
+}
+
+.header-contact a, .header-contact a:visited, .header-contact a:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
+.header-user button {
+    font-size: larger;
+}
+
+.carousel .img-fluid {
+    min-width: 100%;
+    max-height: 600px;
+}
+
+button i {
+    /*color: #046056;*/
+    color: black;
+}
+
+footer h3, footer i {
+    color: #046056;
+}
+
+.footer {
+    background-color: #addccf;
+}
+
+.footer p {
+    color: #707070;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+footer a, footer a:hover {
+    color: #707070;
+    text-decoration: none;
+}

@@ -38,9 +38,60 @@ header i {
     max-height: 600px;
 }
 
-button i {
-    /*color: #046056;*/
-    color: black;
+#searchBtn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.table td.fit,
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+}
+
+.pagination li a {
+    border: none;
+    font-size: 95%;
+    width: 30px;
+    height: 30px;
+    color: #999;
+    margin: 0 2px;
+    line-height: 30px;
+    border-radius: 30px !important;
+    text-align: center;
+    padding: 0;
+}
+
+.pagination li a:hover {
+    color: #666;
+}
+
+.pagination li.active a {
+    background: #03A9F4;
+}
+
+.pagination li.active a:hover {
+    background: #0397d6;
+}
+
+.pagination li.disabled i {
+    color: #ccc;
+}
+
+.pagination li i {
+    font-size: 16px;
+    padding-top: 6px
+}
+
+.hint-text {
+    float: left;
+    margin-top: 6px;
+    font-size: 95%;
 }
 
 footer h3, footer i {

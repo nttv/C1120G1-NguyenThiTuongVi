@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
               integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
               crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon"/>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon"/>
         <title>Furama Resort Danang - A Culinary Beach Resort In Vietnam</title>
     </head>
     <body>
@@ -17,7 +17,7 @@
                 <div class="container">
                     <div class="row py-3">
                         <div class="col-2">
-                            <a th:href="@{/}" class="header-logo"><img src="img/logo.png" alt="logo" class="img-fluid"></a>
+                            <a th:href="@{/}" class="header-logo"><img src="/img/logo.png" alt="logo" class="img-fluid"></a>
                         </div>
                         <div class="col-5">
                             <div class="header-contact d-flex">
@@ -79,10 +79,10 @@
                         </li>
                     </ul>
                 </div>
-                <form class="navbar-form navbar-right" method="post" th:action="@{/customer}">
+                <form class="navbar-form navbar-right" method="get" th:action="@{/customer/search}">
                     <div class="input-group">
                         <input type="text" class="form-control" id="searchValue" name="key" placeholder="Search">
-                        <button class="btn btn-light rounded-0 rounded-right" type="submit" name="action" value="search">
+                        <button id="searchBtn" class="btn btn-light" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>

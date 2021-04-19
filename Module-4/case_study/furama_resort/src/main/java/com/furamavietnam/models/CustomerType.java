@@ -1,5 +1,6 @@
-package com.furamavietnam.model;
+package com.furamavietnam.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class CustomerType {
     private String customerTypeName;
 
     @OneToMany(mappedBy = "customerType")
+    @JsonIgnore
     private Set<Customer> customerSet;
 
 }

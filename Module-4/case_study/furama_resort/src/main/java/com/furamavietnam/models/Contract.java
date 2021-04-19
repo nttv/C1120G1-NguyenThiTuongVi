@@ -1,11 +1,10 @@
-package com.furamavietnam.model;
+package com.furamavietnam.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @NoArgsConstructor

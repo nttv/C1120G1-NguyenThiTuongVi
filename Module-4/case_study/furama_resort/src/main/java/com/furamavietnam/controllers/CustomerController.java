@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("customer")
@@ -24,16 +24,23 @@ public class CustomerController {
     @Autowired
     private CustomerTypeService customerTypeService;
 
-    @GetMapping("")
-    public String getCustomerPage(@PageableDefault(value = 4) Pageable pageable, Model model) {
-        model.addAttribute("customers", customerService.findAll(pageable));
-        return "customer/list";
-    }
+//    @GetMapping("")
+//    public String getCustomerPage(@PageableDefault(value = 4) Pageable pageable, Model model) {
+//        model.addAttribute("customers", customerService.findAll(pageable));
+//        return "customer/list";
+//    }
 
-    @GetMapping("list")
-    @ResponseBody
-    public Page<Customer> getList(@PageableDefault(value = 4) Pageable pageable, Model model) {
-        return customerService.findAll(pageable);
+    @GetMapping("")
+    public String getList(@RequestParam Optional<String> key, @PageableDefault(value = 4) Pageable pageable, Model model) {
+        Page<Customer> customers;
+        if (key.isPresent() && !key.get().trim().equals("")) {
+            model.addAttribute("key", key.get());
+            customers = customerService.findAllByKey(key.get(), pageable);
+        } else {
+            customers = customerService.findAll(pageable);
+        }
+        model.addAttribute("customers", customers);
+        return "customer/list";
     }
 
     @GetMapping("create")
@@ -71,15 +78,16 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
-    @GetMapping("search")
-    public String deleteCustomer(@RequestParam String key, @PageableDefault(value = 4) Pageable pageable, Model model) {
-        Page<Customer> customerList = customerService.findAllByKey(key, pageable);
-        if (customerList.isEmpty()) {
-            model.addAttribute("customers", customerService.findAll(pageable));
-        } else {
-            model.addAttribute("customers", customerList);
-        }
-        return "customer/list";
-    }
+//    @GetMapping("search")
+//    public String deleteCustomer(@RequestParam String key, @PageableDefault(value = 4) Pageable pageable, Model model) {
+//        Page<Customer> customerList = customerService.findAllByKey(key, pageable);
+//        if (customerList.isEmpty()) {
+//            model.addAttribute("customers", customerService.findAll(pageable));
+//        } else {
+//            model.addAttribute("key")
+//            model.addAttribute("customers", customerList);
+//        }
+//        return "customer/list";
+//    }
 
 }

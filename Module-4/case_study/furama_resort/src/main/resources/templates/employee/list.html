@@ -70,19 +70,13 @@
         <div class="hint-text">
         </div>
         <ul class="pagination">
-            <li class="page-item">
-                <a th:href="@{/customer(key = ${key}, page=${customers.number - 1})}" th:if="${customers.hasPrevious()}" class="page-link" >
-                    <i class="fa fa-angle-double-left"></i>
-                </a>
+            <li class="page-item" id="linkPrevious">
+                <a class="page-link"><i class="fa fa-angle-double-left"></i></a>
             </li>
             <li class="page-item" id="currentPage" th:each="i: ${#numbers.sequence(0, customers.totalPages - 1)}">
-                <a class="page-link" th:href="@{/customer(key = ${key}, page = ${i})}" th:text="${i + 1}"></a>
+                <a class="page-link" th:href="@{/customer(page = ${i})}" th:text="${i + 1}"></a>
             </li>
-            <li class="page-item">
-                <a th:href="@{/customer(key = ${key}, page=${customers.number + 1})}" th:if="${customers.hasNext()}" class="page-link" >
-                    <i class="fa fa-angle-double-right"></i>
-                </a>
-            </li>
+            <li class="page-item" id="linkNext"><a class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
         </ul>
     </div>
 </div>
@@ -91,6 +85,32 @@
 <div th:replace="/modal/delete-confirm :: modal"></div>
 
 <script>
+
+    $.ajax({
+        type: "GET",
+        url: "/customer/list",
+        dataType: "json",
+        success: function (data) {
+            let customers = data.content;
+            let result = showCustomers(customers, data.number * data.size);
+            $("#customerTableBody").html(result);
+
+            $("#linkPrevious a").attr("href", "/customer?page=" + (data.number - 1));
+            if (data.number == 0) {
+                $("#linkPrevious").attr("class", "disabled");
+            }
+
+            $("#currentPage").html("Page " + (data.number + 1) + " / " + data.totalPages);
+
+            $("#linkNext a").attr("href", "/customer?page=" + (data.number + 1));
+            if (data.number == data.totalPages - 1) {
+                $("#linkNext").attr("class", "disabled");
+            }
+
+
+            $(".hint-text").html("Showing <b>" + data.numberOfElements + "</b> out of <b>" + data.totalElements + "</b> entries");
+        }
+    });
 
     $(document).ready(function () {
         $(".alert").delay(2000).slideUp(800, function () {
@@ -102,6 +122,60 @@
             $("#deleteModalBody").html("<p>Do you really want to delete this customer?<br>This process cannot be undone.</p>");
         });
     });
+
+    function showCustomers(customers, startIndex) {
+        let result = "";
+        for (let customer of customers) {
+            result += "<tr>"
+                + "<td class='pl-1 pr-0 align-middle'>" + ++startIndex + "</td>"
+                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerId + "</td>"
+                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerName + "</td>"
+                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerType.customerTypeName + "</td>"
+                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerBirthday + "</td>";
+
+            if (customer.customerGender) {
+                result += "<td class='pl-1 pr-0 align-middle'>Male</td>";
+            } else {
+                result += "<td class='pl-1 pr-0 align-middle'>Female</td>"
+            }
+
+            result += "<td class='pl-1 pr-0 align-middle'>" + customer.customerIdCard + "</td>"
+                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerPhone + "</td>"
+                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerEmail + "</td>"
+                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerAddress + "</td>"
+                + "<td class='px-0 pr-0'>"
+                + "<a href='/customer/" + customer.customerId + "/edit' "
+                + "class='edit btn bg-transparent shadow-none text-warning'>"
+                + "<i class='fas fa-edit' data-toggle='tooltip' title='Edit'></i>"
+                + "</a>"
+                + "<button class='delete btn bg-transparent shadow-none text-danger' data-toggle='modal' "
+                + "data-target='#deleteModal' value='" + customer.customerId + "'>"
+                + "<i class='fas fa-ban' data-toggle='tooltip' title='Delete'></i>"
+                + "</button>"
+                + "</td>"
+                + "</tr>";
+        }
+        return result;
+    }
+
+    function showPagination(data) {
+        let currentPage = data.number;
+        let totalPages = data.totalPages;
+
+        let result = "<li class='page-item' id='linkPrevious'>"
+            + "<a class='page-link'><i class='fa fa-angle-double-left'></i></a>"
+            + "</li>";
+
+
+        for (let i = 0; i < totalPages && i < 5; i++) {
+            result += "<li class='page-item' id='page" + (i + currentPage) + "'><a class='page-link'>" + (i + currentPage + 1) + "</a></li>";
+        }
+
+        result += "<li class='page-item' id='linkNext'><a class='page-link'>"
+            + "<i class='fa fa-angle-double-right'></i></a></li>";
+
+        return result;
+    }
 
 </script>
 

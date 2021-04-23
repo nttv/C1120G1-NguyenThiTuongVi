@@ -1,5 +1,7 @@
 package com.furamavietnam.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.furamavietnam.models.Employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +24,7 @@ public class EducationDegree {
     @Column(name = "education_degree_name", columnDefinition = "VARCHAR(45) NOT NULL")
     private String degreeName;
 
-    @OneToMany(mappedBy = "educationDegree")
+    @OneToMany(mappedBy = "educationDegree", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Set<Employee> employeeSet;
 }

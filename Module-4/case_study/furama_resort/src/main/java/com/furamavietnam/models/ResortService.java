@@ -8,10 +8,11 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "service")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Service {
+public class ResortService {
 
     @Id
     @Column(name = "service_id", columnDefinition = "VARCHAR(45)")
@@ -49,7 +50,7 @@ public class Service {
     @JoinColumn(name = "service_type_id", nullable = false)
     private ServiceType serviceType;
 
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "resortService", cascade = CascadeType.REMOVE)
     private Set<Contract> contractSet;
 
 }

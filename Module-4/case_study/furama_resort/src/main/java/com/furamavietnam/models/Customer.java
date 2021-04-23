@@ -43,7 +43,7 @@ public class Customer {
     @Column(name = "customer_address", columnDefinition = "VARCHAR(45)")
     private String customerAddress;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Contract> contractSet;
 

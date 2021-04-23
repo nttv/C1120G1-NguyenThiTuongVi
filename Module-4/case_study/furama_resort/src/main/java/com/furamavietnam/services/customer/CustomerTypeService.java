@@ -1,4 +1,4 @@
-package com.furamavietnam.services;
+package com.furamavietnam.services.customer;
 
 import com.furamavietnam.models.CustomerType;
 

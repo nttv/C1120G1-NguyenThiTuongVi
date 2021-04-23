@@ -1,8 +1,8 @@
-package com.furamavietnam.services.impl;
+package com.furamavietnam.services.customer.impl;
 
 import com.furamavietnam.models.Customer;
-import com.furamavietnam.repositories.CustomerRepository;
-import com.furamavietnam.services.CustomerService;
+import com.furamavietnam.repositories.customer.CustomerRepository;
+import com.furamavietnam.services.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,30 +12,30 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerRepository repository;
 
     @Override
     public Page<Customer> findAll(Pageable pageable) {
-        return customerRepository.findAll(pageable);
+        return repository.findAll(pageable);
     }
 
     @Override
     public Customer findById(String id) {
-        return customerRepository.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public void save(Customer customer) {
-        customerRepository.save(customer);
+        repository.save(customer);
     }
 
     @Override
     public void delete(String id) {
-        customerRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     public Page<Customer> findAllByKey(String key, Pageable pageable) {
-        return customerRepository.findAllByKey(key, pageable);
+        return repository.findAllByKey(key, pageable);
     }
 }

@@ -7,14 +7,12 @@
 <header th:replace="/layout/header :: header"></header>
 <nav th:replace="/layout/header :: nav-bar"></nav>
 
-<div id="page-content" class="container mb-4">
+<div id="pageContent" class="container mb-4">
     <div class="row d-flex">
         <h2 class="col py-3">Customer List</h2>
         <div class="col text-right my-auto mr-3">
-            <a th:href="@{/customer/create}">
-                <button class="btn btn-success p-1">
-                    <i class="fas fa-plus"></i> <span>Add New Customer</span>
-                </button>
+            <a th:href="@{/customer/create}" class="btn btn-success p-1">
+                <i class="fas fa-plus"></i> <span>Add New Customer</span>
             </a>
         </div>
     </div>
@@ -24,7 +22,7 @@
             <span th:text="${message}"></span>
         </div>
     </div>
-    <table class="table table-hover" id="customer-table">
+    <table class="table table-hover text-center" id="customerTable">
         <thead>
         <tr>
             <th class="pl-1">#</th>
@@ -40,7 +38,7 @@
             <th class="pl-1">Actions</th>
         </tr>
         </thead>
-        <tbody id="customerTableBody">
+        <tbody>
         <tr th:each="customer, iterStat : ${customers}">
             <td class="pl-1 pr-0 align-middle" th:text="${(customers.size * customers.number) + iterStat.count}"></td>
             <td class="pl-1 pr-0 align-middle" th:text="${customer.customerId}"></td>
@@ -54,6 +52,10 @@
             <td class="pl-1 pr-0 align-middle" th:text="${customer.customerEmail}"></td>
             <td class="pl-1 pr-0 align-middle" th:text="${customer.customerAddress}"></td>
             <td class="px-0 pr-0">
+                <a th:href="@{/customer/{id}(id=${customer.customerId})}"
+                   class="view btn bg-transparent shadow-none text-info">
+                    <i class="far fa-eye" data-toggle="tooltip" title="View"></i>
+                </a>
                 <a th:href="@{/customer/{id}/edit(id=${customer.customerId})}"
                    class="edit btn bg-transparent shadow-none text-warning">
                     <i class="fas fa-edit" data-toggle="tooltip" title="Edit"></i>
@@ -67,19 +69,22 @@
         </tbody>
     </table>
     <div class="clearfix">
-        <div class="hint-text">
+        <div class="hint-text"
+             th:utext="'Showing <b>' + ${customers.numberOfElements} + '</b> out of <b>' + ${customers.totalElements} + '</b> entries'">
         </div>
         <ul class="pagination">
             <li class="page-item">
-                <a th:href="@{/customer(key = ${key}, page=${customers.number - 1})}" th:if="${customers.hasPrevious()}" class="page-link" >
+                <a th:href="@{/customer(key = ${key}, page=${customers.number - 1})}" th:if="${customers.hasPrevious()}"
+                   class="page-link">
                     <i class="fa fa-angle-double-left"></i>
                 </a>
             </li>
-            <li class="page-item" id="currentPage" th:each="i: ${#numbers.sequence(0, customers.totalPages - 1)}">
+            <li class="page-item" th:each="i: ${#numbers.sequence(0, customers.totalPages - 1)}">
                 <a class="page-link" th:href="@{/customer(key = ${key}, page = ${i})}" th:text="${i + 1}"></a>
             </li>
             <li class="page-item">
-                <a th:href="@{/customer(key = ${key}, page=${customers.number + 1})}" th:if="${customers.hasNext()}" class="page-link" >
+                <a th:href="@{/customer(key = ${key}, page=${customers.number + 1})}" th:if="${customers.hasNext()}"
+                   class="page-link">
                     <i class="fa fa-angle-double-right"></i>
                 </a>
             </li>
@@ -88,11 +93,13 @@
 </div>
 
 <footer th:replace="/layout/footer :: footer"></footer>
-<div th:replace="/modal/delete-confirm :: modal"></div>
+<div th:replace="/layout/delete-confirm :: modal"></div>
 
 <script>
 
     $(document).ready(function () {
+        $("#searchForm").attr("action", "/customer");
+
         $(".alert").delay(2000).slideUp(800, function () {
             $(this).alert('close');
         });

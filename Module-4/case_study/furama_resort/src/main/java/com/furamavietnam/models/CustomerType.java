@@ -23,7 +23,7 @@ public class CustomerType {
     @Column(name = "customer_type_name", columnDefinition = "VARCHAR(45) NOT NULL")
     private String customerTypeName;
 
-    @OneToMany(mappedBy = "customerType")
+    @OneToMany(mappedBy = "customerType", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Customer> customerSet;
 

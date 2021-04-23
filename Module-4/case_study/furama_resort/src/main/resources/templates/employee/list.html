@@ -7,14 +7,12 @@
 <header th:replace="/layout/header :: header"></header>
 <nav th:replace="/layout/header :: nav-bar"></nav>
 
-<div id="page-content" class="container mb-4">
+<div id="pageContent" class="container mb-4">
     <div class="row d-flex">
-        <h2 class="col py-3">Customer List</h2>
+        <h2 class="col py-3">Employee List</h2>
         <div class="col text-right my-auto mr-3">
-            <a th:href="@{/customer/create}">
-                <button class="btn btn-success p-1">
-                    <i class="fas fa-plus"></i> <span>Add New Customer</span>
-                </button>
+            <a th:href="@{/employee/create}" class="btn btn-success p-1">
+                <i class="fas fa-plus"></i> <span>Add New Employee</span>
             </a>
         </div>
     </div>
@@ -24,42 +22,41 @@
             <span th:text="${message}"></span>
         </div>
     </div>
-    <table class="table table-hover" id="customer-table">
+    <table class="table table-hover text-center" id="employeeTable">
         <thead>
         <tr>
-            <th class="pl-1">#</th>
-            <th class="pl-1">ID</th>
-            <th class="pl-1">Name</th>
-            <th class="pl-1">Type</th>
-            <th class="pl-1">Birthday</th>
-            <th class="pl-1">Gender</th>
-            <th class="pl-1">ID Card</th>
-            <th class="pl-1">Phone</th>
-            <th class="pl-1">Email</th>
-            <th class="pl-1">Address</th>
-            <th class="pl-1">Actions</th>
+            <th class="px-0">#</th>
+            <th class="px-0">ID</th>
+            <th class="px-0">Name</th>
+            <th class="px-0">Education</th>
+            <th class="px-0">Position</th>
+            <th class="px-0">Division</th>
+            <th class="px-0">Salary</th>
+            <th class="px-0">User</th>
+            <th class="px-0">Actions</th>
         </tr>
         </thead>
-        <tbody id="customerTableBody">
-        <tr th:each="customer, iterStat : ${customers}">
-            <td class="pl-1 pr-0 align-middle" th:text="${(customers.size * customers.number) + iterStat.count}"></td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerId}"></td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerName}"></td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerType.customerTypeName}"></td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerBirthday}"></td>
-            <td class="pl-1 pr-0 align-middle" th:if="${customer.customerGender}">Male</td>
-            <td class="pl-1 pr-0 align-middle" th:if="${!customer.customerGender}">Female</td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerIdCard}"></td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerPhone}"></td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerEmail}"></td>
-            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerAddress}"></td>
-            <td class="px-0 pr-0">
-                <a th:href="@{/customer/{id}/edit(id=${customer.customerId})}"
+        <tbody id="employeeTableBody">
+        <tr th:each="employee, iterStat : ${employees}">
+            <td class="px-3 align-middle" th:text="${(employees.size * employees.number) + iterStat.count}"></td>
+            <td class="px-3 align-middle" th:text="${employee.employeeId}"></td>
+            <td class="px-3 align-middle" th:text="${employee.employeeName}"></td>
+            <td class="px-3 align-middle" th:text="${employee.educationDegree.degreeName}"></td>
+            <td class="px-3 align-middle" th:text="${employee.position.positionName}"></td>
+            <td class="px-3 align-middle" th:text="${employee.division.divisionName}"></td>
+            <td class="px-3 align-middle" th:text="${employee.employeeSalary}"></td>
+            <td class="px-3 align-middle" th:text="${employee.appUser.username}"></td>
+            <td class="px-3">
+                <a th:href="@{/employee/{id}(id=${employee.employeeId})}"
+                   class="view btn bg-transparent shadow-none text-info">
+                    <i class="far fa-eye" data-toggle="tooltip" title="View"></i>
+                </a>
+                <a th:href="@{/employee/{id}/edit(id=${employee.employeeId})}"
                    class="edit btn bg-transparent shadow-none text-warning">
                     <i class="fas fa-edit" data-toggle="tooltip" title="Edit"></i>
                 </a>
                 <button class="delete btn bg-transparent shadow-none text-danger" data-toggle="modal"
-                        data-target="#deleteModal" th:value="${customer.customerId}">
+                        data-target="#deleteModal" th:value="${employee.employeeId}">
                     <i class="fas fa-ban" data-toggle="tooltip" title="Delete"></i>
                 </button>
             </td>
@@ -67,115 +64,46 @@
         </tbody>
     </table>
     <div class="clearfix">
-        <div class="hint-text">
+        <div class="hint-text"
+             th:utext="'Showing <b>' + ${employees.numberOfElements} + '</b> out of <b>' + ${employees.totalElements} + '</b> entries'">
         </div>
         <ul class="pagination">
-            <li class="page-item" id="linkPrevious">
-                <a class="page-link"><i class="fa fa-angle-double-left"></i></a>
+            <li class="page-item">
+                <a th:href="@{/employee(page=${employees.number - 1})}" th:if="${employees.hasPrevious()}"
+                   class="page-link">
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
             </li>
-            <li class="page-item" id="currentPage" th:each="i: ${#numbers.sequence(0, customers.totalPages - 1)}">
-                <a class="page-link" th:href="@{/customer(page = ${i})}" th:text="${i + 1}"></a>
+            <li class="page-item" th:each="i: ${#numbers.sequence(0, employees.totalPages - 1)}">
+                <a class="page-link" th:href="@{/employee(page = ${i})}" th:text="${i + 1}"></a>
             </li>
-            <li class="page-item" id="linkNext"><a class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+            <li class="page-item">
+                <a th:href="@{/employee(page=${employees.number + 1})}" th:if="${employees.hasNext()}" class="page-link">
+                    <i class="fa fa-angle-double-right"></i>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
 
 <footer th:replace="/layout/footer :: footer"></footer>
-<div th:replace="/modal/delete-confirm :: modal"></div>
+<div th:replace="/layout/delete-confirm :: modal"></div>
 
 <script>
 
-    $.ajax({
-        type: "GET",
-        url: "/customer/list",
-        dataType: "json",
-        success: function (data) {
-            let customers = data.content;
-            let result = showCustomers(customers, data.number * data.size);
-            $("#customerTableBody").html(result);
-
-            $("#linkPrevious a").attr("href", "/customer?page=" + (data.number - 1));
-            if (data.number == 0) {
-                $("#linkPrevious").attr("class", "disabled");
-            }
-
-            $("#currentPage").html("Page " + (data.number + 1) + " / " + data.totalPages);
-
-            $("#linkNext a").attr("href", "/customer?page=" + (data.number + 1));
-            if (data.number == data.totalPages - 1) {
-                $("#linkNext").attr("class", "disabled");
-            }
-
-
-            $(".hint-text").html("Showing <b>" + data.numberOfElements + "</b> out of <b>" + data.totalElements + "</b> entries");
-        }
-    });
-
     $(document).ready(function () {
+        $("#searchForm").attr("action", "/employee");
+
         $(".alert").delay(2000).slideUp(800, function () {
             $(this).alert('close');
         });
 
         $(".delete").click(function () {
-            $("#deleteForm").attr("action", "/customer/" + $(this).val() + "/delete");
-            $("#deleteModalBody").html("<p>Do you really want to delete this customer?<br>This process cannot be undone.</p>");
+            $("#deleteForm").attr("action", "/employee/" + $(this).val() + "/delete");
+            $("#deleteModalBody").html("<p>Do you really want to delete this employee?<br>This process cannot be undone.</p>");
         });
+
     });
-
-    function showCustomers(customers, startIndex) {
-        let result = "";
-        for (let customer of customers) {
-            result += "<tr>"
-                + "<td class='pl-1 pr-0 align-middle'>" + ++startIndex + "</td>"
-                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerId + "</td>"
-                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerName + "</td>"
-                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerType.customerTypeName + "</td>"
-                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerBirthday + "</td>";
-
-            if (customer.customerGender) {
-                result += "<td class='pl-1 pr-0 align-middle'>Male</td>";
-            } else {
-                result += "<td class='pl-1 pr-0 align-middle'>Female</td>"
-            }
-
-            result += "<td class='pl-1 pr-0 align-middle'>" + customer.customerIdCard + "</td>"
-                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerPhone + "</td>"
-                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerEmail + "</td>"
-                + "<td class='pl-1 pr-0 align-middle'>" + customer.customerAddress + "</td>"
-                + "<td class='px-0 pr-0'>"
-                + "<a href='/customer/" + customer.customerId + "/edit' "
-                + "class='edit btn bg-transparent shadow-none text-warning'>"
-                + "<i class='fas fa-edit' data-toggle='tooltip' title='Edit'></i>"
-                + "</a>"
-                + "<button class='delete btn bg-transparent shadow-none text-danger' data-toggle='modal' "
-                + "data-target='#deleteModal' value='" + customer.customerId + "'>"
-                + "<i class='fas fa-ban' data-toggle='tooltip' title='Delete'></i>"
-                + "</button>"
-                + "</td>"
-                + "</tr>";
-        }
-        return result;
-    }
-
-    function showPagination(data) {
-        let currentPage = data.number;
-        let totalPages = data.totalPages;
-
-        let result = "<li class='page-item' id='linkPrevious'>"
-            + "<a class='page-link'><i class='fa fa-angle-double-left'></i></a>"
-            + "</li>";
-
-
-        for (let i = 0; i < totalPages && i < 5; i++) {
-            result += "<li class='page-item' id='page" + (i + currentPage) + "'><a class='page-link'>" + (i + currentPage + 1) + "</a></li>";
-        }
-
-        result += "<li class='page-item' id='linkNext'><a class='page-link'>"
-            + "<i class='fa fa-angle-double-right'></i></a></li>";
-
-        return result;
-    }
 
 </script>
 

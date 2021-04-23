@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout/header :: head">
+</head>
+<body class="custom-background d-flex flex-column">
+
+<header th:replace="/layout/header :: header"></header>
+<nav th:replace="/layout/header :: nav-bar"></nav>
+
+<div id="pageContent" class="container mb-4">
+    <div class="row d-flex text-center">
+        <h2 class="col py-3">Employee Detail</h2>
+    </div>
+    <table class="table w-50 mx-auto">
+        <tr>
+            <th>Employee ID</th>
+            <td th:text="${employee.employeeId}"></td>
+        </tr>
+        <tr>
+            <th>Employee Name</th>
+            <td th:text="${employee.employeeName}"></td>
+        </tr>
+        <tr>
+            <th>Education Degree</th>
+            <td th:text="${employee.educationDegree.degreeName}"></td>
+        </tr>
+        <tr>
+            <th>Position</th>
+            <td th:text="${employee.position.positionName}"></td>
+        </tr>
+        <tr>
+            <th>Division</th>
+            <td th:text="${employee.division.divisionName}"></td>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <td th:text="${employee.appUser.username}"></td>
+        </tr>
+        <tr>
+            <th>Birthday</th>
+            <td th:text="${employee.employeeBirthday}"></td>
+        </tr>
+        <tr>
+            <th>ID Card</th>
+            <td th:text="${employee.employeeIdCard}"></td>
+        </tr>
+        <tr>
+            <th>Employee Phone</th>
+            <td th:text="${employee.employeePhone}"></td>
+        </tr>
+        <tr>
+            <th>Employee Email</th>
+            <td th:text="${employee.employeeEmail}"></td>
+        </tr>
+        <tr>
+            <th>Employee Address</th>
+            <td th:text="${employee.employeeAddress}"></td>
+        </tr>
+        <tr>
+            <th>Employee Salary</th>
+            <td th:text="${employee.employeeSalary}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <a th:href="@{/employee}" class="btn btn-secondary px-4">Back</a>
+                <a th:href="@{/employee/{id}/edit(id=${employee.employeeId})}" class="btn btn-warning px-4">Edit</a>
+                <button class="delete btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                        th:value="${employee.employeeId}">Delete
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<footer th:replace="/layout/footer :: footer"></footer>
+<div th:replace="/layout/delete-confirm :: modal"></div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#searchForm").attr("action", "/employee");
+
+        $(".delete").click(function () {
+            $("#deleteForm").attr("action", "/employee/" + $(this).val() + "/delete");
+            $("#deleteModalBody").html("<p>Do you really want to delete this employee?<br>This process cannot be undone.</p>");
+        });
+    });
+
+</script>
+
+</body>
+</html>

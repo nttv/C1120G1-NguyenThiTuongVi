@@ -1,8 +1,8 @@
-package com.furamavietnam.services.impl;
+package com.furamavietnam.services.customer.impl;
 
 import com.furamavietnam.models.CustomerType;
-import com.furamavietnam.repositories.CustomerTypeRepository;
-import com.furamavietnam.services.CustomerTypeService;
+import com.furamavietnam.repositories.customer.CustomerTypeRepository;
+import com.furamavietnam.services.customer.CustomerTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import java.util.List;
 public class CustomerTypeServiceImpl implements CustomerTypeService {
 
     @Autowired
-    private CustomerTypeRepository customerTypeRepository;
+    private CustomerTypeRepository repository;
 
     @Override
     public List<CustomerType> findAll() {
-        return customerTypeRepository.findAll();
+        return repository.findAll();
     }
 }

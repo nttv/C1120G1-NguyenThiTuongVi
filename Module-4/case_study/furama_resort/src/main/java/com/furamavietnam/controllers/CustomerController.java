@@ -1,8 +1,8 @@
 package com.furamavietnam.controllers;
 
 import com.furamavietnam.models.Customer;
-import com.furamavietnam.services.CustomerService;
-import com.furamavietnam.services.CustomerTypeService;
+import com.furamavietnam.services.customer.CustomerService;
+import com.furamavietnam.services.customer.CustomerTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,6 +76,12 @@ public class CustomerController {
         customerService.delete(id);
         redirect.addFlashAttribute("message", "Removed customer successfully!");
         return "redirect:/customer";
+    }
+
+    @GetMapping("{id}")
+    public String viewCustomer(@PathVariable String id, Model model) {
+        model.addAttribute("customer", customerService.findById(id));
+        return "customer/view";
     }
 
 //    @GetMapping("search")

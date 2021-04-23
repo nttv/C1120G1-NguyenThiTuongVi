@@ -1,5 +1,6 @@
 package com.furamavietnam.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +26,8 @@ public class RentType {
     @Column(name = "rent_type_cost", nullable = false)
     private double rentTypeCost;
 
-    @OneToMany(mappedBy = "rentType")
-    private Set<Service> serviceSet;
+    @OneToMany(mappedBy = "rentType", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<ResortService> resortServiceSet;
 
 }

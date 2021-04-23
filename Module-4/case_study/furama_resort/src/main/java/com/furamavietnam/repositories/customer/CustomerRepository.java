@@ -1,4 +1,4 @@
-package com.furamavietnam.repositories;
+package com.furamavietnam.repositories.customer;
 
 import com.furamavietnam.models.Customer;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package com.furamavietnam.repositories;
+package com.furamavietnam.repositories.customer;
 
 import com.furamavietnam.models.CustomerType;
 import org.springframework.data.jpa.repository.JpaRepository;

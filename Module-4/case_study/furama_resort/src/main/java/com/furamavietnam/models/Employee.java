@@ -1,5 +1,6 @@
 package com.furamavietnam.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -51,11 +52,12 @@ public class Employee {
     @JoinColumn(name = "division_id", nullable = false)
     private Division division;
 
-    @OneToOne
-    @JoinColumn(name = "username", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username")
     private AppUser appUser;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Set<Contract> contractSet;
 
 }

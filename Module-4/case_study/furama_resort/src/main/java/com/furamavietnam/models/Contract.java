@@ -1,10 +1,12 @@
 package com.furamavietnam.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -31,7 +33,7 @@ public class Contract {
 
     @ManyToOne
     @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    private ResortService resortService;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
@@ -40,5 +42,9 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<ContractDetail> contractDetails;
 
 }

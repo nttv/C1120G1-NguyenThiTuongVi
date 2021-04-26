@@ -32,4 +32,10 @@ public class AppUser {
     @JsonIgnore
     private Set<UserRole> userRoles;
 
+    public AppUser(String username) {
+        this.username = username;
+        this.encryptedPassword = "123456";
+        this.enabled = true;
+    }
+
 }

@@ -9,12 +9,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
 @Controller
+@SessionAttributes("appUser")
 @RequestMapping("customer")
 public class CustomerController {
 
@@ -51,10 +54,18 @@ public class CustomerController {
     }
 
     @PostMapping("save")
-    public String saveCustomer(Customer customer, RedirectAttributes redirect) {
-        customerService.save(customer);
-        redirect.addFlashAttribute("message", "Added customer successfully!");
-        return "redirect:/customer";
+    public String saveCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult,
+                               Model model, RedirectAttributes redirect) {
+        new Customer().validate(customer, bindingResult);
+        customerService.validateExistingId(customer, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("customerTypes", customerTypeService.findAll());
+            return "customer/create";
+        } else {
+            customerService.save(customer);
+            redirect.addFlashAttribute("message", "Added customer successfully!");
+            return "redirect:/customer";
+        }
     }
 
     @GetMapping("{id}/edit")
@@ -65,10 +76,17 @@ public class CustomerController {
     }
 
     @PostMapping("update")
-    public String updateCustomer(Customer customer, RedirectAttributes redirect) {
-        customerService.save(customer);
-        redirect.addFlashAttribute("message", "Updated customer successfully!");
-        return "redirect:/customer";
+    public String updateCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult,
+                                 Model model, RedirectAttributes redirect) {
+        new Customer().validate(customer, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("customerTypes", customerTypeService.findAll());
+            return "customer/create";
+        } else {
+            customerService.save(customer);
+            redirect.addFlashAttribute("message", "Updated customer successfully!");
+            return "redirect:/customer";
+        }
     }
 
     @GetMapping("{id}/delete")

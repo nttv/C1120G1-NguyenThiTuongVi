@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout/header :: head">
+</head>
+<body class="custom-background d-flex flex-column">
+
+<header th:replace="/layout/header :: header"></header>
+<nav th:replace="/layout/header :: nav-bar"></nav>
+
+<div id="pageContent" class="container mb-4">
+    <div class="row d-flex text-center">
+        <h2 class="col py-3">Edit Contract</h2>
+    </div>
+    <form class="form w-75 mx-auto" th:action="@{/contract/update}" method="post" th:object="${contract}" novalidate>
+        <table class="table table-borderless">
+            <tr class="form-group">
+                <th><label for="id">Contract ID<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td><input class="form-control" type="text" id="id" th:field="*{contractId}" readonly></td>
+            </tr>
+            <tr class="form-group">
+                <th><label for="startDate">Contract Start Date<span
+                        class="text-danger font-weight-bold">*</span></label></th>
+                <td>
+                    <input class="form-control" type="date" id="startDate" th:field="*{contractStartDate}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('contractStartDate')}" th:errors="*{contractStartDate}"></div>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <th><label for="endDate">Contract End Date<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td>
+                    <input class="form-control" type="date" id="endDate" th:field="*{contractEndDate}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('contractEndDate')}" th:errors="*{contractEndDate}"></div>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <th><label for="employee">Employee<span class="text-danger font-weight-bold">*</span></label></th>
+                <td>
+                    <input class="form-control" id="employee" list="employeeList" th:field="*{employee}">
+                    <datalist id="employeeList">
+                        <option th:each="employee : ${employees}" th:value="${employee.employeeId}"
+                                th:text="${employee.employeeName}">
+                    </datalist>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <th><label for="customer">Customer<span class="text-danger font-weight-bold">*</span></label></th>
+                <td>
+                    <input class="form-control" id="customer" list="customerList" th:field="*{customer}">
+                    <datalist id="customerList">
+                        <option th:each="customer : ${customers}" th:value="${customer.customerId}"
+                                th:text="${customer.customerName}">
+                    </datalist>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <th><label for="service">Resort Service<span class="text-danger font-weight-bold">*</span></label></th>
+                <td>
+                    <input class="form-control" id="service" list="serviceList" th:field="*{resortService}">
+                    <datalist id="serviceList">
+                        <option th:each="service : ${services}" th:value="${service.serviceId}"
+                                th:text="${service.serviceName}">
+                        </option>
+                    </datalist>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <th><label for="deposit">Contract Deposit<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td>
+                    <input class="form-control" type="number" id="deposit" th:field="*{contractDeposit}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('contractDeposit')}" th:errors="*{contractDeposit}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <a th:href="@{/contract}" class="btn btn-secondary px-4" type="button">Back</a>
+                    <button class="btn btn-success px-4" type="submit">Update</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<footer th:replace="/layout/footer :: footer"></footer>
+
+</body>
+</html>

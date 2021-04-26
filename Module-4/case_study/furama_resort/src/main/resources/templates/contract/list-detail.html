@@ -1,0 +1,20 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <table class="table table-borderless mb-0">
+        <tr class="row">
+            <th class="col text-center">Contract ID</th>
+            <th class="col text-center">Attach Services</th>
+            <th class="col text-center">Quantity</th>
+        </tr>
+        <tr class="row">
+            <td class="col-4 text-center" th:text="${contract.contractId}"></td>
+            <td colspan="2" class="col-8 py-0 text-center">
+                <table class="table table-borderless mb-0">
+                    <tr class="row" th:each="detail : ${contract.contractDetails}">
+                        <td class="col text-center" th:text="${detail.attachService.attachServiceName}"></td>
+                        <td class="col text-center" th:text="${detail.quantity}"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

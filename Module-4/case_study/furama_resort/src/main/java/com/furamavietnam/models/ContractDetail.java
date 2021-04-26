@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "contract_detail",
@@ -30,4 +31,21 @@ public class ContractDetail {
     @Column(name = "quantity")
     private int quantity;
 
+    public ContractDetail(Contract contract) {
+        this.contract = contract;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContractDetail detail = (ContractDetail) o;
+        return Objects.equals(contract, detail.contract) &&
+                Objects.equals(attachService, detail.attachService);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(contract, attachService);
+    }
 }

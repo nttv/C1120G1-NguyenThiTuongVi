@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@SessionAttributes("appUser")
 @RequestMapping("service")
 public class ServiceController {
 
@@ -53,27 +56,38 @@ public class ServiceController {
     @GetMapping("create")
     public String addService(Model model) {
         model.addAttribute("service", new ResortService());
-        return "service/form";
+        return "service/create";
     }
 
     @PostMapping("save")
-    public String saveService(@ModelAttribute ResortService resortService, RedirectAttributes redirect) {
-        resortServiceService.save(resortService);
-        redirect.addFlashAttribute("message", "Added service successfully!");
-        return "redirect:/service";
+    public String saveService(@Validated @ModelAttribute(name = "service") ResortService service,
+                              BindingResult bindingResult, RedirectAttributes redirect) {
+        resortServiceService.validateExistingId(service, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "service/create";
+        } else {
+            resortServiceService.save(service);
+            redirect.addFlashAttribute("message", "Added service successfully!");
+            return "redirect:/service";
+        }
     }
 
     @GetMapping("{id}/edit")
     public String editService(@PathVariable String id, Model model) {
         model.addAttribute("service", resortServiceService.findById(id));
-        return "service/form";
+        return "service/edit";
     }
 
     @PostMapping("update")
-    public String updateService(@ModelAttribute ResortService resortService, RedirectAttributes redirect) {
-        resortServiceService.save(resortService);
-        redirect.addFlashAttribute("message", "Updated service successfully!");
-        return "redirect:/service";
+    public String updateService(@Validated @ModelAttribute(name = "service") ResortService service,
+                                BindingResult bindingResult, RedirectAttributes redirect) {
+        if (bindingResult.hasErrors()) {
+            return "service/edit";
+        } else {
+            resortServiceService.save(service);
+            redirect.addFlashAttribute("message", "Updated service successfully!");
+            return "redirect:/service";
+        }
     }
 
     @GetMapping("{id}/delete")
@@ -86,7 +100,7 @@ public class ServiceController {
     @GetMapping("{id}")
     public String viewService(@PathVariable String id, Model model) {
         model.addAttribute("service", resortServiceService.findById(id));
-        return "service/form";
+        return "service/view";
     }
 
 }

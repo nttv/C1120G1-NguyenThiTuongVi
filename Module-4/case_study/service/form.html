@@ -1,0 +1,109 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <form class="form" method="post" th:object="${service}" id="serviceForm">
+        <table class="table table-borderless mb-0">
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="id">Service ID<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <input class="form-control" type="text" id="id" th:field="*{serviceId}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('serviceId')}" th:errors="*{serviceId}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="name">Service Name<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <input class="form-control" type="text" id="name" th:field="*{serviceName}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('serviceName')}"
+                         th:errors="*{serviceName}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="serviceType">Service Type<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <select class="custom-select" id="serviceType" th:field="*{serviceType}">
+                        <option th:each="type : ${serviceTypes}" th:value="${type.serviceTypeId}"
+                                th:text="${type.serviceTypeName}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="rentType">Rent Type<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <select class="custom-select" id="rentType" th:field="*{rentType}">
+                        <option th:each="type : ${rentTypes}" th:value="${type.rentTypeId}"
+                                th:text="${type.rentTypeName}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="standard">Room Standard<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <select class="custom-select" id="standard" th:field="*{roomStandard}">
+                        <option th:each="standard : ${roomStandards}" th:value="${standard}"
+                                th:text="${standard}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="area">Service Area<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <input class="form-control" type="number" id="area" th:field="*{serviceArea}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('serviceArea')}"
+                         th:errors="*{serviceArea}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="people">Max no. of People<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <input class="form-control" type="number" id="people" th:field="*{serviceMaxPeople}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                         th:errors="*{serviceMaxPeople}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5"><label for="pool">Pool Area</label></th>
+                <td class="col-7">
+                    <input class="form-control" type="number" id="pool" th:field="*{poolArea}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5"><label for="floors">No. of Floors</label></th>
+                <td class="col-7">
+                    <input class="form-control" type="number" id="floors" th:field="*{numberOfFloors}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('numberOfFloors')}"
+                         th:errors="*{numberOfFloors}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5">
+                    <label for="cost">Service Cost<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-7">
+                    <input class="form-control" type="number" id="cost" th:field="*{serviceCost}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('serviceCost')}"
+                         th:errors="*{serviceCost}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-5"><label for="convenience">Other Convenience</label></th>
+                <td class="col-7">
+                    <textarea class="form-control" rows="2" id="convenience" th:field="*{descriptionOtherConvenience}">
+                </textarea></td>
+            </tr>
+        </table>
+    </form>
+</div>

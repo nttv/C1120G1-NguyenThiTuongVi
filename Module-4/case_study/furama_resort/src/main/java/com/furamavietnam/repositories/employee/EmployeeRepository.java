@@ -1,5 +1,6 @@
 package com.furamavietnam.repositories.employee;
 
+import com.furamavietnam.models.AppUser;
 import com.furamavietnam.models.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +18,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
             "e.educationDegree.degreeName LIKE %:key% OR " +
             "e.division.divisionName LIKE %:key%")
     Page<Employee> findAllByKey(String key, Pageable pageable);
+
+    Employee findByAppUser(AppUser appUser);
 
 }

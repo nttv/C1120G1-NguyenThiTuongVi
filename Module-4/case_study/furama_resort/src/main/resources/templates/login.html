@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="/layout/header :: head">
+</head>
+<body id="loginPage">
+
+<div class="container">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="/img/avatar_2x.png"/>
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signIn" th:action="@{/j_spring_security_check}" method="post">
+            <!--            <span id="reauth-email" class="reauth-email"></span>-->
+            <input type="text" id="inputUsername" class="form-control"
+                   name="username" placeholder="Username" required autofocus>
+            <input type="password" id="inputPassword" class="form-control"
+                   name="password" placeholder="Password" required>
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block btn-signIn" type="submit">Sign in</button>
+        </form><!-- /form -->
+    </div><!-- /card-container -->
+</div><!-- /container -->
+
+</body>
+</html>

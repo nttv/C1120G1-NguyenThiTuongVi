@@ -1,0 +1,26 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <form class="form" th:action="'/contract/save-detail'" method="post"
+          th:object="${contractDetail}" id="attachServiceForm">
+        <table class="table table-borderless mb-0">
+            <tr class="form-group">
+                <th><label for="id">Contract ID</label></th>
+                <td>
+                    <input class="form-control" type="text" id="id" th:field="*{contract}" readonly>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <th class="align-middle"><label for="service">Attach Service</label></th>
+                <td>
+                    <select class="custom-select" id="service" th:field="*{attachService}">
+                        <option th:each="service : ${attachServices}" th:value="${service.attachServiceId}"
+                                th:text="${service.attachServiceName}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <th><label for="quantity">Quantity</label></th>
+                <td><input class="form-control" type="number" min="1" id="quantity" th:field="*{quantity}"></td>
+            </tr>
+        </table>
+    </form>
+</div>

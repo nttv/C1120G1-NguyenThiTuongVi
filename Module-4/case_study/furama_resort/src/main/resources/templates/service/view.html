@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout/header :: head">
+</head>
+<body class="custom-background d-flex flex-column">
+
+<header th:replace="/layout/header :: header"></header>
+<nav th:replace="/layout/header :: nav-bar"></nav>
+
+<div id="pageContent" class="container mb-4">
+    <div class="row d-flex text-center">
+        <h2 class="col py-3">Customer Detail</h2>
+    </div>
+    <table class="table w-50 mx-auto">
+        <tr>
+            <th>Service ID</th>
+            <td th:text="${service.serviceId}"></td>
+        </tr>
+        <tr>
+            <th>Service Name</th>
+            <td th:text="${service.serviceName}"></td>
+        </tr>
+        <tr>
+            <th>Service Type</th>
+            <td th:text="${service.serviceType.serviceTypeName}"></td>
+        </tr>
+        <tr>
+            <th>Rent Type</th>
+            <td th:text="${service.rentType.rentTypeName}"></td>
+        </tr>
+        <tr>
+            <th>Room Standard</th>
+            <td th:text="${service.roomStandard}"></td>
+        </tr>
+        <tr>
+            <th>Service Area</th>
+            <td th:text="${service.serviceArea}"></td>
+        </tr>
+        <tr>
+            <th>Max no. of People</th>
+            <td th:text="${service.serviceMaxPeople}"></td>
+        </tr>
+        <tr>
+            <th>Pool Area</th>
+            <td th:text="${service.poolArea}"></td>
+        </tr>
+        <tr>
+            <th>No. of Floors</th>
+            <td th:text="${service.numberOfFloors}"></td>
+        </tr>
+        <tr>
+            <th>Service Cost</th>
+            <td th:text="${service.serviceCost}"></td>
+        </tr>
+        <tr>
+            <th>Other Convenience</th>
+            <td th:text="${service.descriptionOtherConvenience}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <a th:href="@{/service}" class="btn btn-secondary px-4">Back</a>
+                <a th:href="@{/service/{id}/edit(id=${service.serviceId})}" class="btn btn-warning px-4">Edit</a>
+                <button class="delete btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                        th:value="${service.serviceId}">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<footer th:replace="/layout/footer :: footer"></footer>
+<div th:replace="/layout/delete-confirm :: modal"></div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#searchForm").attr("action", "/service");
+
+        $(".delete").click(function () {
+            $("#deleteForm").attr("action", "/service/" + $(this).val() + "/delete");
+            $("#deleteModalBody").html("<p>Do you really want to delete this service?<br>This process cannot be undone.</p>");
+        });
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout/layout :: head">
+</head>
+<body class="custom-background d-flex flex-column">
+
+<nav th:replace="/layout/layout :: nav-bar"></nav>
+
+<div class="container">
+    <h1 class="py-3">Thống kê đơn hàng</h1>
+    <div class="row align-middle my-2 ml-0">
+        <form action="product" method="get">
+            <input type="hidden" name="action" value="view-in-range">
+            <label for="startDate">Danh sách từ:</label>
+            <input type="date" name="startDate" id="startDate" value="${startDate}">
+            <span>
+                        <label for="endDate">đến:</label>
+                        <input type="date" name="endDate" id="endDate" value="${endDate}">
+                    </span>
+            <button type="submit" class="btn btn-success mb-3">Xem</button>
+        </form>
+    </div>
+    <div class="row align-middle my-2 ml-0">
+        <form action="product" method="get">
+            <input type="hidden" name="action" value="view-top">
+            <label for="top-list">Top:</label>
+            <!--                    <select name="top" id="top-list">-->
+            <!--                        <option value="3"-->
+            <!--                        <c:if test="${top == 3}">selected</c:if>>3</option>-->
+            <!--                        <option value="5"-->
+            <!--                        <c:if test="${top == 5}">selected</c:if>>5</option>-->
+            <!--                        <option value="10"-->
+            <!--                        <c:if test="${top == 10}">selected</c:if>>10</option>-->
+            <!--                    </select>-->
+            <span>Đơn hàng có tổng số tiền bán cao nhất</span>
+            <button type="submit" class="btn btn-success">Xem</button>
+        </form>
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Mã đơn hàng</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá (USD)</th>
+            <th>Loại sản phẩm</th>
+            <th>Ngày mua</th>
+            <th>Số lượng</th>
+            <th>Tổng tiền (USD)</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order, iterStat : ${orders}">
+            <td class="align-middle">${(orders.size * orders.number) + iterStat.count}</td>
+            <td class="align-middle">${order.orderId}</td>
+            <td class="align-middle">${order.product.productName}</td>
+            <td class="align-middle">${order.product.productCost}</td>
+            <td class="align-middle">${order.product.productType.productTypeName}</td>
+            <td class="align-middle">${order.orderDate}</td>
+            <td class="align-middle">${order.quantity}</td>
+            <td class="align-middle">${order.quantity * order.product.productCost}</td>
+            <td class="align-middle">
+                <a th:href="@{/{id}/edit(id=${order.orderId})}">Sửa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="/layout/layout :: footer"></footer>
+
+</body>
+</html>

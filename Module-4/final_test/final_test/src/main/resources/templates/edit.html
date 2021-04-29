@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout/layout :: head">
+</head>
+<body class="custom-background d-flex flex-column">
+
+<nav th:replace="/layout/layout :: nav-bar"></nav>
+
+<div id="pageContent" class="container mb-4">
+    <div class="row d-flex text-center">
+        <h2 class="col py-3">Edit Customer</h2>
+    </div>
+    <form class="form w-75 mx-auto" th:action="@{/customer/update}" method="post" th:object="${customer}">
+        <table class="table table-borderless">
+            <tr class="form-group row">
+                <th class="col-4">
+                    <label for="id">Customer ID<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-8">
+                    <input class="form-control" type="text" id="id" th:field="*{customerId}" readonly>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4">
+                    <label for="name">Customer Name<span class="text-danger font-weight-bold">*</span></label></th>
+                <td class="col-8">
+                    <input class="form-control" type="text" id="name" th:field="*{customerName}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4">
+                    <label for="type">Customer Type<span class="text-danger font-weight-bold">*</span></label></th>
+                <td class="col-8">
+                    <select class="custom-select w-50" id="type" th:field="*{customerType}">
+                        <option th:each="type : ${customerTypes}" th:value="${type.customerTypeId}"
+                                th:text="${type.customerTypeName}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4">
+                    <label for="birthday">Customer Birthday<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-8">
+                    <input class="form-control w-50" type="date" id="birthday" th:field="*{customerBirthday}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4">Customer Gender<span class="text-danger font-weight-bold">*</span></th>
+                <td class="col-8">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gender1" name="gender" class="custom-control-input" value="true"
+                               th:field="*{customerGender}">
+                        <label class="custom-control-label" for="gender1">Male</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gender0" name="gender" class="custom-control-input" value="false"
+                               th:field="*{customerGender}">
+                        <label class="custom-control-label" for="gender0">Female</label>
+                    </div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4">
+                    <label for="idCard">Customer ID Card<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-8">
+                    <input class="form-control" type="text" id="idCard" th:field="*{customerIdCard}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4">
+                    <label for="phone">Customer Phone<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-8">
+                    <input class="form-control" type="text" id="phone" th:field="*{customerPhone}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4">
+                    <label for="email">Customer Email<span class="text-danger font-weight-bold">*</span></label>
+                </th>
+                <td class="col-8">
+                    <input class="form-control" type="text" id="email" th:field="*{customerEmail}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}"></div>
+                </td>
+            </tr>
+            <tr class="form-group row">
+                <th class="col-4"><label for="address">Customer Address</label></th>
+                <td class="col-8">
+                    <input class="form-control" type="text" id="address" th:field="*{customerAddress}">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <a th:href="@{/customer}" class="btn btn-secondary px-4" type="button">Back</a>
+                    <button class="btn btn-success px-4" type="submit">Update</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<footer th:replace="/layout/layout :: footer"></footer>
+
+<script>
+
+    $(document).ready(function () {
+        $("#searchForm").attr("action", "/customer");
+    });
+
+</script>
+
+</body>
+</html>

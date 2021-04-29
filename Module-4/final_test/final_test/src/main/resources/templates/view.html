@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout/layout :: head">
+</head>
+<body class="custom-background d-flex flex-column">
+
+<nav th:replace="/layout/layout :: nav-bar"></nav>
+
+<div id="pageContent" class="container mb-4">
+    <div class="row d-flex text-center">
+        <h2 class="col py-3">Customer Detail</h2>
+    </div>
+    <table class="table w-50 mx-auto">
+        <tr>
+            <th>Customer ID</th>
+            <td th:text="${customer.customerId}"></td>
+        </tr>
+        <tr>
+            <th>Customer Name</th>
+            <td th:text="${customer.customerName}"></td>
+        </tr>
+        <tr>
+            <th>Customer Type</th>
+            <td th:text="${customer.customerType.customerTypeName}"></td>
+        </tr>
+        <tr>
+            <th>Customer Birthday</th>
+            <td th:text="${customer.customerBirthday}"></td>
+        </tr>
+        <tr>
+            <th>Customer Gender</th>
+            <td th:if="${customer.customerGender}">Male</td>
+            <td th:if="${!customer.customerGender}">Female</td>
+        </tr>
+        <tr>
+            <th>Customer ID Card</th>
+            <td th:text="${customer.customerBirthday}"></td>
+        </tr>
+        <tr>
+            <th>Customer ID Card</th>
+            <td th:text="${customer.customerIdCard}"></td>
+        </tr>
+        <tr>
+            <th>Customer Phone</th>
+            <td th:text="${customer.customerPhone}"></td>
+        </tr>
+        <tr>
+            <th>Customer Email</th>
+            <td th:text="${customer.customerEmail}"></td>
+        </tr>
+        <tr>
+            <th>Customer Address</th>
+            <td th:text="${customer.customerAddress}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <a th:href="@{/customer}" class="btn btn-secondary px-4">Back</a>
+                <a th:href="@{/customer/{id}/edit(id=${customer.customerId})}" class="btn btn-warning px-4">Edit</a>
+                <button class="delete btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                        th:value="${customer.customerId}">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<footer th:replace="/layout/layout :: footer"></footer>
+<div th:replace="/layout/layout :: modal"></div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#searchForm").attr("action", "/customer");
+
+        $(".delete").click(function () {
+            $("#deleteForm").attr("action", "/customer/" + $(this).val() + "/delete");
+            $("#deleteModalBody").html("<p>Do you really want to delete this customer?<br>This process cannot be undone.</p>");
+        });
+    });
+
+</script>
+
+</body>
+</html>

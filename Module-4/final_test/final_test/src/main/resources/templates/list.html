@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout/layout :: head">
+</head>
+<body class="custom-background d-flex flex-column">
+
+<nav th:replace="/layout/layout :: nav-bar"></nav>
+
+<div id="pageContent" class="container mb-4">
+    <div class="row d-flex">
+        <h2 class="col py-3">Customer List</h2>
+        <div class="col text-right my-auto mr-3">
+            <a th:href="@{/customer/create}" class="btn btn-success p-1">
+                <i class="fas fa-plus"></i> <span>Add New Customer</span>
+            </a>
+        </div>
+    </div>
+    <div th:if="${message}">
+        <div class="alert alert-success alert-dismissible fade show font-weight-bold">
+            <button type="button" class="close btn shadow-none float-right" data-dismiss="alert">&times;</button>
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+    <table class="table table-hover text-center" id="customerTable">
+        <thead>
+        <tr>
+            <th class="pl-1">#</th>
+            <th class="pl-1">ID</th>
+            <th class="pl-1">Name</th>
+            <th class="pl-1">Type</th>
+            <th class="pl-1">Birthday</th>
+            <th class="pl-1">Gender</th>
+            <th class="pl-1">ID Card</th>
+            <th class="pl-1">Phone</th>
+            <th class="pl-1">Email</th>
+            <th class="pl-1">Address</th>
+            <th class="pl-1">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer, iterStat : ${customers}">
+            <td class="pl-1 pr-0 align-middle" th:text="${(customers.size * customers.number) + iterStat.count}"></td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerId}"></td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerName}"></td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerType.customerTypeName}"></td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerBirthday}"></td>
+            <td class="pl-1 pr-0 align-middle" th:if="${customer.customerGender}">Male</td>
+            <td class="pl-1 pr-0 align-middle" th:if="${!customer.customerGender}">Female</td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerIdCard}"></td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerPhone}"></td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerEmail}"></td>
+            <td class="pl-1 pr-0 align-middle" th:text="${customer.customerAddress}"></td>
+            <td class="px-0 pr-0">
+                <a th:href="@{/customer/{id}(id=${customer.customerId})}"
+                   class="view btn bg-transparent shadow-none text-info">
+                    <i class="far fa-eye" data-toggle="tooltip" title="View"></i>
+                </a>
+                <a th:href="@{/customer/{id}/edit(id=${customer.customerId})}"
+                   class="edit btn bg-transparent shadow-none text-warning">
+                    <i class="fas fa-edit" data-toggle="tooltip" title="Edit"></i>
+                </a>
+                <button class="delete btn bg-transparent shadow-none text-danger" data-toggle="modal"
+                        data-target="#deleteModal" th:value="${customer.customerId}">
+                    <i class="fas fa-ban" data-toggle="tooltip" title="Delete"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="clearfix">
+        <div class="hint-text"
+             th:utext="'Showing <b>' + ${customers.numberOfElements} + '</b> out of <b>' + ${customers.totalElements} + '</b> entries'">
+        </div>
+        <ul class="pagination">
+            <li class="page-item">
+                <a th:href="@{/customer(key = ${key}, page=${customers.number - 1})}" th:if="${customers.hasPrevious()}"
+                   class="page-link">
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item" th:each="i: ${#numbers.sequence(0, customers.totalPages - 1)}">
+                <a class="page-link" th:href="@{/customer(key = ${key}, page = ${i})}" th:text="${i + 1}"></a>
+            </li>
+            <li class="page-item">
+                <a th:href="@{/customer(key = ${key}, page=${customers.number + 1})}" th:if="${customers.hasNext()}"
+                   class="page-link">
+                    <i class="fa fa-angle-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<footer th:replace="/layout/layout :: footer"></footer>
+<div th:replace="/layout/layout :: modal"></div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#searchForm").attr("action", "/customer");
+
+        $(".alert").delay(2000).slideUp(800, function () {
+            $(this).alert('close');
+        });
+
+        $(".delete").click(function () {
+            $("#deleteForm").attr("action", "/customer/" + $(this).val() + "/delete");
+            $("#deleteModalBody").html("<p>Do you really want to delete this customer?<br>This process cannot be undone.</p>");
+        });
+    });
+
+</script>
+
+</body>
+</html>

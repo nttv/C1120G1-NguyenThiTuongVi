@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title text-center mb-3">Product List</h1>
+        <table class="table table-striped text-center" id="customerTable">
+          <thead>
+          <tr>
+            <th class="pl-1">#</th>
+            <th class="pl-1">Product Name</th>
+            <th class="pl-1">Origin</th>
+            <th class="pl-1">Production Date</th>
+            <th class="pl-1">Price</th>
+            <th class="pl-1">Stock</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <td class="pl-1 pr-0 align-middle">{{ i + 1 }}</td>
+            <td class="pl-1 pr-0 align-middle">{{ product.name | titlecase }}</td>
+            <td class="pl-1 pr-0 align-middle">{{ product.origin }}</td>
+            <td class="pl-1 pr-0 align-middle">{{ product.productionDate }}</td>
+            <td class="pl-1 pr-0 align-middle">{{ product.price }}</td>
+            <td class="pl-1 pr-0 align-middle">
+              <span *ngIf="product.amount == 0" class="txt-highlight">Out of stock</span>
+              <span *ngIf="product.amount > 0 && product.amount < 10">Little left in stock</span>
+              <span *ngIf="product.amount >= 10">Full stock</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

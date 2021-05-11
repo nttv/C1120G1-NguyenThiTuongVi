@@ -1,0 +1,30 @@
+.heart {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 10%;
+  z-index: 1;
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.heart div {
+  background: #ff0000;
+  width: 71px;
+  height: 126px;
+  top: 40px;
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.left {
+  left: 45px;
+  transform: rotate(330deg);
+}
+
+.right {
+  right: 45px;
+  transform: rotate(30deg);
+}

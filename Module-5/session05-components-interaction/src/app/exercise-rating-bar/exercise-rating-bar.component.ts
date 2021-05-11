@@ -7,15 +7,11 @@ import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@an
 })
 export class ExerciseRatingBarComponent implements OnInit {
 
-  @Input()
-  max = 5;
-  @Input()
-  ratingValue = 5;
-  @Input()
-  showRatingValue = true;
+  @Input() max = 10;
+  @Input() ratingValue = 5;
+  @Input() showRatingValue = true;
 
-  @Output()
-  rateChange = new EventEmitter<number>();
+  @Output() rateChange = new EventEmitter<number>();
 
   ratingUnits: Array<IRatingUnit> = [];
 

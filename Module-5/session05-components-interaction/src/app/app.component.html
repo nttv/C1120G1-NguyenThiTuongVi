@@ -1,4 +1,7 @@
 <app-practice-name-card cardName="Professional Dev" email="prodev@codegym.vn" phone="0123456789"></app-practice-name-card>
+<br><br>
 <app-practice-progress-bar progress="0"></app-practice-progress-bar>
-<app-exercise-rating-bar></app-exercise-rating-bar>
-<app-exercise-countdown-timer></app-exercise-countdown-timer>
+<br><br>
+<app-exercise-rating-bar [maxRating]="10" [previousRating]="5" [showRating]="true"></app-exercise-rating-bar>
+<br><br>
+<app-exercise-countdown-timer [myTimer]="10"></app-exercise-countdown-timer>

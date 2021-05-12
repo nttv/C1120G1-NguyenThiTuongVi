@@ -7,27 +7,31 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ExerciseCountdownTimerComponent implements OnInit {
 
-  private intervalId = 0;
-  message = '';
+  intervalId: number;
+  message: string = '';
   remainingTime: number;
 
-  @Input() seconds = 11;
+  @Input('myTimer') seconds = 10;
+
+  ngOnInit() {
+    this.reset();
+  }
 
   clearTimer() {
     clearInterval(this.intervalId);
   }
 
-  ngOnInit() {
-    this.reset();
-    this.start();
-  }
-
-  ngOnDestroy() {
-    this.clearTimer();
-  }
-
   start() {
-    this.countDown();
+    this.clearTimer();
+    this.intervalId = window.setInterval(() => {
+      this.remainingTime--;
+      if (this.remainingTime === 0) {
+        this.message = 'Time out!';
+        this.clearTimer();
+      } else {
+        this.message = `T-${this.remainingTime} seconds and counting`;
+      }
+    }, 1000);
     if (this.remainingTime <= 0) {
       this.remainingTime = this.seconds;
     }
@@ -35,25 +39,12 @@ export class ExerciseCountdownTimerComponent implements OnInit {
 
   stop() {
     this.clearTimer();
-    this.message = `Holding at T-${this.remainingTime} seconds`;
+    this.message = `Pausing at T-${this.remainingTime} seconds`;
   }
 
   reset() {
     this.clearTimer();
     this.remainingTime = this.seconds;
     this.message = `Click start button to start the Countdown`;
-  }
-
-  private countDown() {
-    this.clearTimer();
-    this.intervalId = window.setInterval(() => {
-      this.remainingTime -= 1;
-      if (this.remainingTime === 0) {
-        this.message = 'Blast off!';
-        this.clearTimer();
-      } else {
-        this.message = `T-${this.remainingTime} seconds and counting`;
-      }
-    }, 1000);
   }
 }

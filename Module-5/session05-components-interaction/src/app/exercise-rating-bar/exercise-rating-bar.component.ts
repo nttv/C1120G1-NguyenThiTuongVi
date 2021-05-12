@@ -7,42 +7,30 @@ import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@an
 })
 export class ExerciseRatingBarComponent implements OnInit {
 
-  @Input() max = 10;
-  @Input() ratingValue = 5;
-  @Input() showRatingValue = true;
+  @Input('maxRating') max: number = 0;
+  @Input('previousRating') ratingValue: number = 0;
+  @Input('showRating') showRatingValue: boolean = false;
 
-  @Output() rateChange = new EventEmitter<number>();
-
-  ratingUnits: Array<IRatingUnit> = [];
+  ratingUnits: IRatingUnit[] = [];
 
   constructor() {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if ('max' in changes) {
-      let max = changes.max.currentValue;
-      max = typeof max === 'undefined' ? 5 : max;
-      this.max = max;
-      this.calculate(max, this.ratingValue);
-    }
+  ngOnInit() {
+    this.init();
   }
 
-  calculate(max, ratingValue) {
-    this.ratingUnits = Array.from({length: max},
+  init() {
+    this.ratingUnits = Array.from({length: this.max},
       (_, index) => ({
         value: index + 1,
-        active: index < ratingValue
+        active: index < this.ratingValue
       }));
-  }
-
-  ngOnInit() {
-    this.calculate(this.max, this.ratingValue);
   }
 
   select(index) {
     this.ratingValue = index + 1;
     this.ratingUnits.forEach((item, idx) => item.active = idx < this.ratingValue);
-    this.rateChange.emit(this.ratingValue);
   }
 
   enter(index) {

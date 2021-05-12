@@ -25,7 +25,7 @@ export class PracticeTodoComponent implements OnInit {
     this.todos[i].complete = !this.todos[i].complete;
   }
 
-  change() {
+  add() {
     const value = this.content.value;
     if (value) {
       const todo: Todo = {

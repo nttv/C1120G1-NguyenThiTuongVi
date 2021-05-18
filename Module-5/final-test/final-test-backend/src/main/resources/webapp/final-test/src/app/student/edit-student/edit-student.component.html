@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <h2 class="card-title mb-3 border-bottom">Edit Student Page</h2>
-        <form class="form w-75 mx-auto mt-5" [formGroup]="updateForm" *ngIf="updateForm" (ngSubmit)="update()">
+        <form class="form w-75 mx-auto mt-5" [formGroup]="updateForm" (ngSubmit)="update()">
           <table class="table table-striped table-borderless">
             <tbody>
             <tr class="form-group row">
@@ -22,8 +22,8 @@
                 <input class="form-control" type="text" formControlName="studentName" id="name">
                 <div class="text-danger"
                      *ngIf="updateForm.controls.studentName.touched || updateForm.controls.studentName.dirty">
-                  <p *ngIf="updateForm.controls.studentName.errors?.required">Student name is required.</p>
-                  <p *ngIf="updateForm.controls.studentName.errors?.pattern">Student name must not contain special
+                  <p *ngIf="updateForm.controls.studentName.errors.required">Student name is required.</p>
+                  <p *ngIf="updateForm.controls.studentName.errors.pattern">Student name must not contain special
                     characters.</p>
                 </div>
               </td>
@@ -32,7 +32,7 @@
               <th class="col-4">
                 <label for="group">Group</label></th>
               <td class="col-8">
-                <select class="form-control" id="group" *ngIf="groups" formControlName="group">
+                <select class="form-control" id="group" formControlName="group">
                   <option *ngFor="let group of groups" [ngValue]="group">{{group.groupName}}</option>
                 </select>
               </td>
@@ -53,10 +53,9 @@
               <th class="col-4">
                 <label for="supervisor">Supervisor</label></th>
               <td class="col-8">
-                <select class="form-control" id="supervisor" formControlName="supervisor" *ngIf="supervisors">
+                <select class="form-control" id="supervisor" formControlName="supervisor">
                   <option *ngFor="let supervisor of supervisors"
-                          [selected]="supervisor.supervisorId == updateForm.controls.supervisor.value.supervisorId">
-                    {{supervisor.supervisorName}}</option>
+                          [ngValue]="supervisor">{{supervisor.supervisorName}}</option>
                 </select>
               </td>
             </tr>
@@ -67,8 +66,8 @@
               <td class="col-8">
                 <input class="form-control" type="text" id="email" formControlName="email">
                 <div class="text-danger" *ngIf="updateForm.controls.email.touched || updateForm.controls.email.dirty">
-                  <p *ngIf="updateForm.controls.email.errors?.required">Email is required.</p>
-                  <p *ngIf="updateForm.controls.email.errors?.pattern">Email is not in correct format. (i.e:
+                  <p *ngIf="updateForm.controls.email.errors.required">Email is required.</p>
+                  <p *ngIf="updateForm.controls.email.errors.pattern">Email is not in correct format. (i.e:
                     abc@def.com)</p>
                 </div>
               </td>
@@ -80,8 +79,8 @@
               <td class="col-8">
                 <input class="form-control" type="text" id="phone" formControlName="phone">
                 <div class="text-danger" *ngIf="updateForm.controls.phone.touched || updateForm.controls.phone.dirty">
-                  <p *ngIf="updateForm.controls.phone.errors?.required">Phone number is required.</p>
-                  <p *ngIf="updateForm.controls.phone.errors?.pattern">Phone number must be in correct format (10-12
+                  <p *ngIf="updateForm.controls.phone.errors.required">Phone number is required.</p>
+                  <p *ngIf="updateForm.controls.phone.errors.pattern">Phone number must be in correct format (10-12
                     digits).</p>
                 </div>
               </td>

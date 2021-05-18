@@ -25,7 +25,7 @@ export class DeleteStudentComponent implements OnInit {
 
   initData() {
     let id = this._activatedRoute.snapshot.params['id'];
-    this.id = +id;
+    this.id = id;
     this._studentService.getById(id).subscribe(data => {
       this.student = data;
     });

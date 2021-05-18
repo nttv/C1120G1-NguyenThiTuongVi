@@ -5,8 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Group} from "../../models/group";
 import {Supervisor} from "../../models/supervisor";
 import {Student} from "../../models/student";
-import {element} from "protractor";
-import {forkJoin, Observable} from "rxjs";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-edit-student',
@@ -25,19 +24,16 @@ export class EditStudentComponent implements OnInit {
               private _router: Router,
               private _formBuilder: FormBuilder,
               private _activatedRoute: ActivatedRoute) {
-    console.log("Step 1");  // test async
   }
 
   ngOnInit(): void {
-    console.log("Step 2");  // test async
+    console.log("Step 1");  // test async
     this.initForm();
-    this.initData().subscribe(() => {
-      this.patchFormValue();
-    });
+    this.initData();
   }
 
   initForm() {
-    console.log("Step 3");  // test async
+    console.log("Step 2");  // test async
     this.updateForm = this._formBuilder.group({
       studentName: ['', [Validators.required, Validators.pattern("^[A-Za-z0-9\\s]+$")]],
       group: ['', Validators.required],
@@ -49,58 +45,48 @@ export class EditStudentComponent implements OnInit {
   }
 
   initData() {
-    const data$ = forkJoin(
+    this.id = this._activatedRoute.snapshot.params['id'];
+    console.log("Step 3");  // test async
+
+    const dataSource = [
       this._studentService.getGroups(),
       this._studentService.getSupervisors(),
       this._studentService.getById(this.id)
-    );
+    ];
 
-    this.id = this._activatedRoute.snapshot.params['id'];
-    console.log("Step 4");  // test async
-
-    this._studentService.getGroups().subscribe(data => {
-      console.log("Step 5");  // test async
-      this.groups = data;
-    }, error => {
-      console.log("getGroups() error: " + error);
+    forkJoin(dataSource).subscribe(data => {
+      console.log("Step 4");  // test async
+      // @ts-ignore
+      this.groups = data[0];
+      // @ts-ignore
+      this.supervisors = data[1];
+      // @ts-ignore
+      this.updateStudent = data[2];
+      this.patchFormValue();
     });
-
-    this._studentService.getSupervisors().subscribe(data => {
-      console.log("Step 6");  // test async
-      this.supervisors = data;
-    }, error => {
-      console.log("getSupervisors() error: " + error);
-    });
-
-    this._studentService.getById(this.id).subscribe(data => {
-      console.log("Step 7");  // test async
-      this.updateStudent = data;
-    }, error => {
-      console.log('getById(): ' + error);
-    });
-
-    this.patchFormValue();
   }
 
   patchFormValue() {
-    console.log("Step 8");
-    // this.updateForm.patchValue(this.updateStudent);
-    let group = this.groups.find(obj => obj.groupId == this.updateStudent.group.groupId);
-    console.log(group);
-    console.log(this.updateStudent.group);
-
-
+    console.log("Step 5");  // test async
+    this.updateForm.patchValue(this.updateStudent);
+    let patchGroup = this.groups.find(obj => obj.groupId == this.updateStudent.group.groupId);
+    let patchSupervisor = this.supervisors.find(obj =>
+      obj.supervisorId == this.updateStudent.supervisor.supervisorId
+    );
+    this.updateForm.patchValue({
+      group: patchGroup,
+      supervisor: patchSupervisor
+    });
   }
 
   update() {
     if (this.updateForm.valid) {
       console.log(this.updateForm.value);
-      console.log(this.updateForm.controls.group.value.groupId);
-      // this._studentService.update(this.updateForm.value, this.id).subscribe(() => {
-      //   this._router.navigateByUrl('');
-      // }, error => {
-      //   console.log('update(): ' + error);
-      // });
+      this._studentService.update(this.updateForm.value, this.id).subscribe(() => {
+        this._router.navigateByUrl('');
+      }, error => {
+        console.log('update() error: ' + error);
+      });
     }
   }
 

@@ -22,8 +22,8 @@ export class CreateStudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initData();
     this.initForm();
+    this.initData();
   }
 
   initData() {

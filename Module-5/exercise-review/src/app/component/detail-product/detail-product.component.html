@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title mb-3">Product Detail
+          <span>
+          <a routerLink="/" class="btn btn-dark float-end">Back</a>
+        </span></h1>
+        <form #detailForm="ngForm" (ngSubmit)="updateAmount(detailForm)">
+          <table class="table w-50 mx-auto mt-5 table-borderless table-striped">
+            <tbody>
+            <tr>
+              <th>Product ID</th>
+              <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+              <th>Product Name</th>
+              <td>{{ product.name | titlecase }}</td>
+            </tr>
+            <tr>
+              <th>Origin</th>
+              <td>{{ product.origin['country'] }}</td>
+            </tr>
+            <tr>
+              <th>Production Date</th>
+              <td>{{ product.productionDate | date:"dd/MM/yyyy" }}</td>
+            </tr>
+            <tr>
+              <th>Price</th>
+              <td>{{ product.price | currency:"VND" }}</td>
+            </tr>
+            <tr>
+              <th>Amount</th>
+              <td>{{ product.amount }}
+<!--                <a href="#" *ngIf="product.amount == 0" class="float-end" (click)="collapsed = !collapsed">Update</a><br>-->
+<!--                <input type="number" name="amount" [hidden]="collapsed" required min=1 max=100 ngModel>-->
+<!--                <button mat-raised-button [hidden]="collapsed" class="float-end">Update</button>-->
+<!--                <p class="error-message"-->
+<!--                   *ngIf="detailForm.controls.amount?.invalid && (detailForm.controls.amount?.dirty || detailForm.controls.amount?.touched)">-->
+<!--                  Amount must be greater than 0 and not greater than 100.-->
+<!--                </p>-->
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="2" class="text-center">
+                <a [routerLink]="['/', product.id, 'edit']">
+                  <button mat-raised-button class="btn btn-dark mx-2">Edit</button>
+                </a>
+                <button mat-raised-button (click)="openModal(product.id)" class="btn btn-dark mx-1">Delete</button>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

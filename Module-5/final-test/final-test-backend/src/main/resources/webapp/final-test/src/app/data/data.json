@@ -1,0 +1,31 @@
+{
+  "students": [
+    {
+      "name": "Pham Van Chien",
+      "group": "Group 2",
+      "topic": "Topic 1",
+      "supervisor": "Nguyen Vu Thanh Tien",
+      "email": "chien.pham@gmail.com",
+      "phone": "0909123456",
+      "id": 102110130
+    },
+    {
+      "name": "Tran Quoc Hoang",
+      "group": "Group 3",
+      "topic": "Topic 2",
+      "supervisor": "Dang Chi Trung",
+      "email": "hoang.tran@gmail.com",
+      "phone": "090588889999",
+      "id": 102110131
+    },
+    {
+      "name": "Nguyen Ngoc Thuan",
+      "group": "Group 3",
+      "topic": "Topic 3",
+      "supervisor": "Doan Phuoc Trung",
+      "email": "thuan.nguyen@gmail.com",
+      "phone": "0903030303",
+      "id": 102110133
+    }
+  ]
+}

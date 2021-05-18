@@ -1,0 +1,162 @@
+{
+  "origins": [
+    {
+      "id": 1,
+      "country": "Vietnam"
+    },
+    {
+      "id": 2,
+      "country": "China"
+    },
+    {
+      "id": 3,
+      "country": "US"
+    },
+    {
+      "id": 4,
+      "country": "UK"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "iPhone X",
+      "price": 1000,
+      "productionDate": "2017-01-01",
+      "amount": 15,
+      "origin": {
+        "id": 3,
+        "country": "US"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Vsmart Aris",
+      "price": 2400,
+      "productionDate": "2018-01-01",
+      "amount": 0,
+      "origin": {
+        "id": 1,
+        "country": "Vietnam"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Wileyfox Swift 2X",
+      "price": 1200,
+      "productionDate": "2019-01-01",
+      "amount": 6,
+      "origin": {
+        "id": 4,
+        "country": "UK"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Xiaomi Redmi Note 10 Pro",
+      "price": 600,
+      "productionDate": "2017-01-01",
+      "amount": 10,
+      "origin": {
+        "id": 2,
+        "country": "China"
+      }
+    },
+    {
+      "id": 5,
+      "name": "iPhone 8 plus 128GB",
+      "price": 1000,
+      "productionDate": "2014-01-01",
+      "amount": 4,
+      "origin": {
+        "id": 3,
+        "country": "US"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Oppo F10",
+      "price": 1050,
+      "productionDate": "2021-01-01",
+      "amount": 20,
+      "origin": {
+        "id": 2,
+        "country": "China"
+      }
+    },
+    {
+      "name": "abc",
+      "price": 12,
+      "productionDate": "2021-05-08",
+      "amount": 0,
+      "origin": {
+        "id": 4,
+        "country": "UK"
+      },
+      "id": 7
+    },
+    {
+      "name": "abc",
+      "price": 123123,
+      "productionDate": "2021-05-17",
+      "amount": 11,
+      "origin": {
+        "id": 2,
+        "country": "China"
+      },
+      "id": 8
+    },
+    {
+      "name": "asasd",
+      "price": 123123,
+      "productionDate": "2021-05-01",
+      "amount": 11,
+      "origin": {
+        "id": 4,
+        "country": "UK"
+      },
+      "id": 9
+    },
+    {
+      "name": "abc",
+      "price": 123123,
+      "productionDate": "2021-05-01",
+      "amount": 12,
+      "origin": {
+        "id": 1,
+        "country": "Vietnam"
+      },
+      "id": 10
+    },
+    {
+      "name": "hgfh",
+      "price": 5464577,
+      "productionDate": "2021-05-11",
+      "amount": 12,
+      "origin": {
+        "id": 3,
+        "country": "US"
+      },
+      "id": 11
+    },
+    {
+      "name": "abc",
+      "price": 1243545,
+      "productionDate": "2021-05-05",
+      "amount": 12,
+      "origin": {
+        "id": 2,
+        "country": "China"
+      },
+      "id": 12
+    },
+    {
+      "name": "abc",
+      "price": 323465,
+      "productionDate": "2021-05-13",
+      "amount": 0,
+      "origin": "US",
+      "id": 14
+    }
+  ]
+}

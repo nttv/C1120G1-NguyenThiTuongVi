@@ -1,0 +1,17 @@
+<div class="modal-dialog my-0 border-0" role="document">
+  <div class="modal-content">
+    <div class="modal-header flex-column justify-content-center text-center border-0 pb-0">
+      <div class="icon-box text-center my-0 mx-auto">
+        <i class="far fa-times-circle fa-5x text-danger d-inline-block"></i>
+      </div>
+      <h4 class="modal-title w-100 text-center my-3">Are you sure?</h4>
+    </div>
+    <div class="modal-body text-center border-0 py-0" id="deleteModalBody">
+      <pre>{{ description }}</pre>
+    </div>
+    <div class="modal-footer justify-content-center text-center border-0">
+      <button mat-raised-button mat-dialog-close class="btn btn-light mx-1">Cancel</button>
+      <button mat-raised-button class="btn btn-dark mx-1" (click)="delete()">Delete</button>
+    </div>
+  </div>
+</div>

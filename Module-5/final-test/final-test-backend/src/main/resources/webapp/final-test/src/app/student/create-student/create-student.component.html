@@ -1,0 +1,98 @@
+<div class="container w-50">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title mb-3 border-bottom">Edit Student Page</h2>
+        <form class="form w-75 mx-auto mt-5" [formGroup]="createForm" *ngIf="createForm" (ngSubmit)="create()">
+          <table class="table table-striped table-borderless">
+            <tbody>
+            <tr class="form-group row">
+              <th class="col-4">
+                <label for="name">Student Name</label>
+              </th>
+              <td class="col-8">
+                <input class="form-control" type="text" formControlName="studentName" id="name">
+                <div class="text-danger"
+                     *ngIf="createForm.controls.studentName.touched || createForm.controls.studentName.dirty">
+                  <p *ngIf="createForm.controls.studentName.errors?.required">Student name is required.</p>
+                  <p *ngIf="createForm.controls.studentName.errors?.pattern">Student name must not contain special
+                    characters.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="form-group row">
+              <th class="col-4">
+                <label for="group">Group</label></th>
+              <td class="col-8">
+                <select class="form-control" id="group" *ngIf="groups" formControlName="group">
+                  <option value="" selected disabled>Select a group</option>
+                  <option *ngFor="let group of groups" [ngValue]="group">{{group.groupName}}</option>
+                </select>
+                <div class="text-danger"
+                     *ngIf="createForm.controls.group.touched || createForm.controls.group.dirty">
+                  <p *ngIf="createForm.controls.group.errors?.required">Group is required.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="form-group row">
+              <th class="col-4">
+                <label for="topic">Topic</label>
+              </th>
+              <td class="col-8">
+                <input class="form-control" type="text" id="topic" formControlName="topic">
+                <div class="text-danger"
+                     *ngIf="createForm.controls.topic.touched || createForm.controls.topic.dirty">
+                  <p *ngIf="createForm.controls.topic.errors?.required">Topic is required.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="form-group row">
+              <th class="col-4">
+                <label for="supervisor">Supervisor</label></th>
+              <td class="col-8">
+                <select class="form-control" id="supervisor" formControlName="supervisor" *ngIf="supervisors">
+                  <option value="" selected disabled>Select a supervisor</option>
+                  <option *ngFor="let supervisor of supervisors" [ngValue]="supervisor">
+                    {{supervisor.supervisorName}}</option>
+                </select>
+                <div class="text-danger"
+                     *ngIf="createForm.controls.supervisor.touched || createForm.controls.supervisor.dirty">
+                  <p *ngIf="createForm.controls.supervisor.errors?.required">Supervisor is required.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="form-group row">
+              <th class="col-4">
+                <label for="email">Email</label>
+              </th>
+              <td class="col-8">
+                <input class="form-control" type="text" id="email" formControlName="email">
+                <div class="text-danger" *ngIf="createForm.controls.email.touched || createForm.controls.email.dirty">
+                  <p *ngIf="createForm.controls.email.errors?.required">Email is required.</p>
+                  <p *ngIf="createForm.controls.email.errors?.pattern">Email is not in correct format. (i.e:
+                    abc@def.com)</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="form-group row">
+              <th class="col-4">
+                <label for="phone">Phone</label>
+              </th>
+              <td class="col-8">
+                <input class="form-control" type="text" id="phone" formControlName="phone">
+                <div class="text-danger" *ngIf="createForm.controls.phone.touched || createForm.controls.phone.dirty">
+                  <p *ngIf="createForm.controls.phone.errors?.required">Phone number is required.</p>
+                  <p *ngIf="createForm.controls.phone.errors?.pattern">Phone number must be in correct format (10-12
+                    digits).</p>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <a routerLink="/" class="btn btn-dark ml-2 float-end">Back</a>
+          <button class="btn btn-dark mx-2 float-end" [disabled]="createForm.invalid">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
